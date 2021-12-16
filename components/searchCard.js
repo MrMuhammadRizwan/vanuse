@@ -15,7 +15,7 @@ const SearchCard = () => {
           <div className='card-form'>
             <Paper
               component="form"
-              sx={{ p: '2px 4px', mb:'30px', display: 'flex', alignItems: 'center', width: 400, background:'#F7F7FC', boxShadow:'none'}}
+              sx={{ p: '2px 4px', mb:'30px', display: 'flex', alignItems: 'center', width: '100%', background:'#F7F7FC', boxShadow:'none'}}
             >
               <IconButton sx={{ p: '10px' }} aria-label="icon">
                 <Brightness1Icon />
@@ -28,7 +28,7 @@ const SearchCard = () => {
             </Paper>
             <Paper
               component="form"
-              sx={{ p: '2px 4px', mb:'50px', display: 'flex', alignItems: 'center', width: 400, background:'#F7F7FC', boxShadow:'none'}}
+              sx={{ p: '2px 4px', mb:'50px', display: 'flex', alignItems: 'center', width: '100%', background:'#F7F7FC', boxShadow:'none'}}
             >
               <IconButton sx={{ p: '10px' }} aria-label="icon">
                 <AddLocationAltIcon />

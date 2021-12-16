@@ -32,47 +32,12 @@ const HeaderBar = () => {
             variant="h6"
             noWrap
             component="div"
-            sx={{ mr: 10, display: { xs: 'none', md: 'flex' } }}
+            sx={{ mr: 10, display: { xs: 'flex', md: 'flex' } }}
           >
               <img src="/logo.png" alt="Logo" className="logo" />
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+         
           <Typography
             variant="h6"
             noWrap
@@ -107,6 +72,58 @@ const HeaderBar = () => {
               >
                 Sign Up
               </Button>
+          </Box>
+
+          <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'none' , justifyContent:'space-between'},  }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+              className='mobileMenu'
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: 'block', md: 'none' },
+              }}
+            >
+              {pages.map((page) => (
+                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">{page}</Typography>
+                </MenuItem>
+              ))}
+              <MenuItem
+                key={'login'}
+                onClick={handleCloseNavMenu}
+                sx={{ display: {xs: 'block', md: 'none'} }}
+              >
+                Log In
+              </MenuItem>
+              <MenuItem
+                key={'signup'}
+                onClick={handleCloseNavMenu}
+                sx={{ display: {xs: 'block', md: 'none'} }}
+              >
+                Sign Up
+              </MenuItem>
+            </Menu>
           </Box>
         </Toolbar>
       </Container>

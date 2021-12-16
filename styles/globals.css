@@ -143,6 +143,8 @@ code {
     flex-direction: column;
   }
 }
+
+
 .MuiAppBar-root{
   background-color: #fff;
 }
@@ -165,7 +167,16 @@ code {
   background-color: #1F3D6D;
   color: #fff !important;
 }
-
+.mobileMenu{
+  background-color: #1F3D6D;
+  color: #fff !important;
+  justify-content: space-between;
+}
+.mobileMenu:hover{
+  background-color: #1F3D6D;
+  color: #fff !important;
+  justify-content: space-between;
+}
 .lightbutton{
   background-color: #fff;
   border: 2px solid #D9DBE9;
@@ -210,4 +221,10 @@ code {
 }
 .card-buttons{
   display: grid;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .MuiAppBar-root .MuiButton-root{
+    margin-right: 10px;
+  }
 }
