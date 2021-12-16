@@ -1,0 +1,22 @@
+{
+  "name": "react-next-app",
+  "private": true,
+  "author": "Muhammad Rizwan",
+  "email": "rizwanbinnawaz@gmail.com",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.12.3",
+    "next": "^12.0.4",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "eslint": "7",
+    "eslint-config-next": "12.0.4"
+  }
+}
