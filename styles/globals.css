@@ -124,6 +124,9 @@ code {
     width: 100%;
     flex-direction: column;
   }
+  .main-content{
+    padding: 15px;
+  }
 }
 
 
@@ -162,11 +165,12 @@ code {
 }
 
 .main-content{
-  min-height: 98vh;
+  min-height: 100vh;
   height: 100%;
   background: url(/web-background.png);
-  background-size: 100%;
-  background-position: bottom;
+  background-size: 120%;
+  background-position: center;
+  padding: 10px;
 }
 
 .banner-container{
@@ -180,18 +184,28 @@ code {
   background: #FFFFFF;
   box-shadow: 0px 8px 16px rgba(17, 17, 17, 0.06);
   border-radius: 16px;
+  overflow: hidden;
 }
 .card-content{
   padding: 60px;
 }
 .card-content h2{
   margin-bottom: 5px;
+  margin: 0px;
 }
 .card-content p{
   margin-top: 0px;
 }
 .card-buttons{
   display: grid;
+}
+
+.custom-input .MuiOutlinedInput-notchedOutline{
+  border: 0px;
+}
+
+.custom-input .MuiOutlinedInput-root{
+  padding: 0px;
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
