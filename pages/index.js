@@ -1,5 +1,5 @@
-import HeaderBar from '../components/headerBar';
-import SearchCard from '../components/searchCard';
+import HeaderBar from "../components/header/headerBar";
+import SearchCard from "../components/searchCard/searchCard";
 
 export default function Home() {
   return (
