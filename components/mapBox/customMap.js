@@ -61,7 +61,7 @@ const CustomMap = (value, value2) => {
             :
               null
             }
-      </Map>;
+      </Map>
     </div>
   );
 };
