@@ -129,8 +129,13 @@ code {
   }
 }
 
+.start-field-active {
+  border: 2px solid #31B7B7;
+}
 
-
+.card-form form{
+  height: 50px;
+}
 
 .darkbutton{
   background-color: #1F3D6D;
@@ -141,6 +146,19 @@ code {
   background-color: #1F3D6D;
   color: #fff !important;
 }
+
+.darkbutton-disable{
+  background-color: #ccc;
+  color: #fff !important;
+  cursor: not-allowed;
+}
+
+.darkbutton-disable:hover{
+  background-color: #ccc;
+  color: #fff !important;
+  cursor: not-allowed;
+}
+
 .mobileMenu{
   background-color: #1F3D6D;
   color: #fff !important;

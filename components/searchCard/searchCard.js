@@ -8,9 +8,8 @@ import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 const filter = createFilterOptions();
 import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
-import Brightness1Icon from '@mui/icons-material/Brightness1';
-import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt';
 import CustomMap from '../mapBox/customMap';
+import CustomEmptyMap from '../mapBox/customEmptyMap';
 
 
 const SearchCard = () => {
@@ -20,11 +19,14 @@ const SearchCard = () => {
   const [allTitles, setAllTitles] = React.useState([]);
   const [allTitles2, setAllTitles2] = React.useState([]);
   const [open, toggleOpen] = React.useState(false);
+  const [drawPoints, setDrawPoints] = React.useState(false);
+  const [focusActive, setFocusActive] = React.useState(false);
+  const [focusActiveEnd, setFocusActiveEnd] = React.useState(false);
 
   useEffect(() => {
-    console.log('value sss', value)
-    console.log('value sss 2', value2)
-  }, [value, value2])
+    console.log(' sss', value)
+    console.log(' sss 2', value2)
+  }, [value, value2, drawPoints, focusActive])
 
   const handleClose = () => {
     setDialogValue({
@@ -102,10 +104,42 @@ const SearchCard = () => {
     })
   }
 
+
+  const goDrawPoints = () => {
+    setDrawPoints(true)
+  }
+
+  const selectOnFocusFunc = () =>{
+    setFocusActive(true)
+  }
+
+  const unselectOnFocusFunc = () =>{
+    setFocusActive(!focusActive)
+  }
+
+  const selectOnFocusFuncEnd = () =>{
+    setFocusActiveEnd(true)
+  }
+
+  const unselectOnFocusFuncEnd = () =>{
+    setFocusActiveEnd(!focusActiveEnd)
+  }
+  
+
   return (
     <div className='banner-card'>
         {/* map */}
-        <div className='map'><CustomMap value={value} value2={value2}/></div>
+        <div className='map'>
+          {
+           drawPoints ?
+              value && value2?
+                <CustomMap value={value} value2={value2} />
+              :
+              null
+           :
+            <CustomEmptyMap />
+          }
+          </div>
         {/* content */}
         <div className='card-content'>
           <h2>Need help with a move?</h2>
@@ -113,10 +147,14 @@ const SearchCard = () => {
           <div className='card-form'>
             <Paper
               component="form"
+              className={focusActive?"start-field-active":"start-field"}
+              onMouseOver={selectOnFocusFunc} 
+              onMouseOut={unselectOnFocusFunc}
+              onFocusOut={unselectOnFocusFunc}
               sx={{ p: '2px 4px', mb:'30px', display: 'flex', alignItems: 'center', width: '100%', background:'#F7F7FC', boxShadow:'none'}}
             >
               <IconButton sx={{ p: '10px' }} aria-label="icon">
-                <Brightness1Icon />
+                 <img src="/search-start.png" alt="search start" className="icons" />
               </IconButton>
                 <Autocomplete
                   value={value}
@@ -124,6 +162,7 @@ const SearchCard = () => {
                   onChange={(event, newValue) => {
                     console.log('onChange');
                     if (typeof newValue === 'string') {
+                      setDrawPoints(false)
                       setTimeout(() => {
                         toggleOpen(true);
                         setDialogValue({
@@ -133,6 +172,7 @@ const SearchCard = () => {
                         });
                       });
                     } else if (newValue && newValue.inputValue) {
+                      setDrawPoints(false)
                       toggleOpen(true);
                       setDialogValue({
                         title: newValue.inputValue,
@@ -140,6 +180,7 @@ const SearchCard = () => {
                         latitude: '',
                       });
                     } else {
+                      setDrawPoints(false)
                       setValue(newValue);
                     }
                   }}
@@ -162,15 +203,19 @@ const SearchCard = () => {
                   renderOption={(props, option) => <li {...props}>{option.title}</li>}
                   sx={{ ml: 1, flex: 1 }}
                   freeSolo
-                  renderInput={(params) => <TextField {...params} placeholder="Enter pickup address"/>}
+                  renderInput={(params) => <TextField {...params} placeholder="Enter pickup address" />}
                 />
             </Paper>
             <Paper
               component="form"
+              className={focusActiveEnd?"start-field-active":"start-field"}
+              onMouseOver={selectOnFocusFuncEnd} 
+              onMouseOut={unselectOnFocusFuncEnd}
+              onFocusOut={unselectOnFocusFuncEnd}
               sx={{ p: '2px 4px', mb:'50px', display: 'flex', alignItems: 'center', width: '100%', background:'#F7F7FC', boxShadow:'none'}}
             >
               <IconButton sx={{ p: '10px' }} aria-label="icon">
-                <AddLocationAltIcon />
+                  <img src="/search-end.png" alt="search end" className="icons" />
               </IconButton>
               <Autocomplete
                   value={value2}
@@ -178,6 +223,7 @@ const SearchCard = () => {
                   onChange={(event, newValue) => {
                     if (typeof newValue === 'string') {
                       setTimeout(() => {
+                        setDrawPoints(false)
                         toggleOpen(true);
                         setDialogValue2({
                           title: newValue,
@@ -186,6 +232,7 @@ const SearchCard = () => {
                         });
                       });
                     } else if (newValue && newValue.inputValue) {
+                      setDrawPoints(false)
                       toggleOpen(true);
                       setDialogValue2({
                         title: newValue.inputValue,
@@ -193,6 +240,7 @@ const SearchCard = () => {
                         latitude: '',
                       });
                     } else {
+                      setDrawPoints(false)
                       setValue2(newValue);
                     }
                   }}
@@ -214,24 +262,42 @@ const SearchCard = () => {
                   renderOption={(props, option) => <li {...props}>{option.title}</li>}
                   sx={{ ml: 1, flex: 1 }}
                   freeSolo
-                  renderInput={(params) => <TextField {...params} placeholder="Enter destination address"/>}
+                  renderInput={(params) => <TextField {...params} placeholder="Enter destination address" />}
                 />
             </Paper>
           </div>
           <div className='card-buttons'>
-            <Button
-              key={'Request Now'}
-              className="darkbutton"
-              sx={{ mb:'16px' }}
-            >
-              Request Now
-            </Button>
-            <Button
-              key={'Schedule Later'}
-              className="lightbutton"
-            >
-              Schedule Later
-            </Button>
+            {
+            drawPoints ?
+                value && value2?
+                <>
+                    <Button
+                      key={'Request Now'}
+                      className="darkbutton"
+                      sx={{ mb:'16px' }}
+                    >
+                      Request Now
+                    </Button>
+                    <Button
+                      key={'Schedule Later'}
+                      className="lightbutton"
+                    >
+                      Schedule Later
+                    </Button>
+                </>
+                :
+                null
+            :
+              <Button
+                key={'Next'}
+                className={value && value2 ?"darkbutton":"darkbutton-diable"}
+                sx={{ mb:'16px' }}
+                onClick={goDrawPoints}
+                disabled={value && value2?false:true}
+              >
+                Next
+              </Button>
+            }
           </div>
         </div>
     </div>
