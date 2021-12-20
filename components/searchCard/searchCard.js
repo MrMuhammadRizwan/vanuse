@@ -52,28 +52,26 @@ const SearchCard = () => {
     latitude: '',
   });
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setValue({
-      title: dialogValue.title,
-      longitude: parseInt(dialogValue.longitude, 10),
-      latitude: parseInt(dialogValue.latitude, 10),
-    });
-    setValue({
-      title: dialogValue2.title,
-      longitude: parseInt(dialogValue2.longitude, 10),
-      latitude: parseInt(dialogValue2.latitude, 10),
-    });
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   setValue({
+  //     title: dialogValue.title,
+  //     longitude: parseInt(dialogValue.longitude, 10),
+  //     latitude: parseInt(dialogValue.latitude, 10),
+  //   });
+  //   setValue({
+  //     title: dialogValue2.title,
+  //     longitude: parseInt(dialogValue2.longitude, 10),
+  //     latitude: parseInt(dialogValue2.latitude, 10),
+  //   });
 
-    handleClose();
-  };
+  //   handleClose();
+  // };
 
-
+// starting trip actions
   const getValueInput = (e) => {
-    // console.log('getValueInput', e.target.value);
     Axios.get( `https://api.mapbox.com/geocoding/v5/mapbox.places/${e.target.value}.json?access_token=pk.eyJ1IjoiaGFyaXNjczQ5OTciLCJhIjoiY2t4OHhuYjd2MzQwZjJycHo2aWZ6dW5xNiJ9.XF4Rwzg_G7nton8noZ7VVA`)
     .then(function (response) {
-      // console.log(response.data.features);
       console.log('coordinates >>>>>', response.data.features);
       let result = response.data.features.map(list => (
         {title: list.place_name, longitude: list.geometry.coordinates[0], latitude: list.geometry.coordinates[1]}
@@ -86,6 +84,8 @@ const SearchCard = () => {
       console.log(error);
     })
   }
+
+// end trip actions
   const getValueInput2 = (e) => {
     Axios.get( `https://api.mapbox.com/geocoding/v5/mapbox.places/${e.target.value}.json?access_token=pk.eyJ1IjoiaGFyaXNjczQ5OTciLCJhIjoiY2t4OHhuYjd2MzQwZjJycHo2aWZ6dW5xNiJ9.XF4Rwzg_G7nton8noZ7VVA`)
     .then(function (response) {
@@ -101,13 +101,11 @@ const SearchCard = () => {
       console.log(error);
     })
   }
+
   return (
     <div className='banner-card'>
-
         {/* map */}
-        {console.log('value >>>>>>', value, value2)}
         <div className='map'><CustomMap value={value} value2={value2}/></div>
-
         {/* content */}
         <div className='card-content'>
           <h2>Need help with a move?</h2>

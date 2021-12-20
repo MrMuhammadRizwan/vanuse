@@ -18,18 +18,20 @@ const CustomMap = (value, value2) => {
   const [showIcon2, setShowIcon2] = React.useState(false);
 
   useEffect(() => {
-    console.log( 'value CustomMap', value.value)
-    // console.log( 'value CustomMap 2 >>>>>>',value, value2)
+    console.log( 'value CustomMap 1 >>>>', value)
+    console.log( 'value CustomMap 2 >>>>', value2)
+
     value.value?
       setShowIcon(true)
-    :
-    setShowIcon(false)
+      :
+      setShowIcon(false)
 
     value2.value2?
       setShowIcon2(true)
-    :
-    setShowIcon2(false)
-  }, [value,value2])
+      :
+      setShowIcon2(false)
+
+  }, [value, value2])
 
   return (
     <div className='map-box'>
@@ -40,26 +42,44 @@ const CustomMap = (value, value2) => {
           width: '100%'
         }}
         zoom={[13]}
-        center={[showIcon ? value.value.longitude : 74.556022, showIcon ? value.value.latitude:32.483556]}
+        center={
+          showIcon ?
+          // console.log('value.value.longitude', value)
+          [value.value?value.value.longitude:74.556022, value.value?value.value.latitude:32.483556]
+          :
+          [74.556022, 32.483556]
+        }
         >
+          {/* start location */}
           {showIcon?
-            <Marker
-              coordinates={[value.value.longitude, value.value.latitude]}
-              anchor="bottom">
-              <Brightness1Icon />
-            </Marker>
+            value.value?
+              <Marker
+                coordinates={
+                  [value.value.longitude, value.value.latitude]
+                }
+                anchor="bottom">
+                <Brightness1Icon />
+              </Marker>
+              :
+              null
             :
               null
             }
-          {console.log( 'value CustomMap 2 >>>>>>', value2)}
-          {showIcon2?
-            <Marker
-              coordinates={[value2.value2.longitude, value2.value2.latitude]}
-              anchor="bottom">
-              <AddLocationAltIcon />
-            </Marker>
-            :
-              null
+
+            {/* end location */}
+            {showIcon2?
+              value2.value2?
+                <Marker
+                  coordinates={
+                    [value2.value2.longitude, value2.value2.latitude]
+                  }
+                  anchor="bottom">
+                  <AddLocationAltIcon />
+                </Marker>
+                :
+                null
+              :
+                null
             }
       </Map>
     </div>
