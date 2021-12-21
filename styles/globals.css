@@ -10,6 +10,9 @@ a {
   color: inherit;
   text-decoration: none;
 }
+p{
+  color: #5A5D77;
+}
 
 * {
   box-sizing: border-box;

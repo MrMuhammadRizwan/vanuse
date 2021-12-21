@@ -11,6 +11,8 @@ import IconButton from "@mui/material/IconButton";
 import CustomMap from "../mapBox/customMap";
 import CustomEmptyMap from "../mapBox/customEmptyMap";
 
+import Cards from "../mainCards/cards";
+
 const SearchCard = () => {
   const [value, setValue] = React.useState(null);
   const [value2, setValue2] = React.useState(null);
@@ -21,9 +23,11 @@ const SearchCard = () => {
   const [focusActive, setFocusActive] = React.useState(false);
   const [focusActiveEnd, setFocusActiveEnd] = React.useState(false);
 
+  const [sliderCard, setSliderCard] = React.useState(false);
+
   useEffect(() => {
     console.log(drawPoints)
-  }, [value, value2, drawPoints, focusActive]);
+  }, [value, value2, drawPoints, focusActive, sliderCard]);
 
   const handleClose = () => {
     setDialogValue({
@@ -51,21 +55,6 @@ const SearchCard = () => {
     latitude: "",
   });
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   setValue({
-  //     title: dialogValue.title,
-  //     longitude: parseInt(dialogValue.longitude, 10),
-  //     latitude: parseInt(dialogValue.latitude, 10),
-  //   });
-  //   setValue({
-  //     title: dialogValue2.title,
-  //     longitude: parseInt(dialogValue2.longitude, 10),
-  //     latitude: parseInt(dialogValue2.latitude, 10),
-  //   });
-
-  //   handleClose();
-  // };
 
   // starting trip actions
   const getValueInput = (e) => {
@@ -129,204 +118,218 @@ const SearchCard = () => {
     setFocusActiveEnd(!focusActiveEnd);
   };
 
+
+  const scheduleNow = () => {
+    console.log('scheduleNow')
+    setSliderCard(true)
+  }
+
   return (
     <div className="banner-card">
-      {/* map */}
-      <div className="map">
-        {drawPoints ? (
-          value && value2 ? (
-            <CustomMap value={value} value2={value2} />
-          ) : null
-        ) : (
-          <CustomEmptyMap />
-        )}
-      </div>
-      {/* content */}
-      <div className="card-content">
-        {value && value2 ? (
-          <div>
-          <h2>Does this look correct?</h2><br/>
-          </div>
-        ) : (
-          <div>
-            <h2>Need help with a move?</h2>
-            <p>Book on demand or a pre-scheduled van.</p>
-          </div>
-        )}
+      {sliderCard?
+        <Cards /> 
+      :
+      <>
+        {/* map */}
+        <div className="map">
+          {drawPoints ? (
+            value && value2 ? (
+              <CustomMap value={value} value2={value2} />
+            ) : null
+          ) : (
+            <CustomEmptyMap />
+          )}
+        </div>
+        {/* content */}
+        <div className="card-content">
+          {value && value2 ? (
+            <div>
+            <h2>Does this look correct?</h2><br/>
+            </div>
+          ) : (
+            <div>
+              <h2>Need help with a move?</h2>
+              <p>Book on demand or a pre-scheduled van.</p>
+            </div>
+          )}
 
-        <div className="card-form">
-          <Paper
-            component="form"
-            className={focusActive ? "start-field-active" : "start-field"}
-            onMouseOver={selectOnFocusFunc}
-            onMouseOut={unselectOnFocusFunc}
-            onBlur={unselectOnFocusFunc}
-            sx={{
-              p: "2px 4px",
-              mb: "30px",
-              display: "flex",
-              alignItems: "center",
-              width: "100%",
-              background: "#F7F7FC",
-              boxShadow: "none",
-            }}
-          >
-            <IconButton sx={{ p: "10px" }} aria-label="icon">
-              <img
-                src="/search-start.png"
-                alt="search start"
-                className="icons"
-              />
-            </IconButton>
-            <Autocomplete
-              value={value}
-              onKeyUp={(e) => getValueInput(e)}
-              onChange={(event, newValue) => {
-                if (typeof newValue === "string") {
-                  setDrawPoints(false);
-                  setTimeout(() => {
+          <div className="card-form">
+            <Paper
+              component="form"
+              className={focusActive ? "start-field-active" : "start-field"}
+              onMouseOver={selectOnFocusFunc}
+              onMouseOut={unselectOnFocusFunc}
+              onBlur={unselectOnFocusFunc}
+              sx={{
+                p: "2px 4px",
+                mb: "30px",
+                display: "flex",
+                alignItems: "center",
+                width: "100%",
+                background: "#F7F7FC",
+                boxShadow: "none",
+              }}
+            >
+              <IconButton sx={{ p: "10px" }} aria-label="icon">
+                <img
+                  src="/search-start.png"
+                  alt="search start"
+                  className="icons"
+                />
+              </IconButton>
+              <Autocomplete
+                value={value}
+                onKeyUp={(e) => getValueInput(e)}
+                onChange={(event, newValue) => {
+                  if (typeof newValue === "string") {
+                    setDrawPoints(false);
+                    setTimeout(() => {
+                      toggleOpen(true);
+                      setDialogValue({
+                        title: newValue,
+                        longitude: "",
+                        latitude: "",
+                      });
+                    });
+                  } else if (newValue && newValue.inputValue) {
+                    setDrawPoints(false);
                     toggleOpen(true);
                     setDialogValue({
-                      title: newValue,
+                      title: newValue.inputValue,
                       longitude: "",
                       latitude: "",
                     });
-                  });
-                } else if (newValue && newValue.inputValue) {
-                  setDrawPoints(false);
-                  toggleOpen(true);
-                  setDialogValue({
-                    title: newValue.inputValue,
-                    longitude: "",
-                    latitude: "",
-                  });
-                } else {
-                  setDrawPoints(false);
-                  setValue(newValue);
-                  if(newValue && value2){
-                    setDrawPoints(true)
+                  } else {
+                    setDrawPoints(false);
+                    setValue(newValue);
+                    if(newValue && value2){
+                      setDrawPoints(true)
+                    }
                   }
-                }
+                }}
+                id="free-solo-dialog-demo"
+                className="custom-input"
+                options={allTitles}
+                getOptionLabel={(option) => {
+                  // e.g value selected with enter, right from the input
+                  if (typeof option === "string") {
+                    return option;
+                  }
+                  if (option.inputValue) {
+                    return option.inputValue;
+                  }
+                  return option.title;
+                }}
+                selectOnFocus
+                clearOnBlur
+                handleHomeEndKeys
+                renderOption={(props, option) => (
+                  <li {...props}>{option.title}</li>
+                )}
+                sx={{ ml: 1, flex: 1 }}
+                freeSolo
+                renderInput={(params) => (
+                  <TextField {...params} placeholder="Enter pickup address" />
+                )}
+              />
+            </Paper>
+            <Paper
+              component="form"
+              className={focusActiveEnd ? "start-field-active" : "start-field"}
+              onMouseOver={selectOnFocusFuncEnd}
+              onMouseOut={unselectOnFocusFuncEnd}
+              onBlur={unselectOnFocusFuncEnd}
+              sx={{
+                p: "2px 4px",
+                mb: "50px",
+                display: "flex",
+                alignItems: "center",
+                width: "100%",
+                background: "#F7F7FC",
+                boxShadow: "none",
               }}
-              id="free-solo-dialog-demo"
-              className="custom-input"
-              options={allTitles}
-              getOptionLabel={(option) => {
-                // e.g value selected with enter, right from the input
-                if (typeof option === "string") {
-                  return option;
-                }
-                if (option.inputValue) {
-                  return option.inputValue;
-                }
-                return option.title;
-              }}
-              selectOnFocus
-              clearOnBlur
-              handleHomeEndKeys
-              renderOption={(props, option) => (
-                <li {...props}>{option.title}</li>
-              )}
-              sx={{ ml: 1, flex: 1 }}
-              freeSolo
-              renderInput={(params) => (
-                <TextField {...params} placeholder="Enter pickup address" />
-              )}
-            />
-          </Paper>
-          <Paper
-            component="form"
-            className={focusActiveEnd ? "start-field-active" : "start-field"}
-            onMouseOver={selectOnFocusFuncEnd}
-            onMouseOut={unselectOnFocusFuncEnd}
-            onBlur={unselectOnFocusFuncEnd}
-            sx={{
-              p: "2px 4px",
-              mb: "50px",
-              display: "flex",
-              alignItems: "center",
-              width: "100%",
-              background: "#F7F7FC",
-              boxShadow: "none",
-            }}
-          >
-            <IconButton sx={{ p: "10px" }} aria-label="icon">
-              <img src="/search-end.png" alt="search end" className="icons" />
-            </IconButton>
-            <Autocomplete
-              value={value2}
-              onKeyUp={(e) => getValueInput2(e)}
-              onChange={(event, newValue) => {
-                if (typeof newValue === "string") {
-                  setTimeout(() => {
+            >
+              <IconButton sx={{ p: "10px" }} aria-label="icon">
+                <img src="/search-end.png" alt="search end" className="icons" />
+              </IconButton>
+              <Autocomplete
+                value={value2}
+                onKeyUp={(e) => getValueInput2(e)}
+                onChange={(event, newValue) => {
+                  if (typeof newValue === "string") {
+                    setTimeout(() => {
+                      setDrawPoints(false);
+                      toggleOpen(true);
+                      setDialogValue2({
+                        title: newValue,
+                        longitude: "",
+                        latitude: "",
+                      });
+                    });
+                  } else if (newValue && newValue.inputValue) {
                     setDrawPoints(false);
                     toggleOpen(true);
                     setDialogValue2({
-                      title: newValue,
+                      title: newValue.inputValue,
                       longitude: "",
                       latitude: "",
                     });
-                  });
-                } else if (newValue && newValue.inputValue) {
-                  setDrawPoints(false);
-                  toggleOpen(true);
-                  setDialogValue2({
-                    title: newValue.inputValue,
-                    longitude: "",
-                    latitude: "",
-                  });
-                } else {
-                  setDrawPoints(false);
-                  setValue2(newValue);
-                  if(value && newValue){
-                    setDrawPoints(true)
+                  } else {
+                    setDrawPoints(false);
+                    setValue2(newValue);
+                    if(value && newValue){
+                      setDrawPoints(true)
+                    }
                   }
-                }
-              }}
-              id="free-solo-dialog-demo2"
-              className="custom-input"
-              options={allTitles2}
-              getOptionLabel={(option) => {
-                if (typeof option === "string") {
-                  return option;
-                }
-                if (option.inputValue) {
-                  return option.inputValue;
-                }
-                return option.title;
-              }}
-              selectOnFocus
-              clearOnBlur
-              handleHomeEndKeys
-              renderOption={(props, option) => (
-                <li {...props}>{option.title}</li>
-              )}
-              sx={{ ml: 1, flex: 1 }}
-              freeSolo
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  placeholder="Enter destination address"
-                />
-              )}
-            />
-          </Paper>
+                }}
+                id="free-solo-dialog-demo2"
+                className="custom-input"
+                options={allTitles2}
+                getOptionLabel={(option) => {
+                  if (typeof option === "string") {
+                    return option;
+                  }
+                  if (option.inputValue) {
+                    return option.inputValue;
+                  }
+                  return option.title;
+                }}
+                selectOnFocus
+                clearOnBlur
+                handleHomeEndKeys
+                renderOption={(props, option) => (
+                  <li {...props}>{option.title}</li>
+                )}
+                sx={{ ml: 1, flex: 1 }}
+                freeSolo
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    placeholder="Enter destination address"
+                  />
+                )}
+              />
+            </Paper>
+          </div>
+          <div className="card-buttons">
+                  <Button
+                    key={"Request Now"}
+                    className="darkbutton"
+                    sx={{ mb: "16px" }}
+                    disabled={value && value2 ? false: true}
+                    onClick={()=>scheduleNow()}
+                  >
+                    Request Now
+                  </Button>
+                  <Button key={"Schedule Later"} className="lightbutton">
+                    Schedule Later
+                  </Button>
+              
+          </div>
         </div>
-        <div className="card-buttons">
-                <Button
-                  key={"Request Now"}
-                  className="darkbutton"
-                  sx={{ mb: "16px" }}
-                  disabled={value && value2 ? false: true}
-                >
-                  Request Now
-                </Button>
-                <Button key={"Schedule Later"} className="lightbutton">
-                  Schedule Later
-                </Button>
-            
-        </div>
-      </div>
+      </>
+      }
+
     </div>
   );
 };
