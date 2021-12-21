@@ -16,7 +16,6 @@ const CustomMap = (value) => {
       setShowIcon(true)
       :
       setShowIcon(false)
-
   }, [value])
 
   return (
@@ -27,7 +26,7 @@ const CustomMap = (value) => {
           height: '250px',
           width: '100%'
         }}
-        zoom={[10]}
+        zoom={[2]}
         center={
           showIcon ?
           [value.value?value.value.longitude:74.556022, value.value2?value.value2.latitude:32.483556]
