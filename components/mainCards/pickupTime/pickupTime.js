@@ -11,21 +11,21 @@ import Select from '@mui/material/Select';
 
 
 const Hours = [
-    '8',
-    '7',
-    '6',
-    '5',
-    '4',
-    '3',
-    '2',
-    '1',
+    '01',
+    '02',
+    '03',
+    '04',
+    '05',
+    '06',
+    '07',
+    '08',
 ];
 const Minutes = [
-    '60',
-    '45',
-    '30',
-    '15',
     '00',
+    '15',
+    '30',
+    '45',
+    '60',
 ];
 const AMPM = [
     'AM',
@@ -35,23 +35,51 @@ const AMPM = [
 const PickupTime = () => {
     const [immediateChecked, setImmediateChecked] = React.useState(true);
     const [scheduleChecked, setScheduleChecked] = React.useState(false);
+    const [showHoursMinutesAmpm, setShowHoursMinutesAmpm] = React.useState(false);
+    
+    const [hoursBorder, setHoursBorder] = React.useState(false);
+    const [minutesBorder, setMinutesBorder] = React.useState(false);
+    const [fillColor, setFillColor] = React.useState(false);
 
-    const [personName, setPersonName] = React.useState([]);
+    const [hoursValue, setHoursValue] = React.useState([]);
+    const [minutesValue, setMinutesValue] = React.useState([]);
+    const [ampmValue, setAmpm] = React.useState([]);
 
-    const handleChange = (event) => {
+    const handleHours = (event) => {
         const {
         target: { value },
         } = event;
-        setPersonName(
-        typeof value === 'string' ? value.split(',') : value,
+        setHoursValue(
+            typeof value === 'string' ? value.split(',') : value,
         );
+        setHoursBorder(true)
     };
+    const handleMinutes = (event) => {
+        const {
+        target: { value },
+        } = event;
+        setMinutesValue(
+            typeof value === 'string' ? value.split(',') : value,
+        );
+        setMinutesBorder(true)
+    };
+    const handleAmpm = (event) => {
+        const {
+        target: { value },
+        } = event;
+        setAmpm(
+            typeof value === 'string' ? value.split(',') : value,
+        );
+        setFillColor(true)
+    };
+    
 
     useEffect(() => {
       }, [immediateChecked,scheduleChecked]);
 
     const handleIimmediateChecked = (event) => {
         setImmediateChecked(event.target.checked);
+        setShowHoursMinutesAmpm(false)
 
         if(scheduleChecked){
             setScheduleChecked(!scheduleChecked);
@@ -62,6 +90,7 @@ const PickupTime = () => {
 
     const handleScheduleChecked = (event) => {
         setScheduleChecked(event.target.checked);
+        setShowHoursMinutesAmpm(true)
 
         if(immediateChecked){
             setImmediateChecked(!immediateChecked);
@@ -69,6 +98,7 @@ const PickupTime = () => {
             setScheduleChecked(event.target.checked);
         }
     };
+
 
     return (
             <>
@@ -97,68 +127,103 @@ const PickupTime = () => {
                 <p>Book a van up to 30 days in advance</p>
               </div>
               
-              <div className="time-wrapper mb-71">
-                    <div className="select">
-                        <FormControl sx={{ m: 1 }}>
-                            <Select
-                            labelId="demo-multiple-name-label"
-                            id="demo-multiple-name"
-                            value={personName}
-                            onChange={handleChange}
-                            input={<OutlinedInput />}
-                            >
-                            {Hours.map((name) => (
-                                <MenuItem
-                                key={name}
-                                value={name}
+              {showHoursMinutesAmpm?
+                <div className="time-wrapper mb-71">
+                        <div className={hoursBorder?"select-border select":"select"}>
+                            <FormControl sx={{ m: 1 }}>
+                                <Select
+                                labelId="hours"
+                                id="hours"
+                                value={hoursValue}
+                                onChange={handleHours}
+                                placeholder="Hours"
+                                input={<OutlinedInput />}
+                                displayEmpty
+                                renderValue={(selected) => {
+                                    if (selected.length === 0) {
+                                    return <span className="placeholder">Hours</span>;
+                                    }
+                                    return selected.join(', ');
+                                }}
                                 >
-                                {name}
-                                </MenuItem>
-                            ))}
-                            </Select>
-                        </FormControl>
-                    </div>
-                    <div className="select">
-                        <FormControl sx={{ m: 1 }}>
-                            <Select
-                            labelId="demo-multiple-name-label"
-                            id="demo-multiple-name2"
-                            value={personName}
-                            onChange={handleChange}
-                            input={<OutlinedInput/>}
-                            >
-                            {Minutes.map((name) => (
-                                <MenuItem
-                                key={name}
-                                value={name}
+                                    <MenuItem disabled value="">
+                                        <em>Hours</em>
+                                    </MenuItem>
+                                    {Hours.map((name) => (
+                                        <MenuItem
+                                        key={name}
+                                        value={name}
+                                        >
+                                        {name}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        </div>
+                        <div className={minutesBorder?"select-border select":"select"}>
+                            <FormControl sx={{ m: 1 }}>
+                                <Select
+                                labelId="minutes"
+                                id="minutes"
+                                placeholder="Minutes"
+                                value={minutesValue}
+                                onChange={handleMinutes}
+                                input={<OutlinedInput/>}
+                                displayEmpty
+                                renderValue={(selected) => {
+                                    if (selected.length === 0) {
+                                    return <span className="placeholder">Minutes</span>;
+                                    }
+                                    return selected.join(', ');
+                                }}
                                 >
-                                {name}
-                                </MenuItem>
-                            ))}
-                            </Select>
-                        </FormControl>
-                    </div>
-                    <div className="select">
-                        <FormControl sx={{ m: 1}}>
-                            <Select
-                            labelId="demo-multiple-name-label"
-                            id="demo-multiple-name3"
-                            value={personName}
-                            onChange={handleChange}
-                            input={<OutlinedInput/>}
-                            >
-                            {AMPM.map((name) => (
-                                <MenuItem
-                                key={name}
-                                value={name}
+                                    <MenuItem disabled value="">
+                                        <em>Minutes</em>
+                                    </MenuItem>
+                                    {Minutes.map((name) => (
+                                        <MenuItem
+                                        key={name}
+                                        value={name}
+                                        >
+                                        {name}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        </div>
+                        <div className={fillColor?"select-fill-color select":"select"}>
+                            <FormControl sx={{ m: 1}}>
+                                <Select
+                                labelId="ampm"
+                                id="ampm"
+                                value={ampmValue}
+                                onChange={handleAmpm}
+                                input={<OutlinedInput/>}
+                                displayEmpty
+                                renderValue={(selected) => {
+                                    if (selected.length === 0) {
+                                    return <span className="placeholder">AM/PM</span>;
+                                    }
+                                    return selected.join(', ');
+                                }}
                                 >
-                                {name}
-                                </MenuItem>
-                            ))}
-                            </Select>
-                        </FormControl>
-                    </div>
-              </div>
+                                    <MenuItem disabled value="">
+                                        <em>AM/PM</em>
+                                    </MenuItem>
+                                    {AMPM.map((name) => (
+                                        <MenuItem
+                                        key={name}
+                                        value={name}
+                                        >
+                                        {name}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        </div>
+                </div>
+                :null
+              }
 
               <div className="notification-box mb-23">
                     <div className="notification-icon">
@@ -172,6 +237,18 @@ const PickupTime = () => {
                         </p>
                     </div>
               </div>
+
+              <div className="notification-box mb-23">
+                    <div className="notification-icon">
+                        <img src="/alarm.svg" alt="alarm" className="icons" />
+                    </div>
+                    <div className="notification-text">
+                        <p>
+                            Driver will arrive on <strong>Thursday 1st October</strong> between <strong>7:15 - 7:30 AM</strong>
+                        </p>
+                    </div>
+              </div>
+
               <div className="card-buttons-grid">
                     <Button 
                         key={"Back"} 
