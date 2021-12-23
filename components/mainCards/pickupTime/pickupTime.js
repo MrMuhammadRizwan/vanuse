@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import moment from 'moment';
 
 import Button from "@mui/material/Button";
 import Checkbox from '@mui/material/Checkbox';
@@ -19,20 +20,23 @@ const Hours = [
     '06',
     '07',
     '08',
+    '09',
+    '10',
+    '11',
+    '12',
 ];
 const Minutes = [
     '00',
     '15',
     '30',
     '45',
-    '60',
 ];
 const AMPM = [
     'AM',
     'PM',
 ];
 
-const PickupTime = () => {
+const PickupTime = (props) => {
     const [immediateChecked, setImmediateChecked] = React.useState(true);
     const [scheduleChecked, setScheduleChecked] = React.useState(false);
     const [showHoursMinutesAmpm, setShowHoursMinutesAmpm] = React.useState(false);
@@ -75,11 +79,12 @@ const PickupTime = () => {
     
 
     useEffect(() => {
-      }, [immediateChecked,scheduleChecked]);
+      }, [immediateChecked,scheduleChecked,props]);
 
     const handleIimmediateChecked = (event) => {
         setImmediateChecked(event.target.checked);
         setShowHoursMinutesAmpm(false)
+        props.shedulePickupChange(false)
 
         if(scheduleChecked){
             setScheduleChecked(!scheduleChecked);
@@ -91,6 +96,7 @@ const PickupTime = () => {
     const handleScheduleChecked = (event) => {
         setScheduleChecked(event.target.checked);
         setShowHoursMinutesAmpm(true)
+        props.shedulePickupChange(true)
 
         if(immediateChecked){
             setImmediateChecked(!immediateChecked);
@@ -98,7 +104,6 @@ const PickupTime = () => {
             setScheduleChecked(event.target.checked);
         }
     };
-
 
     return (
             <>
@@ -225,29 +230,47 @@ const PickupTime = () => {
                 :null
               }
 
-              <div className="notification-box mb-23">
-                    <div className="notification-icon">
-                        <img src="/alarm.svg" alt="alarm" className="icons" />
-                    </div>
-                    <div className="notification-text">
-                        <p>
-                            Immediate pickups are usually able to be serviced <strong>within an hour.</strong>
-                            <br/>
-                            We'll notify drivers of your request once payment is complete
-                        </p>
-                    </div>
-              </div>
-
-              <div className="notification-box mb-23">
-                    <div className="notification-icon">
-                        <img src="/alarm.svg" alt="alarm" className="icons" />
-                    </div>
-                    <div className="notification-text">
-                        <p>
-                            Driver will arrive on <strong>Thursday 1st October</strong> between <strong>7:15 - 7:30 AM</strong>
-                        </p>
-                    </div>
-              </div>
+            {immediateChecked?
+                <div className="notification-box mb-23">
+                        <div className="notification-icon">
+                            <img src="/alarm.svg" alt="alarm" className="icons" />
+                        </div>
+                        <div className="notification-text">
+                            <p>
+                                Immediate pickups are usually able to be serviced <strong>within an hour.</strong>
+                                <br/>
+                                We'll notify drivers of your request once payment is complete
+                            </p>
+                        </div>
+                </div>
+              :null
+            }
+            
+            {scheduleChecked?
+                <>
+                    {console.log('getDate pickupTime <<<', moment(props.dateValueFromOtherComp).format("dddd DD MMMM"))}
+                    {hoursValue.length>0, minutesValue.length>0, ampmValue.length>0?
+                        <div className="notification-box mb-23">
+                            <div className="notification-icon">
+                                <img src="/alarm.svg" alt="alarm" className="icons" />
+                            </div>
+                            <div className="notification-text">
+                                <p>
+                                    Driver will arrive on <strong>{moment(props.dateValueFromOtherComp).format("dddd DD MMMM")}</strong> between {" "} 
+                                    <strong>
+                                        {hoursValue}:{minutesValue}
+                                        {" "} - {" "}
+                                        {parseInt(minutesValue) + 15=='60'? (++hoursValue) : hoursValue}:{parseInt(minutesValue) + 15=='60'?'00':parseInt(minutesValue) + 15} 
+                                        {ampmValue}
+                                    </strong>
+                                </p>
+                            </div>
+                        </div>
+                    :null
+                    }
+                </>
+              :null
+            }
 
               <div className="card-buttons-grid">
                     <Button 
@@ -261,6 +284,7 @@ const PickupTime = () => {
                         key={"Next"}
                         className="darkbutton"
                         sx={{ mb: "16px" }}
+                        onClick={props.goNextServices}
                     >
                         Next
                     </Button>  

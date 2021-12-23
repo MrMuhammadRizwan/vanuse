@@ -22,6 +22,7 @@ const SearchCard = () => {
   const [drawPoints, setDrawPoints] = React.useState(false);
   const [focusActive, setFocusActive] = React.useState(false);
   const [focusActiveEnd, setFocusActiveEnd] = React.useState(false);
+  const [goBackValue, setGoBackValue] = React.useState(false);
 
   const [sliderCard, setSliderCard] = React.useState(false);
 
@@ -124,9 +125,15 @@ const SearchCard = () => {
     setSliderCard(true)
   }
 
+  const goBack = () => {
+    console.log('goBack')
+    setGoBackValue(true)
+    setSliderCard(false)
+  }
+
   return (
     sliderCard?
-      <Cards /> 
+      <Cards goBack={goBack}/> 
       :
       <>
       <div className="banner-card">
