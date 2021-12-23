@@ -14,6 +14,9 @@
 .notification-text{
     width: 85%;
 }
+.notification-text p{
+    margin-bottom: 0px;
+}
 .card-buttons-grid{
     display: inline-flex;
     width: 100%;
@@ -78,18 +81,72 @@
 .time-wrapper .select{
     width: 30%;
 }
+.time-wrapper .MuiSelect-select{
+    padding: 10px 20px;
+}
 .time-wrapper .MuiFormControl-root{
     background: #F7F7FC;
     padding: 0px;
-    margin: 0px;
     width: 100%;
-    border-radius: 40px;
+    border-radius: 15px;
 }
 .time-wrapper .MuiOutlinedInput-notchedOutline{
     border: 0px;
 }
 .time-wrapper .MuiOutlinedInput-root{
-    border-radius: 40px;
+    border-radius: 15px;
+}
+
+
+
+.placeholder{
+    color: #ccc;
+}
+.date-card{
+    width: 100%;
+    max-width: 540px;
+    background: #F7F7FC;
+    box-shadow: 0px 8px 16px rgb(17 17 17 / 6%);
+    border-radius: 16px;
+    overflow: hidden;
+}
+.date-card .card-content{
+    padding: 20px;
+}
+.date-card .PrivatePickersSlideTransition-root{
+    min-height: 200px;
+}
+.date-card .MuiPickersDay-root,
+.date-card .MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected){
+    border-radius: 10px
+}
+.date-card .MuiButtonBase-root-MuiPickersDay-root.Mui-selected,
+.date-card .css-bkrceb-MuiButtonBase-root-MuiPickersDay-root.Mui-selected:hover,
+.date-card .Mui-selected{
+    border-radius: 10px;
+    background: #31B7B7 !important;
+    color: #fff;
+}
+
+/* .select-border .MuiOutlinedInput-root{
+    border: 1px solid #31B7B7;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    border-radius: 15px;
+}
+.select-fill-color .MuiOutlinedInput-root{
+    border: 1px solid #31B7B7;
+    background-color: #31B7B7;
+    padding: 0px;
+    width: 100%;
+    border-radius: 15px;
+    color: #fff;
+} */
+
+.select-fill-color .MuiOutlinedInput-root svg{
+    fill: #fff;
 }
 
 .mb-20{

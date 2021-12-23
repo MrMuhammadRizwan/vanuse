@@ -125,11 +125,11 @@ const SearchCard = () => {
   }
 
   return (
-    <div className="banner-card">
-      {sliderCard?
-        <Cards /> 
+    sliderCard?
+      <Cards /> 
       :
       <>
+      <div className="banner-card">
         {/* map */}
         <div className="map">
           {drawPoints ? (
@@ -327,10 +327,8 @@ const SearchCard = () => {
               
           </div>
         </div>
+        </div>
       </>
-      }
-
-    </div>
   );
 };
 export default SearchCard;
