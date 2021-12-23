@@ -34,7 +34,7 @@ const HeaderBar = () => {
             component="div"
             sx={{ mr: 10, display: { xs: 'flex', md: 'flex' } }}
           >
-              <img src="/logo.png" alt="Logo" className="logo" />
+              <img src="/logo.svg" alt="Logo" className="logo" />
           </Typography>
 
          

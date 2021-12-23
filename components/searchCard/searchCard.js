@@ -172,7 +172,7 @@ const SearchCard = () => {
             >
               <IconButton sx={{ p: "10px" }} aria-label="icon">
                 <img
-                  src="/search-start.png"
+                  src="/search-start.svg"
                   alt="search start"
                   className="icons"
                 />
