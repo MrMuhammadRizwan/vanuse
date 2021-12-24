@@ -108,7 +108,7 @@ const PickupTime = (props) => {
     return (
             <>
               <div className="card-heading mb-71">
-                <h2>Pik-Up Time</h2>
+                <h2>Pick-Up Time</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing</p>
               </div>
 
