@@ -248,7 +248,6 @@ const PickupTime = (props) => {
             
             {scheduleChecked?
                 <>
-                    {console.log('getDate pickupTime <<<', moment(props.dateValueFromOtherComp).format("dddd DD MMMM"))}
                     {hoursValue.length>0, minutesValue.length>0, ampmValue.length>0?
                         <div className="notification-box mb-23">
                             <div className="notification-icon">
@@ -276,6 +275,7 @@ const PickupTime = (props) => {
                     <Button 
                         key={"Back"} 
                         className="lightbutton"
+                        onClick={props.goBackFirstScreen}
                     >
                         Back
                     </Button>

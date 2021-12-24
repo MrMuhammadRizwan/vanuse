@@ -15,24 +15,21 @@ const Cards = (props) => {
 
 
     const getDateFromComponent = (date) =>{
-        console.log('getDate parent', date)
         setGettingDate(date)
     }
 
     const shedulePickupChange = (data) =>{
-        console.log('shedulePickupChange', data)
         setShedulePickupValue(data)
     }
     const goNextServices = () => {
         setViwPickupTime(false)
-        console.log('goServices')
         setViwServices(true)
         setSliderValue(2)
       }
     return (
         <>
             <Grid container spacing={10}>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
                 <div className="banner-card">
                     <div className="card-content">
                         <div className="card-slider">
@@ -42,17 +39,17 @@ const Cards = (props) => {
                             <span className="card-slider-count">{sliderValue}/5</span>
                         </div>
                         {viwServices?
-                            <PickupTime dateValueFromOtherComp={gettingDate} shedulePickupChange={shedulePickupChange} goBack={props.goBack} goNextServices={goNextServices}/>
+                            <PickupTime dateValueFromOtherComp={gettingDate} shedulePickupChange={shedulePickupChange} goBackFirstScreen={props.goBackFirstScreen} goNextServices={goNextServices}/>
                             :null
                         }
                         {viwPickupTime?
-                            <PickupTime dateValueFromOtherComp={gettingDate} shedulePickupChange={shedulePickupChange} goBack={props.goBack} goNextServices={goNextServices}/>
+                            <PickupTime dateValueFromOtherComp={gettingDate} shedulePickupChange={shedulePickupChange} goBackFirstScreen={props.goBackFirstScreen} goNextServices={goNextServices}/>
                             :null
                         }
                     </div>
                 </div>
             </Grid>
-            <Grid item xs={5}>
+            <Grid item xs={12} md={5}>
             {viwPickupTime?
                 <>
                 {shedulePickupValue?
