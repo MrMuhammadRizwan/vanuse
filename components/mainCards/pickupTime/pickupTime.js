@@ -11,30 +11,9 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 
-const Hours = [
-    '01',
-    '02',
-    '03',
-    '04',
-    '05',
-    '06',
-    '07',
-    '08',
-    '09',
-    '10',
-    '11',
-    '12',
-];
-const Minutes = [
-    '00',
-    '15',
-    '30',
-    '45',
-];
-const AMPM = [
-    'AM',
-    'PM',
-];
+const Hours = ['01','02','03','04','05','06','07','08','09','10','11','12',];
+const Minutes = ['00','15','30','45',];
+const AMPM = ['AM','PM',];
 
 const PickupTime = (props) => {
     const [immediateChecked, setImmediateChecked] = React.useState(true);
