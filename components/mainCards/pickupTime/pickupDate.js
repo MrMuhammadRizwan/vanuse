@@ -11,7 +11,6 @@ const PickupDate = (props) => {
   const [date, setDate] = React.useState(new Date());
 
   const setDateNow = (newDate) =>{
-      console.log('getDate child')
       setDate(newDate)
       props.getDate(newDate)
     }

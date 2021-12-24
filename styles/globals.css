@@ -234,3 +234,8 @@ code {
     margin-right: 10px;
   }
 }
+
+.link{
+  color: #31B7B7;
+  cursor: pointer;
+}

@@ -31,7 +31,7 @@
 .card-slection{
     position: relative;
     padding: 10px 10px 10px 20px;
-    border: 1px solid #A0A3BD;
+    border: 1px solid #d1d1d1;
     border-radius: 5px;
 }
 .card-slection p{
@@ -148,12 +148,77 @@
     fill: #fff;
 }
 
+
+.items-list .MuiPaper-root{
+    background-color: #F7F7FC;
+    border-radius: 15px;
+    box-shadow:none;
+    margin-bottom: 10px;
+}
+.items-list .MuiPaper-root.Mui-expanded{
+    border: 2px solid #31B7B7;
+}
+.MuiAccordionSummary-content{
+    margin: 0px;
+}
+.MuiAccordionSummary-root{
+    min-height: 39px;
+}
+.items-list .MuiPaper-root:before{
+    display: none;
+}
+
+.child-items{
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+}
+.child-items span{
+    width: 100px;
+    display: inline-flex;
+}
+.child-items .MuiOutlinedInput-notchedOutline{
+    border: none;
+}
+.child-items .cart-increase{
+    min-width: 30px;
+    width: 30px;
+    background: #EFF0F7;
+    height: 30px;
+    border-radius: 50%;
+}
+.child-items .MuiInputBase-input{
+    padding: 0px;
+    height: 30px;
+    text-align: center;
+}
+
+.search-box{
+    background: #FFFFFF;
+    border: 1px solid #A0A3BD;
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding: 0px 10px;
+}
+.search-box .MuiFormControl-roo{
+    width: 100%;
+}
+.search-box .MuiOutlinedInput-notchedOutline{
+    border: 0px;
+}
 .mb-20{
     margin-bottom: 20px;
 }
 .mb-23{
     margin-bottom: 23px;
 }
+.mb-31{
+    margin-bottom: 31px;
+}
 .mb-71{
     margin-bottom: 73px;
+}
+.text-center{
+    text-align: center;
 }
