@@ -12,6 +12,7 @@ import CustomMap from "../mapBox/customMap";
 import CustomEmptyMap from "../mapBox/customEmptyMap";
 
 import Cards from "../mainCards/cards";
+import Typography from '@mui/material/Typography';
 
 const SearchCard = () => {
   const [value, setValue] = React.useState(null);
@@ -27,6 +28,7 @@ const SearchCard = () => {
   const [sliderCard, setSliderCard] = React.useState(false);
 
   useEffect(() => {
+    console.log(drawPoints)
   }, [value, value2, drawPoints, focusActive, sliderCard]);
 
   const handleClose = () => {
@@ -62,12 +64,15 @@ const SearchCard = () => {
       `https://api.mapbox.com/geocoding/v5/mapbox.places/${e.target.value}.json?access_token=pk.eyJ1IjoiaGFyaXNjczQ5OTciLCJhIjoiY2t4OHhuYjd2MzQwZjJycHo2aWZ6dW5xNiJ9.XF4Rwzg_G7nton8noZ7VVA`
     )
       .then(function (response) {
+        console.log("coordinates >>>>>", response.data.features);
         let result = response.data.features.map((list) => ({
           title: list.place_name,
           longitude: list.geometry.coordinates[0],
           latitude: list.geometry.coordinates[1],
         }));
+        console.log("result", result);
         setAllTitles(result);
+        console.log("allTitles", allTitles);
       })
       .catch(function (error) {
         console.log(error);
@@ -80,12 +85,15 @@ const SearchCard = () => {
       `https://api.mapbox.com/geocoding/v5/mapbox.places/${e.target.value}.json?access_token=pk.eyJ1IjoiaGFyaXNjczQ5OTciLCJhIjoiY2t4OHhuYjd2MzQwZjJycHo2aWZ6dW5xNiJ9.XF4Rwzg_G7nton8noZ7VVA`
     )
       .then(function (response) {
+        console.log("coordinates >>>>>", response.data.features);
         let result = response.data.features.map((list) => ({
           title: list.place_name,
           longitude: list.geometry.coordinates[0],
           latitude: list.geometry.coordinates[1],
         }));
+        console.log("result", result);
         setAllTitles2(result);
+        console.log("allTitles 2", allTitles2);
       })
       .catch(function (error) {
         console.log(error);
@@ -114,17 +122,19 @@ const SearchCard = () => {
 
 
   const scheduleNow = () => {
+    console.log('scheduleNow')
     setSliderCard(true)
   }
 
-  const goBackFirstScreen = () => {
+  const goBack = () => {
+    console.log('goBack')
     setGoBackValue(true)
     setSliderCard(false)
   }
 
   return (
     sliderCard?
-      <Cards goBackFirstScreen={goBackFirstScreen}/> 
+      <Cards goBack={goBack}/> 
       :
       <>
       <div className="banner-card">
@@ -310,22 +320,33 @@ const SearchCard = () => {
             </Paper>
           </div>
           <div className="card-buttons">
-                  <Button
-                    key={"Request Now"}
-                    className="darkbutton"
-                    sx={{ mb: "16px" }}
-                    disabled={value && value2 ? false: true}
-                    onClick={()=>scheduleNow()}
-                  >
-                    Request Now
-                  </Button>
-                  <Button key={"Schedule Later"} className="lightbutton">
-                    Schedule Later
-                  </Button>
-              
+            <Button
+              key={"Request Now"}
+              className="darkbutton"
+              sx={{ mb: "16px" }}
+              disabled={value && value2 ? false: true}
+              onClick={()=>scheduleNow()}
+            >
+              Request Now
+            </Button>
+            <Button key={"Schedule Later"} className="lightbutton">
+              Schedule Later
+            </Button>
           </div>
         </div>
-        </div>
+      </div>
+      <div class="right-heading">
+      <Typography variant="h1"  gutterBottom component="h1">
+        Order a van <br/>
+        any time, <br/>
+        any place in the UK.
+      </Typography>
+      <Typography variant="subtitle1" gutterBottom component="p">
+        Lorem ipsum
+      </Typography>
+
+      <img src="/blue-car.svg" alt="Blue Car" className="bluecar" />
+    </div>
       </>
   );
 };
