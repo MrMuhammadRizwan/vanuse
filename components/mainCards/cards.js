@@ -6,6 +6,7 @@ import PickupTime from "./pickupTime/pickupTime";
 import PickupDate from "./pickupTime/pickupDate";
 import Services from "./services/services";
 import AddItems from "./addItems/addItems";
+import MyItemsList from "./addItems/myItemsList";
 
 const Cards = (props) => {
     const [sliderValue, setSliderValue] = React.useState(1);
@@ -14,6 +15,8 @@ const Cards = (props) => {
     const [viwServices, setViwServices] = React.useState(false);
     const [viwPickupTime, setViwPickupTime] = React.useState(true);
     const [viwAddItemsScreen, setViwAddItemsScreen] = React.useState(false);
+    const [viewAddItemsToList, setViewAddItemsToList] = React.useState(false);
+    const [myItemsList, setMyItemsList] = React.useState([]);
 
 
     const getDateFromComponent = (date) =>{
@@ -41,6 +44,7 @@ const Cards = (props) => {
         setViwServices(false)
         setViwPickupTime(true)
         setSliderValue(1)
+        setViewAddItemsToList(false)
     }
 
     const goBackThirdScreen = () => {
@@ -48,10 +52,15 @@ const Cards = (props) => {
         setViwAddItemsScreen(false)
         setViwServices(true)
         setSliderValue(2)
+        setViewAddItemsToList(false)
     }
 
-    const addItems = () => {
-        console.log('addToList')
+    const addItemsToList = ( list ) => {
+        console.log('addItems', list)
+        if(list.length>0){
+            setViewAddItemsToList(true)
+            setMyItemsList(list)
+        }
     }
 
     return (
@@ -67,7 +76,7 @@ const Cards = (props) => {
                             <span className="card-slider-count">{sliderValue}/5</span>
                         </div>
                         {viwAddItemsScreen?
-                            <AddItems goBackThirdScreen={goBackThirdScreen} addItems={addItems}/>
+                            <AddItems goBackThirdScreen={goBackThirdScreen} addItemsToList={addItemsToList}/>
                             :null
                         }
                         {viwServices?
@@ -82,15 +91,19 @@ const Cards = (props) => {
                 </div>
             </Grid>
             <Grid item xs={12} md={5}>
-            {viwPickupTime?
-                <>
-                {shedulePickupValue?
-                    <PickupDate getDate={getDateFromComponent}/>
+                {viewAddItemsToList?
+                    <MyItemsList myItemsList={myItemsList}/>
                     :null
                 }
-                </>
-            :null
-            }
+                {viwPickupTime?
+                    <>
+                    {shedulePickupValue?
+                        <PickupDate getDate={getDateFromComponent}/>
+                        :null
+                    }
+                    </>
+                    :null
+                }
             </Grid>
             </Grid>
         </>
