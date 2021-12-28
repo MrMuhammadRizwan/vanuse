@@ -49,16 +49,16 @@ const AddItems = (props) => {
         //     // return newElt.subitems.filter(subElement => subElement.quantity === '1');
         //     // }
         // )
-        let selectedTaskListItems = filteredData.map(k => k.subitems.filter(j => j.quantity !== 0));
+        let selectedTaskListItems = itemsList.map(k => k.subitems.filter(j => j.quantity !== 0));
 
         setSelectedTaskList(selectedTaskListItems)
 
-        console.log('SelectedTaskList', selectedTaskList)
+        // console.log('SelectedTaskList', selectedTaskList)
         props.addItemsToList(selectedTaskListItems)
 
         setLoading(false)
 
-    }, [fillVanChecked,scheduleVanChecked,setSelectedTaskList, filteredData, addItemsToList]);
+    }, [fillVanChecked,scheduleVanChecked,itemsList]);
 
     const itemsList = [
         {
@@ -134,7 +134,7 @@ const AddItems = (props) => {
     }
 
     const increaseQty = (qty, ind, key) => {
-        let key = key
+        let keys = key
         // console.log('increaseQty', qty, key)
         // console.log('increaseQty Id', qty.id, key)
 
@@ -155,9 +155,9 @@ const AddItems = (props) => {
         //  }))
 
         const rooms = JSON.parse(JSON.stringify(filteredData));
-            console.log('rooms Key', JSON.parse(JSON.stringify(key)))
+            console.log('rooms Key', JSON.parse(JSON.stringify(keys)))
             console.log('rooms Id', JSON.parse(JSON.stringify(ind)))
-            rooms[JSON.parse(JSON.stringify(key))].subitems[JSON.parse(JSON.stringify(ind))].quantity++;
+            rooms[JSON.parse(JSON.stringify(keys))].subitems[JSON.parse(JSON.stringify(ind))].quantity++;
             setLoading(true)
 
         setFilteredData(rooms);
@@ -196,8 +196,8 @@ const AddItems = (props) => {
         // console.log('increaseQty Child ', findChild)
 
         console.log('increaseQty setFilteredData ', setFilteredData)
-        props.addItemsToList(rooms)
-
+        let selectedRooms = rooms.map(k => k.subitems.filter(j => j.quantity !== 0));
+        props.addItemsToList(selectedRooms)
         // setFilteredData[findParent].subitems[findChild]((prevState) => {
         //     return({
         //       ...prevState,
@@ -211,19 +211,18 @@ const AddItems = (props) => {
     }
 
     const decreaseQty = (qty, ind, key) => {
-        let key = key
+        let kiy = key
         const rooms = JSON.parse(JSON.stringify(filteredData));
-            console.log('rooms Key', JSON.parse(JSON.stringify(key)))
+            console.log('rooms Key', JSON.parse(JSON.stringify(kiy)))
             console.log('rooms Id', JSON.parse(JSON.stringify(ind)))
-            rooms[JSON.parse(JSON.stringify(key))].subitems[JSON.parse(JSON.stringify(ind))].quantity--;
-            const checkValue = rooms[JSON.parse(JSON.stringify(key))].subitems[JSON.parse(JSON.stringify(ind))].quantity
+            rooms[JSON.parse(JSON.stringify(kiy))].subitems[JSON.parse(JSON.stringify(ind))].quantity--;
+            const checkValue = rooms[JSON.parse(JSON.stringify(kiy))].subitems[JSON.parse(JSON.stringify(ind))].quantity
             if(checkValue<0){
-                rooms[JSON.parse(JSON.stringify(key))].subitems[JSON.parse(JSON.stringify(ind))].quantity = 0
+                rooms[JSON.parse(JSON.stringify(kiy))].subitems[JSON.parse(JSON.stringify(ind))].quantity = 0
             }
             setLoading(true)
 
         setFilteredData(rooms);
-        props.addItemsToList(rooms)
         console.log('increaseQty rooms', rooms);
         console.log('increaseQty setFilteredData ', setFilteredData)
         setLoading(false)

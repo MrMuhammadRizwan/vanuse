@@ -15,14 +15,9 @@ import SearchIcon from '@mui/icons-material/Search';
 
 
 const MyItemsList = (props) => {
-    const [expanded, setExpanded] = React.useState(false);
-
-
+    console.log('props.myItemsList', props.myItemsList)
     useEffect(() => {
-        console.log('props', props.myItemsList)
-    }, []);
-
-    
+    }, [props.myItemsList]);
     return (
         <div className="date-card">
             <div className="card-content">
@@ -34,7 +29,7 @@ const MyItemsList = (props) => {
 
                 <div className="mb-31">
                     {props.myItemsList && props.myItemsList.map((item,i)=>{
-                        console.log('props item', item)
+                        console.log('props.myItemsList', item)
                         return(
                             item.length>0?
                                 item.map((childitem,i)=>{

@@ -56,12 +56,16 @@ const Cards = (props) => {
     }
 
     const addItemsToList = ( list ) => {
-        console.log('addItems', list)
+        console.log('addItems >>>', list)
         if(list.length>0){
-            setViewAddItemsToList(true)
-            setMyItemsList(list)
         }
+        setViewAddItemsToList(true)
+        setMyItemsList(list)
     }
+    
+    useEffect(() => {
+    }, [viewAddItemsToList,myItemsList]);
+
 
     return (
         <>
