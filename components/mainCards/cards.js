@@ -57,41 +57,44 @@ const Cards = (props) => {
     return (
         <>
             <Grid container spacing={10}>
-            <Grid item xs={12} md={6}>
-                <div className="banner-card">
-                    <div className="card-content">
-                        <div className="card-slider">
-                            <Slider aria-label="Volume" 
-                                value={sliderValue} max={5} 
-                                disabled/>
-                            <span className="card-slider-count">{sliderValue}/5</span>
+                <Grid item xs={12} md={6}>
+                    <div className="banner-card">
+                        <div className="card-content">
+                            <div className="card-slider">
+                                <Slider aria-label="Volume" 
+                                    value={sliderValue} max={5} 
+                                    disabled/>
+                                <span className="card-slider-count">{sliderValue}/5</span>
+                            </div>
+                            {viwAddItemsScreen?
+                                <AddItems goBackThirdScreen={goBackThirdScreen} addItems={addItems}/>
+                                :null
+                            }
+                            {viwServices?
+                                <Services goBackSecondScreen={goBackSecondScreen} goNextFourScreen={goNextFourScreen}/>
+                                :null
+                            }
+                            {viwPickupTime?
+                                <PickupTime dateValueFromOtherComp={gettingDate} shedulePickupChange={shedulePickupChange} goBackFirstScreen={props.goBackFirstScreen} goNextServices={goNextServices}/>
+                                :null
+                            }
                         </div>
-                        {viwAddItemsScreen?
-                            <AddItems goBackThirdScreen={goBackThirdScreen} addItems={addItems}/>
-                            :null
-                        }
-                        {viwServices?
-                            <Services goBackSecondScreen={goBackSecondScreen} goNextFourScreen={goNextFourScreen}/>
-                            :null
-                        }
-                        {viwPickupTime?
-                            <PickupTime dateValueFromOtherComp={gettingDate} shedulePickupChange={shedulePickupChange} goBackFirstScreen={props.goBackFirstScreen} goNextServices={goNextServices}/>
-                            :null
-                        }
                     </div>
-                </div>
-            </Grid>
-            <Grid item xs={12} md={5}>
-            {viwPickupTime?
-                <>
-                {shedulePickupValue?
-                    <PickupDate getDate={getDateFromComponent}/>
-                    :null
+                </Grid>
+                <Grid item xs={12} md={5}>
+                {viwPickupTime?
+                    <>
+                    {shedulePickupValue?
+                        <PickupDate getDate={getDateFromComponent}/>
+                        :null
+                    }
+                    </>
+                :null
                 }
-                </>
-            :null
-            }
-            </Grid>
+                    <div class="right-heading">
+                        <img src="/blue-car.svg" alt="Blue Car" className="bluecar" />
+                    </div>
+                </Grid>
             </Grid>
         </>
     );

@@ -1,18 +1,15 @@
 h2{
     color: #222B45;
 }
-.MuiInputBase-input{
+.custom-input .MuiInputBase-input{
     color: #6E7191;
 }
-.MuiInputBase-input::placeholder{
+.custom-input .MuiInputBase-input::placeholder{
     color: #6E7191;
 }
 .custom-input{
     margin-left: 0;
 }
 .custom-input input{
-    padding-left: 70px !important;
-}
-.custom-input .MuiOutLinedInput-root{
-    padding-right: 0 !important;
+    padding-left: 70px;
 }
