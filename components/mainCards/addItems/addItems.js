@@ -29,8 +29,8 @@ const AddItems = (props) => {
     };
 
     useEffect(() => {
-        setAllData(itemsList)
-        setFilteredData(itemsList)
+        setAllData(props.itemsList)
+        setFilteredData(props.itemsList)
         // let filteredArray = itemsList
         // .filter((element) => 
         //     element.subitems.some((subElement) => subElement.quantity === 1))
@@ -49,7 +49,7 @@ const AddItems = (props) => {
         //     // return newElt.subitems.filter(subElement => subElement.quantity === '1');
         //     // }
         // )
-        let selectedTaskListItems = itemsList.map(k => k.subitems.filter(j => j.quantity !== 0));
+        let selectedTaskListItems = props.itemsList.map(k => k.subitems.filter(j => j.quantity !== 0));
 
         setSelectedTaskList(selectedTaskListItems)
 
@@ -58,77 +58,13 @@ const AddItems = (props) => {
 
         setLoading(false)
 
-    }, [fillVanChecked,scheduleVanChecked,itemsList]);
+    }, [fillVanChecked,scheduleVanChecked,]);
 
-    const itemsList = [
-        {
-            'key':0,
-            'title':'Parent',
-            'subitems':[
-                {
-                    'id':'9090',
-                    'title':'yyyyyy',
-                    'quantity':1,
-                    'width':'30',
-                    'height':'23',
-                    'depth':'14',
-                    'instructions':'instructions here',
-                },
-                {
-                    'id':'9092',
-                    'title':'zzzzzzz',
-                    'quantity':0,
-                    'width':'30',
-                    'height':'23',
-                    'depth':'14',
-                    'instructions':'instructions here',
-                },
-                {
-                    'id':'9093',
-                    'title':'cccccccc',
-                    'quantity':0,
-                    'width':'30',
-                    'height':'23',
-                    'depth':'14',
-                    'instructions':'instructions here',
-                }
-            ]
-        },
-        {
-            'key':1,
-            'title':'Parent2',
-            'subitems':[
-                {
-                    'id':'9094',
-                    'title':'dddddddd',
-                    'quantity':0,
-                    'width':'30',
-                    'height':'23',
-                    'depth':'14',
-                    'instructions':'instructions here',
-                }
-            ]
-        },
-        {
-            'key':2,
-            'title':'Parent3',
-            'subitems':[
-                {
-                    'id':'9095',
-                    'title':'ffffffff',
-                    'quantity':0,
-                    'width':'30',
-                    'height':'23',
-                    'depth':'14',
-                    'instructions':'instructions here',
-                }
-            ]
-        }
-    ]
+    
 
     const filterData = (e) => {
         const filterValue = e.target.value
-        const editedTaskList = itemsList.filter((data) =>  JSON.stringify(data).toLowerCase().indexOf(filterValue.toLowerCase()) !== -1)
+        const editedTaskList = props.itemsList.filter((data) =>  JSON.stringify(data).toLowerCase().indexOf(filterValue.toLowerCase()) !== -1)
         setFilteredData(editedTaskList)
         setFilteredData(editedTaskList)
     }
@@ -243,9 +179,9 @@ const AddItems = (props) => {
 
             <div className="mb-31">
             {loading?
-                                            'Loading Data...'
-                                        :
-                                        <>
+                    'Loading Data...'
+                :
+                <>
                     {filteredData.length > 0 ? <p>Or quickly add items from a list of popular rooms:</p> : null}
                     {filteredData.length <= 0 ? <p>0 Items Found</p> : null}
                     <div className="items-list mb-20">

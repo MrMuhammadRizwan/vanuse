@@ -15,9 +15,9 @@ import SearchIcon from '@mui/icons-material/Search';
 
 
 const MyItemsList = (props) => {
-    console.log('props.myItemsList', props.myItemsList)
-    useEffect(() => {
-    }, [props.myItemsList]);
+    // console.log('props.myItemsList', props.myItemsList)
+    // useEffect(() => {
+    // }, [props.myItemsList]);
     return (
         <div className="date-card">
             <div className="card-content">

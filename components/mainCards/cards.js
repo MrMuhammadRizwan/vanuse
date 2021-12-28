@@ -8,6 +8,73 @@ import Services from "./services/services";
 import AddItems from "./addItems/addItems";
 import MyItemsList from "./addItems/myItemsList";
 
+
+const itemsList = [
+    {
+        'key':0,
+        'title':'Parent',
+        'subitems':[
+            {
+                'id':'9090',
+                'title':'yyyyyy',
+                'quantity':1,
+                'width':'30',
+                'height':'23',
+                'depth':'14',
+                'instructions':'instructions here',
+            },
+            {
+                'id':'9092',
+                'title':'zzzzzzz',
+                'quantity':0,
+                'width':'30',
+                'height':'23',
+                'depth':'14',
+                'instructions':'instructions here',
+            },
+            {
+                'id':'9093',
+                'title':'cccccccc',
+                'quantity':0,
+                'width':'30',
+                'height':'23',
+                'depth':'14',
+                'instructions':'instructions here',
+            }
+        ]
+    },
+    {
+        'key':1,
+        'title':'Parent2',
+        'subitems':[
+            {
+                'id':'9094',
+                'title':'dddddddd',
+                'quantity':0,
+                'width':'30',
+                'height':'23',
+                'depth':'14',
+                'instructions':'instructions here',
+            }
+        ]
+    },
+    {
+        'key':2,
+        'title':'Parent3',
+        'subitems':[
+            {
+                'id':'9095',
+                'title':'ffffffff',
+                'quantity':0,
+                'width':'30',
+                'height':'23',
+                'depth':'14',
+                'instructions':'instructions here',
+            }
+        ]
+    }
+]
+
 const Cards = (props) => {
     const [sliderValue, setSliderValue] = React.useState(1);
     const [gettingDate, setGettingDate] = React.useState(new Date());
@@ -80,7 +147,7 @@ const Cards = (props) => {
                             <span className="card-slider-count">{sliderValue}/5</span>
                         </div>
                         {viwAddItemsScreen?
-                            <AddItems goBackThirdScreen={goBackThirdScreen} addItemsToList={addItemsToList}/>
+                            <AddItems goBackThirdScreen={goBackThirdScreen} addItemsToList={addItemsToList} itemsList={itemsList}/>
                             :null
                         }
                         {viwServices?
