@@ -4,12 +4,13 @@
     vertical-align: middle;
     justify-content: center;
     align-items: center;
-    padding: 24px;
+    padding: 24px 24px 24px 20px;
     border: 1px solid #D9DBE9;
     border-radius: 5px;
 }
 .notification-icon{
-    width: 15%;
+    /* width: 15%; */
+    padding-right: 19px;
 }
 .notification-text{
     width: 85%;
@@ -55,9 +56,10 @@
     color:#31B7B7;
     height: 8px;  
     padding: 0px; 
+    border-radius: 16px;
 }
 .card-slider .MuiSlider-track{
-    border-radius: 0px;
+    border-radius: 16px;
 }
 .card-slider .MuiSlider-rail{
     color: #EFF0F7;
@@ -111,7 +113,7 @@
     padding: 0px;
     width: 100%;
     border-radius: 15px;
-    color: #fff;
+    color: #fff !important;
 }
 
 .placeholder{
@@ -119,7 +121,7 @@
 }
 .date-card{
     width: 100%;
-    max-width: 540px;
+    max-width: 360px;
     background: #F7F7FC;
     box-shadow: 0px 8px 16px rgb(17 17 17 / 6%);
     border-radius: 16px;
@@ -128,27 +130,41 @@
 .date-card .card-content{
     padding: 20px;
 }
+.date-card .card-content .MuiTypography-caption {
+    color: #23274F;
+    font-weight: 500;
+}
+.date-card .card-content .css-l0iinn{
+    color: #23274F;
+    font-weight: bold;
+}
+.date-card .card-content .MuiIconButton-sizeSmall{
+    width: 30px;
+    height: 30px;
+    color: #23274F;
+}
 .date-card .PrivatePickersSlideTransition-root{
-    min-height: 200px;
+    min-height: 230px;
 }
 .date-card .MuiPickersDay-root,
 .date-card .MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected){
-    border-radius: 10px
+    border-radius: 6px;
+    color: #23274F;
+    font-weight: 500;
+}
+.date-card .Mui-disabled{
+    color: #D9DBE9;
 }
 .date-card .MuiButtonBase-root-MuiPickersDay-root.Mui-selected,
 .date-card .css-bkrceb-MuiButtonBase-root-MuiPickersDay-root.Mui-selected:hover,
 .date-card .Mui-selected{
-    border-radius: 10px;
+    border-radius: 6px;
     background: #31B7B7 !important;
     color: #fff;
 }
-
-
 .select-fill-color .MuiOutlinedInput-root svg{
     fill: #fff;
 }
-
-
 .items-list .MuiPaper-root{
     background-color: #F7F7FC;
     border-radius: 15px;
@@ -213,14 +229,35 @@
 .mb-23{
     margin-bottom: 23px;
 }
+.mb-26{
+    margin-bottom: 26px;
+}
 .mb-31{
     margin-bottom: 31px;
 }
+.mb-32{
+    margin-bottom: 32px;
+}
+.mb-52{
+    margin-bottom: 52px;
+}
+.mb-61{
+    margin-bottom: 61px;
+}
 .mb-71{
-    margin-bottom: 73px;
+    margin-bottom: 71px;
+}
+.mb-132{
+    margin-bottom: 132px;
 }
 .text-center{
     text-align: center;
+}
+
+@media (max-width: 991px){
+    .date-card{
+        margin: auto;
+    }
 }
 .display-block{
     display: block;

@@ -184,6 +184,9 @@ code {
 .login-buttons .MuiButton-root{
   margin-right: 20px;
 }
+.MuiButton-root{
+  height: 48px;
+}
 
 .main-content{
   min-height: 100vh;
@@ -200,20 +203,12 @@ code {
   padding-top: 21px;
   /* padding-left: 172px;
   padding-right: 86px; */
-  display: flex;
-  justify-content: center;
   position: relative;
-}
-.banner-container .bluecar{
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-20%, 35%);
-  z-index: 0;
 }
 .banner-card{
   width: 100%;
   max-width: 540px;
+  margin-left: auto;
   /* float: left; */
   background: #FFFFFF;
   box-shadow: 0px 8px 16px rgba(17, 17, 17, 0.06);
@@ -225,7 +220,7 @@ code {
   padding: 60px;
   padding-top: 48px;
 }
-.card-content .icons{
+/* .card-content .icons{
   position: absolute !important;
   z-index: 1 !important;
   left: 10px;
@@ -236,21 +231,25 @@ code {
   height: 30px;
   top: -5px;
   left: 10px;
-}
+} */
 .card-content h2{
-  margin-bottom: 5px;
   margin: 0px;
+  margin-bottom: 5px;
 }
 .card-content p{
   margin-top: 0px;
-  margin-bottom: 52px;
 }
 .card-buttons{
   display: grid;
 }
 .right-heading{
   margin-top: 20px;
-  margin-left: 82px;
+}
+.right-heading .bluecar{
+  position: absolute;
+  top: 50%;
+  transform: translate(-15%, 35%);
+  z-index: 0;
 }
 .right-heading h1{
   font-weight: bold;
@@ -275,20 +274,25 @@ code {
 .custom-input .MuiOutlinedInput-root{
   padding: 0px;
 }
-
+@media (max-width: 1120px){
+  .right-heading .bluecar{
+    width: 50%;
+    transform: translate(-16% , 50%);
+  }
+}
 @media (min-width: 768px) and (max-width: 1024px) {
   .MuiAppBar-root .MuiButton-root{
     margin-right: 10px;
-  }
-  .banner-container .bluecar{
-    transform: translate(-25% , 35%);
   }
 }
 @media (max-width: 991px){
   .right-heading {
     margin-left: 32px;
   }
-  .banner-container .bluecar{
+  .banner-card{
+    margin: auto;
+  }
+  .right-heading .bluecar{
     display: none;
   }
 }
@@ -304,6 +308,9 @@ code {
   .banner-card{
     margin: auto;
     margin-bottom: 70px;
+  }
+  .banner-section{
+    flex-direction: column-reverse;
   }
 }
 @media (max-width: 575px){

@@ -85,13 +85,13 @@ const PickupTime = (props) => {
     };
 
     return (
-            <>
-              <div className="card-heading mb-71">
+        <>
+            <div className="card-heading mb-71">
                 <h2>Pick-Up Time</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing</p>
-              </div>
+            </div>
 
-              <div className={immediateChecked ? "card-slection mb-20 selection" : "card-slection mb-20"}>
+            <div className={immediateChecked ? "card-slection mb-32 selection" : "card-slection mb-32"}>
                 <Checkbox
                     checked={immediateChecked}
                     onChange={handleIimmediateChecked}
@@ -99,9 +99,9 @@ const PickupTime = (props) => {
                 />
                 <p><strong>Immediate Pick-up</strong></p>
                 <p>Get a van in the next hour</p>
-              </div>
+            </div>
 
-              <div className={scheduleChecked ? "card-slection mb-71 selection" : "card-slection mb-71"}>
+            <div className={scheduleChecked ? "card-slection mb-61 selection" : "card-slection mb-71"}>
                 <Checkbox
                     checked={scheduleChecked}
                     onChange={handleScheduleChecked}
@@ -109,118 +109,118 @@ const PickupTime = (props) => {
                 />
                 <p><strong>Schedule A Pickup</strong></p>
                 <p>Book a van up to 30 days in advance</p>
-              </div>
+            </div>
               
-              {showHoursMinutesAmpm?
-                <div className="time-wrapper mb-71">
-                        <div className={hoursBorder?"select-border select":"select"}>
-                            <FormControl sx={{ m: 1 }}>
-                                <Select
-                                labelId="hours"
-                                id="hours"
-                                value={hoursValue}
-                                onChange={handleHours}
-                                placeholder="Hours"
-                                input={<OutlinedInput />}
-                                displayEmpty
-                                renderValue={(selected) => {
-                                    if (selected.length === 0) {
-                                    return <span className="placeholder">Hours</span>;
-                                    }
-                                    return selected.join(', ');
-                                }}
-                                >
-                                    <MenuItem disabled value="">
-                                        <em>Hours</em>
+            {showHoursMinutesAmpm?
+                <div className="time-wrapper mb-132">
+                    <div className={hoursBorder?"select-border select":"select"}>
+                        <FormControl sx={{ m: 1 }}>
+                            <Select
+                            labelId="hours"
+                            id="hours"
+                            value={hoursValue}
+                            onChange={handleHours}
+                            placeholder="Hours"
+                            input={<OutlinedInput />}
+                            displayEmpty
+                            renderValue={(selected) => {
+                                if (selected.length === 0) {
+                                return <span className="placeholder">Hours</span>;
+                                }
+                                return selected.join(', ');
+                            }}
+                            >
+                                <MenuItem disabled value="">
+                                    <em>Hours</em>
+                                </MenuItem>
+                                {Hours.map((name) => (
+                                    <MenuItem
+                                    key={name}
+                                    value={name}
+                                    >
+                                    {name}
                                     </MenuItem>
-                                    {Hours.map((name) => (
-                                        <MenuItem
-                                        key={name}
-                                        value={name}
-                                        >
-                                        {name}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
-                        </div>
-                        <div className={minutesBorder?"select-border select":"select"}>
-                            <FormControl sx={{ m: 1 }}>
-                                <Select
-                                labelId="minutes"
-                                id="minutes"
-                                placeholder="Minutes"
-                                value={minutesValue}
-                                onChange={handleMinutes}
-                                input={<OutlinedInput/>}
-                                displayEmpty
-                                renderValue={(selected) => {
-                                    if (selected.length === 0) {
-                                    return <span className="placeholder">Minutes</span>;
-                                    }
-                                    return selected.join(', ');
-                                }}
-                                >
-                                    <MenuItem disabled value="">
-                                        <em>Minutes</em>
+                                ))}
+                            </Select>
+                        </FormControl>
+                    </div>
+                    <div className={minutesBorder?"select-border select":"select"}>
+                        <FormControl sx={{ m: 1 }}>
+                            <Select
+                            labelId="minutes"
+                            id="minutes"
+                            placeholder="Minutes"
+                            value={minutesValue}
+                            onChange={handleMinutes}
+                            input={<OutlinedInput/>}
+                            displayEmpty
+                            renderValue={(selected) => {
+                                if (selected.length === 0) {
+                                return <span className="placeholder">Minutes</span>;
+                                }
+                                return selected.join(', ');
+                            }}
+                            >
+                                <MenuItem disabled value="">
+                                    <em>Minutes</em>
+                                </MenuItem>
+                                {Minutes.map((name) => (
+                                    <MenuItem
+                                    key={name}
+                                    value={name}
+                                    >
+                                    {name}
                                     </MenuItem>
-                                    {Minutes.map((name) => (
-                                        <MenuItem
-                                        key={name}
-                                        value={name}
-                                        >
-                                        {name}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
-                        </div>
-                        <div className={fillColor?"select-fill-color select":"select"}>
-                            <FormControl sx={{ m: 1}}>
-                                <Select
-                                labelId="ampm"
-                                id="ampm"
-                                value={ampmValue}
-                                onChange={handleAmpm}
-                                input={<OutlinedInput/>}
-                                displayEmpty
-                                renderValue={(selected) => {
-                                    if (selected.length === 0) {
-                                    return <span className="placeholder">AM/PM</span>;
-                                    }
-                                    return selected.join(', ');
-                                }}
-                                >
-                                    <MenuItem disabled value="">
-                                        <em>AM/PM</em>
+                                ))}
+                            </Select>
+                        </FormControl>
+                    </div>
+                    <div className={fillColor?"select-fill-color select":"select"}>
+                        <FormControl sx={{ m: 1}}>
+                            <Select
+                            labelId="ampm"
+                            id="ampm"
+                            value={ampmValue}
+                            onChange={handleAmpm}
+                            input={<OutlinedInput/>}
+                            displayEmpty
+                            renderValue={(selected) => {
+                                if (selected.length === 0) {
+                                return <span className="placeholder">AM/PM</span>;
+                                }
+                                return selected.join(', ');
+                            }}
+                            >
+                                <MenuItem disabled value="">
+                                    <em>AM/PM</em>
+                                </MenuItem>
+                                {AMPM.map((name) => (
+                                    <MenuItem
+                                    key={name}
+                                    value={name}
+                                    >
+                                    {name}
                                     </MenuItem>
-                                    {AMPM.map((name) => (
-                                        <MenuItem
-                                        key={name}
-                                        value={name}
-                                        >
-                                        {name}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
-                        </div>
+                                ))}
+                            </Select>
+                        </FormControl>
+                    </div>
                 </div>
                 :null
               }
 
             {immediateChecked?
                 <div className="notification-box mb-23">
-                        <div className="notification-icon">
-                            <img src="/alarm.svg" alt="alarm" className="icons" />
-                        </div>
-                        <div className="notification-text">
-                            <p>
-                                Immediate pickups are usually able to be serviced <strong>within an hour.</strong>
-                                <br/>
-                                We'll notify drivers of your request once payment is complete
-                            </p>
-                        </div>
+                    <div className="notification-icon">
+                        <img src="/alarm.svg" alt="alarm" className="icons" />
+                    </div>
+                    <div className="notification-text">
+                        <p>
+                            Immediate pickups are usually able to be serviced <strong>within an hour.</strong>
+                            <br/>
+                            We'll notify drivers of your request once payment is complete
+                        </p>
+                    </div>
                 </div>
               :null
             }
@@ -250,26 +250,25 @@ const PickupTime = (props) => {
               :null
             }
 
-              <div className="card-buttons-grid">
-                    <Button 
-                        key={"Back"} 
-                        className="lightbutton"
-                        onClick={props.goBackFirstScreen}
-                    >
-                        Back
-                    </Button>
+            <div className="card-buttons-grid">
+                <Button 
+                    key={"Back"} 
+                    className="lightbutton"
+                    onClick={props.goBackFirstScreen}
+                >
+                    Back
+                </Button>
 
-                    <Button
-                        key={"Next"}
-                        className="darkbutton"
-                        sx={{ mb: "16px" }}
-                        onClick={props.goNextServices}
-                    >
-                        Next
-                    </Button>  
-                </div>
-            </>
+                <Button
+                    key={"Next"}
+                    className="darkbutton"
+                    sx={{ mb: "16px" }}
+                    onClick={props.goNextServices}
+                >
+                    Next
+                </Button>  
+            </div>
+        </>
     );
-  };
-
-  export default PickupTime;
+};
+export default PickupTime;
