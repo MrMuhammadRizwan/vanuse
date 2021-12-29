@@ -58,6 +58,15 @@ const PickupTime = (props) => {
     
 
     useEffect(() => {
+        setHoursValue(
+            '10',
+        );
+        setMinutesValue(
+            '00',
+        );
+        setAmpm(
+            'AM',
+        );
       }, [immediateChecked,scheduleChecked,props]);
 
     const handleIimmediateChecked = (event) => {
@@ -118,21 +127,22 @@ const PickupTime = (props) => {
                                 <Select
                                 labelId="hours"
                                 id="hours"
+                                defaultValue={'10'}
                                 value={hoursValue}
                                 onChange={handleHours}
                                 placeholder="Hours"
                                 input={<OutlinedInput />}
-                                displayEmpty
-                                renderValue={(selected) => {
-                                    if (selected.length === 0) {
-                                    return <span className="placeholder">Hours</span>;
-                                    }
-                                    return selected.join(', ');
-                                }}
+                                // displayEmpty
+                                // renderValue={(selected) => {
+                                //     if (selected.length === 0) {
+                                //     return <span className="placeholder">Hours</span>;
+                                //     }
+                                //     return selected.join(', ');
+                                // }}
                                 >
-                                    <MenuItem disabled value="">
+                                    {/* <MenuItem disabled value="">
                                         <em>Hours</em>
-                                    </MenuItem>
+                                    </MenuItem> */}
                                     {Hours.map((name) => (
                                         <MenuItem
                                         key={name}
@@ -153,17 +163,17 @@ const PickupTime = (props) => {
                                 value={minutesValue}
                                 onChange={handleMinutes}
                                 input={<OutlinedInput/>}
-                                displayEmpty
-                                renderValue={(selected) => {
-                                    if (selected.length === 0) {
-                                    return <span className="placeholder">Minutes</span>;
-                                    }
-                                    return selected.join(', ');
-                                }}
+                                // displayEmpty
+                                // renderValue={(selected) => {
+                                //     if (selected.length === 0) {
+                                //     return <span className="placeholder">Minutes</span>;
+                                //     }
+                                //     return selected.join(', ');
+                                // }}
                                 >
-                                    <MenuItem disabled value="">
+                                    {/* <MenuItem disabled value="">
                                         <em>Minutes</em>
-                                    </MenuItem>
+                                    </MenuItem> */}
                                     {Minutes.map((name) => (
                                         <MenuItem
                                         key={name}
@@ -183,17 +193,17 @@ const PickupTime = (props) => {
                                 value={ampmValue}
                                 onChange={handleAmpm}
                                 input={<OutlinedInput/>}
-                                displayEmpty
-                                renderValue={(selected) => {
-                                    if (selected.length === 0) {
-                                    return <span className="placeholder">AM/PM</span>;
-                                    }
-                                    return selected.join(', ');
-                                }}
+                                // displayEmpty
+                                // renderValue={(selected) => {
+                                //     if (selected.length === 0) {
+                                //     return <span className="placeholder">AM/PM</span>;
+                                //     }
+                                //     return selected.join(', ');
+                                // }}
                                 >
-                                    <MenuItem disabled value="">
+                                    {/* <MenuItem disabled value="">
                                         <em>AM/PM</em>
-                                    </MenuItem>
+                                    </MenuItem> */}
                                     {AMPM.map((name) => (
                                         <MenuItem
                                         key={name}
