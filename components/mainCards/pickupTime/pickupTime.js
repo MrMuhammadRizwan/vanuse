@@ -94,13 +94,13 @@ const PickupTime = (props) => {
     };
 
     return (
-            <>
-              <div className="card-heading mb-71">
-                <h2>Pik-Up Time</h2>
+        <>
+            <div className="card-heading mb-71">
+                <h2>Pick-Up Time</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing</p>
-              </div>
+            </div>
 
-              <div className={immediateChecked ? "card-slection mb-20 selection" : "card-slection mb-20"}>
+            <div className={immediateChecked ? "card-slection mb-32 selection" : "card-slection mb-32"}>
                 <Checkbox
                     checked={immediateChecked}
                     onChange={handleIimmediateChecked}
@@ -108,9 +108,9 @@ const PickupTime = (props) => {
                 />
                 <p><strong>Immediate Pick-up</strong></p>
                 <p>Get a van in the next hour</p>
-              </div>
+            </div>
 
-              <div className={scheduleChecked ? "card-slection mb-71 selection" : "card-slection mb-71"}>
+            <div className={scheduleChecked ? "card-slection mb-61 selection" : "card-slection mb-71"}>
                 <Checkbox
                     checked={scheduleChecked}
                     onChange={handleScheduleChecked}
@@ -118,7 +118,7 @@ const PickupTime = (props) => {
                 />
                 <p><strong>Schedule A Pickup</strong></p>
                 <p>Book a van up to 30 days in advance</p>
-              </div>
+            </div>
               
               {showHoursMinutesAmpm?
                 <div className="time-wrapper mb-71">
@@ -221,16 +221,16 @@ const PickupTime = (props) => {
 
             {immediateChecked?
                 <div className="notification-box mb-23">
-                        <div className="notification-icon">
-                            <img src="/alarm.svg" alt="alarm" className="icons" />
-                        </div>
-                        <div className="notification-text">
-                            <p>
-                                Immediate pickups are usually able to be serviced <strong>within an hour.</strong>
-                                <br/>
-                                We'll notify drivers of your request once payment is complete
-                            </p>
-                        </div>
+                    <div className="notification-icon">
+                        <img src="/alarm.svg" alt="alarm" className="icons" />
+                    </div>
+                    <div className="notification-text">
+                        <p>
+                            Immediate pickups are usually able to be serviced <strong>within an hour.</strong>
+                            <br/>
+                            We'll notify drivers of your request once payment is complete
+                        </p>
+                    </div>
                 </div>
               :null
             }
@@ -260,26 +260,25 @@ const PickupTime = (props) => {
               :null
             }
 
-              <div className="card-buttons-grid">
-                    <Button 
-                        key={"Back"} 
-                        className="lightbutton"
-                        onClick={props.goBackFirstScreen}
-                    >
-                        Back
-                    </Button>
+            <div className="card-buttons-grid">
+                <Button 
+                    key={"Back"} 
+                    className="lightbutton"
+                    onClick={props.goBackFirstScreen}
+                >
+                    Back
+                </Button>
 
-                    <Button
-                        key={"Next"}
-                        className="darkbutton"
-                        sx={{ mb: "16px" }}
-                        onClick={props.goNextServices}
-                    >
-                        Next
-                    </Button>  
-                </div>
-            </>
+                <Button
+                    key={"Next"}
+                    className="darkbutton"
+                    sx={{ mb: "16px" }}
+                    onClick={props.goNextServices}
+                >
+                    Next
+                </Button>  
+            </div>
+        </>
     );
-  };
-
-  export default PickupTime;
+};
+export default PickupTime;
