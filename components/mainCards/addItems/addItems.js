@@ -18,7 +18,6 @@ const AddItems = (props) => {
     const [fillVanChecked, setfillVanChecked] = React.useState(true);
     const [scheduleVanChecked, setscheduleVanChecked] = React.useState(false);
     const [loading, setLoading] = React.useState(true);
-    const [allData, setAllData] = React.useState([]);
     const [filteredData, setFilteredData] = React.useState([]);
     const [selectedTaskList, setSelectedTaskList] = React.useState([]);
 
@@ -29,7 +28,6 @@ const AddItems = (props) => {
     };
 
     useEffect(() => {
-        setAllData(props.itemsList)
         setFilteredData(props.itemsList)
         // let filteredArray = itemsList
         // .filter((element) => 
@@ -58,14 +56,13 @@ const AddItems = (props) => {
 
         setLoading(false)
 
-    }, [fillVanChecked,scheduleVanChecked,]);
+    }, [fillVanChecked,scheduleVanChecked]);
 
     
 
     const filterData = (e) => {
         const filterValue = e.target.value
         const editedTaskList = props.itemsList.filter((data) =>  JSON.stringify(data).toLowerCase().indexOf(filterValue.toLowerCase()) !== -1)
-        setFilteredData(editedTaskList)
         setFilteredData(editedTaskList)
     }
 
@@ -152,14 +149,16 @@ const AddItems = (props) => {
             console.log('rooms Key', JSON.parse(JSON.stringify(kiy)))
             console.log('rooms Id', JSON.parse(JSON.stringify(ind)))
             rooms[JSON.parse(JSON.stringify(kiy))].subitems[JSON.parse(JSON.stringify(ind))].quantity--;
-            const checkValue = rooms[JSON.parse(JSON.stringify(kiy))].subitems[JSON.parse(JSON.stringify(ind))].quantity
-            if(checkValue<0){
-                rooms[JSON.parse(JSON.stringify(kiy))].subitems[JSON.parse(JSON.stringify(ind))].quantity = 0
-            }
-            setLoading(true)
-
+            
+            
+        
+        setLoading(true)
         setFilteredData(rooms);
-        console.log('increaseQty rooms', rooms);
+
+        let selectedRooms = rooms.map(k => k.subitems.filter(j => j.quantity !== 0));
+        props.addItemsToList(selectedRooms);
+
+        console.log('increaseQty selectedRooms', selectedRooms);
         console.log('increaseQty setFilteredData ', setFilteredData)
         setLoading(false)
 
@@ -203,11 +202,11 @@ const AddItems = (props) => {
                                                 return(
                                                     <div className="child-items" key={i}>
                                                         {item.title} - index{i}
-                                                        <span>
+                                                        <div className="cart">
                                                             <Button key={"-"} className="cart-increase" onClick={()=>decreaseQty(item, i, list.key)}> - </Button>
                                                             <TextField id="qty" value={item.quantity} min={0}/>
                                                             <Button key={"+"} className="cart-increase" onClick={()=>increaseQty(item, i, list.key)}> + </Button>
-                                                        </span>
+                                                        </div>
                                                     </div>
                                                 )
                                             })}

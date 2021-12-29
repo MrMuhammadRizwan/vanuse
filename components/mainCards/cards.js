@@ -124,8 +124,6 @@ const Cards = (props) => {
 
     const addItemsToList = ( list ) => {
         console.log('addItems >>>', list)
-        if(list.length>0){
-        }
         setViewAddItemsToList(true)
         setMyItemsList(list)
     }
@@ -156,7 +154,7 @@ const Cards = (props) => {
                                 :null
                             }
                             {viwPickupTime?
-                                <PickupTime dateValueFromOtherComp={gettingDate} shedulePickupChange={shedulePickupChange} goBackFirstScreen={props.goBack} goNextServices={goNextServices}/>
+                                <PickupTime dateValueFromOtherComp={gettingDate} shedulePickupChange={shedulePickupChange} goBackFirstScreen={props.goBack} goNextServices={goNextServices} clickSchedule={props.clickSchedule}/>
                                 :null
                             }
                         </div>

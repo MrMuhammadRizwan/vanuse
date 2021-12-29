@@ -24,6 +24,7 @@ const SearchCard = () => {
   const [focusActive, setFocusActive] = React.useState(false);
   const [focusActiveEnd, setFocusActiveEnd] = React.useState(false);
   const [goBackValue, setGoBackValue] = React.useState(false);
+  const [clickSchedule, setClickSchedule] = React.useState(false);
 
   const [sliderCard, setSliderCard] = React.useState(false);
 
@@ -123,7 +124,14 @@ const SearchCard = () => {
 
   const scheduleNow = () => {
     console.log('scheduleNow')
+    setClickSchedule(false)
     setSliderCard(true)
+  }
+
+  const scheduleLater = () => {
+    console.log('scheduleLater')
+    setSliderCard(true)
+    setClickSchedule(true)
   }
 
   const goBack = () => {
@@ -134,7 +142,7 @@ const SearchCard = () => {
 
   return (
     sliderCard?
-      <Cards goBack={goBack}/> 
+      <Cards goBack={goBack} clickSchedule={clickSchedule}/> 
       :
       <>
       <Grid container spacing={10} className="banner-section">
@@ -331,7 +339,7 @@ const SearchCard = () => {
                 >
                   Request Now
                 </Button>
-                <Button key={"Schedule Later"} className="lightbutton">
+                <Button key={"Schedule Later"} className="lightbutton" onClick={()=>scheduleLater()} disabled={value && value2 ? false: true}>
                   Schedule Later
                 </Button>
               </div>
