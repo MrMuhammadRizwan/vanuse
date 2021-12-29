@@ -6,6 +6,74 @@ import PickupTime from "./pickupTime/pickupTime";
 import PickupDate from "./pickupTime/pickupDate";
 import Services from "./services/services";
 import AddItems from "./addItems/addItems";
+import MyItemsList from "./addItems/myItemsList";
+
+
+const itemsList = [
+    {
+        'key':0,
+        'title':'Parent',
+        'subitems':[
+            {
+                'id':'9090',
+                'title':'yyyyyy',
+                'quantity':1,
+                'width':'30',
+                'height':'23',
+                'depth':'14',
+                'instructions':'instructions here',
+            },
+            {
+                'id':'9092',
+                'title':'zzzzzzz',
+                'quantity':0,
+                'width':'30',
+                'height':'23',
+                'depth':'14',
+                'instructions':'instructions here',
+            },
+            {
+                'id':'9093',
+                'title':'cccccccc',
+                'quantity':0,
+                'width':'30',
+                'height':'23',
+                'depth':'14',
+                'instructions':'instructions here',
+            }
+        ]
+    },
+    {
+        'key':1,
+        'title':'Parent2',
+        'subitems':[
+            {
+                'id':'9094',
+                'title':'dddddddd',
+                'quantity':0,
+                'width':'30',
+                'height':'23',
+                'depth':'14',
+                'instructions':'instructions here',
+            }
+        ]
+    },
+    {
+        'key':2,
+        'title':'Parent3',
+        'subitems':[
+            {
+                'id':'9095',
+                'title':'ffffffff',
+                'quantity':0,
+                'width':'30',
+                'height':'23',
+                'depth':'14',
+                'instructions':'instructions here',
+            }
+        ]
+    }
+]
 
 const Cards = (props) => {
     const [sliderValue, setSliderValue] = React.useState(1);
@@ -14,6 +82,8 @@ const Cards = (props) => {
     const [viwServices, setViwServices] = React.useState(false);
     const [viwPickupTime, setViwPickupTime] = React.useState(true);
     const [viwAddItemsScreen, setViwAddItemsScreen] = React.useState(false);
+    const [viewAddItemsToList, setViewAddItemsToList] = React.useState(false);
+    const [myItemsList, setMyItemsList] = React.useState([]);
 
 
     const getDateFromComponent = (date) =>{
@@ -41,6 +111,7 @@ const Cards = (props) => {
         setViwServices(false)
         setViwPickupTime(true)
         setSliderValue(1)
+        setViewAddItemsToList(false)
     }
 
     const goBackThirdScreen = () => {
@@ -48,11 +119,20 @@ const Cards = (props) => {
         setViwAddItemsScreen(false)
         setViwServices(true)
         setSliderValue(2)
+        setViewAddItemsToList(false)
     }
 
-    const addItems = () => {
-        console.log('addToList')
+    const addItemsToList = ( list ) => {
+        console.log('addItems >>>', list)
+        if(list.length>0){
+        }
+        setViewAddItemsToList(true)
+        setMyItemsList(list)
     }
+    
+    useEffect(() => {
+    }, [viewAddItemsToList,myItemsList]);
+
 
     return (
         <>
@@ -61,13 +141,14 @@ const Cards = (props) => {
                     <div className="banner-card">
                         <div className="card-content">
                             <div className="card-slider">
-                                <Slider aria-label="Volume" 
+                                <Slider 
+                                    aria-label="Volume" 
                                     value={sliderValue} max={5} 
                                     disabled/>
                                 <span className="card-slider-count">{sliderValue}/5</span>
                             </div>
                             {viwAddItemsScreen?
-                                <AddItems goBackThirdScreen={goBackThirdScreen} addItems={addItems}/>
+                                <AddItems goBackThirdScreen={goBackThirdScreen} addItemsToList={addItemsToList} itemsList={itemsList}/>
                                 :null
                             }
                             {viwServices?
@@ -75,24 +156,28 @@ const Cards = (props) => {
                                 :null
                             }
                             {viwPickupTime?
-                                <PickupTime dateValueFromOtherComp={gettingDate} shedulePickupChange={shedulePickupChange} goBackFirstScreen={props.goBackFirstScreen} goNextServices={goNextServices}/>
+                                <PickupTime dateValueFromOtherComp={gettingDate} shedulePickupChange={shedulePickupChange} goBackFirstScreen={props.goBack} goNextServices={goNextServices}/>
                                 :null
                             }
                         </div>
                     </div>
                 </Grid>
                 <Grid item xs={12} md={5}>
-                {viwPickupTime?
-                    <>
-                    {shedulePickupValue?
-                        <PickupDate getDate={getDateFromComponent}/>
+                    {viewAddItemsToList?
+                        <MyItemsList myItemsList={myItemsList}/>
                         :null
                     }
-                    </>
-                :null
-                }
+                    {viwPickupTime?
+                        <>
+                            {shedulePickupValue?
+                                <PickupDate getDate={getDateFromComponent}/>
+                                :null
+                            }
+                        </>
+                        :null
+                    }
                     <div class="right-heading">
-                        <img src="/blue-car.svg" alt="Blue Car" className="bluecar" />
+                        <img src="/blue-car.svg" alt="Banner Car" className="bluecar" />
                     </div>
                 </Grid>
             </Grid>

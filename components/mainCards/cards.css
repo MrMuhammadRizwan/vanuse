@@ -250,8 +250,12 @@
 .text-center{
     text-align: center;
 }
+
 @media (max-width: 991px){
     .date-card{
         margin: auto;
     }
+}
+.display-block{
+    display: block;
 }
