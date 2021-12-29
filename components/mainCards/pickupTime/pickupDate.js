@@ -23,6 +23,7 @@ const PickupDate = (props) => {
                 date={date} 
                 minDate={minDate}
                 maxDate={maxDate} 
+                views={['day']}
                 displayStaticWrapperAs="desktop"
                 disablePast 
                 onChange={(newDate) => setDateNow(newDate)} />
