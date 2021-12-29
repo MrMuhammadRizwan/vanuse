@@ -152,6 +152,9 @@
     color: #23274F;
     font-weight: 500;
 }
+.date-card .Mui-disabled{
+    color: #D9DBE9;
+}
 .date-card .MuiButtonBase-root-MuiPickersDay-root.Mui-selected,
 .date-card .css-bkrceb-MuiButtonBase-root-MuiPickersDay-root.Mui-selected:hover,
 .date-card .Mui-selected{
