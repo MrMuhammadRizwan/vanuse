@@ -189,8 +189,9 @@
     display: flex;
     justify-content: space-between;
     padding: 5px 10px;
+    margin-bottom: 5px;
 }
-.child-items span{
+.child-items .cart{
     width: 100px;
     display: inline-flex;
 }

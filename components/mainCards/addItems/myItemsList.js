@@ -16,8 +16,8 @@ import SearchIcon from '@mui/icons-material/Search';
 
 const MyItemsList = (props) => {
     // console.log('props.myItemsList', props.myItemsList)
-    // useEffect(() => {
-    // }, [props.myItemsList]);
+    useEffect(() => {
+    }, [props]);
     return (
         <div className="date-card">
             <div className="card-content">
@@ -28,19 +28,19 @@ const MyItemsList = (props) => {
 
 
                 <div className="mb-31">
+                    {console.log('props.myItemsList >>>', props.myItemsList)}
                     {props.myItemsList && props.myItemsList.map((item,i)=>{
-                        console.log('props.myItemsList', item)
                         return(
                             item.length>0?
                                 item.map((childitem,i)=>{
                                     return(
                                         <div className="child-items" key={i}>
                                             {childitem.title}
-                                            <span>
+                                            <div className="cart">
                                                 <Button key={"-"} className="cart-increase"> - </Button>
                                                 <TextField id="qty" value={childitem.quantity}/>
                                                 <Button key={"+"} className="cart-increase"> + </Button>
-                                            </span>
+                                            </div>
                                         </div>
                                     )
                                 })

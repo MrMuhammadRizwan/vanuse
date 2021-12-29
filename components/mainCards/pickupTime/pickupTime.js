@@ -67,6 +67,12 @@ const PickupTime = (props) => {
         setAmpm(
             'AM',
         );
+        if(props.clickSchedule){
+            setImmediateChecked(false)
+            setScheduleChecked(true)
+            setShowHoursMinutesAmpm(true)
+            props.shedulePickupChange(true)
+        }
       }, [immediateChecked,scheduleChecked,props]);
 
     const handleIimmediateChecked = (event) => {
@@ -87,7 +93,7 @@ const PickupTime = (props) => {
         props.shedulePickupChange(true)
 
         if(immediateChecked){
-            setImmediateChecked(!immediateChecked);
+            setImmediateChecked(false);
         }else{
             setScheduleChecked(event.target.checked);
         }
