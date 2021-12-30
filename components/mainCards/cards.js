@@ -7,6 +7,7 @@ import PickupDate from "./pickupTime/pickupDate";
 import Services from "./services/services";
 import AddItems from "./addItems/addItems";
 import MyItemsList from "./addItems/myItemsList";
+import CustomItems from "./addItems/customItems";
 
 
 const itemsList = [
@@ -83,7 +84,13 @@ const Cards = (props) => {
     const [viwPickupTime, setViwPickupTime] = React.useState(true);
     const [viwAddItemsScreen, setViwAddItemsScreen] = React.useState(false);
     const [viewAddItemsToList, setViewAddItemsToList] = React.useState(false);
-    const [myItemsList, setMyItemsList] = React.useState([]);
+    const [myItemsList, setMyItemsList] = React.useState(itemsList);
+    const [allItemsList, setAllItemsList] = React.useState(itemsList);
+
+    const [viewCustomItemsScreen, setViewCustomItemsScreen] = React.useState(false);
+    
+    const [filteredData, setFilteredData] = React.useState([]);
+
 
 
     const getDateFromComponent = (date) =>{
@@ -92,6 +99,12 @@ const Cards = (props) => {
 
     const shedulePickupChange = (data) =>{
         setShedulePickupValue(data)
+        console.log('clickSchedule Main', data)
+        if(data){
+            setShedulePickupValue(data)
+        }else{
+            setShedulePickupValue(false)
+        }
     }
 
     const goNextServices = () => {
@@ -120,16 +133,69 @@ const Cards = (props) => {
         setViwServices(true)
         setSliderValue(2)
         setViewAddItemsToList(false)
+        setViewCustomItemsScreen(false)
     }
 
-    const addItemsToList = ( list ) => {
-        console.log('addItems >>>', list)
+    const goBackThirdMainScreen = () => {
+        setViwAddItemsScreen(true)
         setViewAddItemsToList(true)
-        setMyItemsList(list)
+        setViewCustomItemsScreen(false)
+    }
+
+    // const addItemsToList = ( list ) => {
+    //     console.log('addItems >>>', list)
+    //     setViewAddItemsToList(true)
+    //     setMyItemsList(list)
+    // }
+
+
+    const increaseQty = (qty, ind, key) => {
+        console.log('increaseQty rooms', qty, ind, key);
+        let keys = key
+        const rooms = JSON.parse(JSON.stringify(allItemsList));
+            rooms[JSON.parse(JSON.stringify(keys))].subitems[JSON.parse(JSON.stringify(ind))].quantity++;
+
+        setAllItemsList(rooms)
+        setMyItemsList(rooms)
+
+    }
+
+    const decreaseQty = (qty, ind, key) => {
+        let kiy = key
+        const rooms = JSON.parse(JSON.stringify(allItemsList));
+            console.log('rooms Key', JSON.parse(JSON.stringify(kiy)))
+            console.log('rooms Id', JSON.parse(JSON.stringify(ind)))
+            rooms[JSON.parse(JSON.stringify(kiy))].subitems[JSON.parse(JSON.stringify(ind))].quantity--;
+            
+        console.log('decreaseQty rooms', rooms);
+        setAllItemsList(rooms)
+
+        setMyItemsList(rooms)
+
+    }
+
+    const clearQty = (qty, ind, kiy) => {
+        console.log('clearQty', qty, ind, kiy);
+        const List = JSON.parse(JSON.stringify(allItemsList));
+              List[JSON.parse(JSON.stringify(kiy))].subitems[JSON.parse(JSON.stringify(ind))].quantity = 0;
+        console.log('clearQty 2', List);
+
+        setAllItemsList(List)
+        setMyItemsList(List)
+
+    }
+
+    const customItem = () => {
+        console.log('customItem');
+        setViwPickupTime(false)
+        setViwAddItemsScreen(false)
+        setViwServices(false)
+        setViewCustomItemsScreen(true)
     }
     
     useEffect(() => {
-    }, [viewAddItemsToList,myItemsList]);
+
+    }, [viewAddItemsToList, allItemsList]);
 
 
     return (
@@ -145,24 +211,54 @@ const Cards = (props) => {
                                     disabled/>
                                 <span className="card-slider-count">{sliderValue}/5</span>
                             </div>
+                            {viewCustomItemsScreen?
+                                <CustomItems
+                                    goBackThirdMainScreen={goBackThirdMainScreen} 
+                                    allItemsList={allItemsList}
+                                    increaseQty={increaseQty}
+                                    decreaseQty={decreaseQty}
+                                    />
+                                :null
+                            }
                             {viwAddItemsScreen?
-                                <AddItems goBackThirdScreen={goBackThirdScreen} addItemsToList={addItemsToList} itemsList={itemsList}/>
+                                <AddItems 
+                                    goBackThirdScreen={goBackThirdScreen} 
+                                    // addItemsToList={addItemsToList} 
+                                    allItemsList={allItemsList}
+                                    increaseQty={increaseQty}
+                                    decreaseQty={decreaseQty}
+                                    customItem={customItem}
+                                    />
                                 :null
                             }
                             {viwServices?
-                                <Services goBackSecondScreen={goBackSecondScreen} goNextFourScreen={goNextFourScreen}/>
+                                <Services 
+                                    goBackSecondScreen={goBackSecondScreen} 
+                                    goNextFourScreen={goNextFourScreen}
+                                    />
                                 :null
                             }
                             {viwPickupTime?
-                                <PickupTime dateValueFromOtherComp={gettingDate} shedulePickupChange={shedulePickupChange} goBackFirstScreen={props.goBack} goNextServices={goNextServices} clickSchedule={props.clickSchedule}/>
+                                <PickupTime 
+                                    dateValueFromOtherComp={gettingDate} 
+                                    shedulePickupChange={shedulePickupChange} 
+                                    goBackFirstScreen={props.goBack} 
+                                    goNextServices={goNextServices} 
+                                    clickSchedule={props.clickSchedule}
+                                    />
                                 :null
                             }
                         </div>
                     </div>
                 </Grid>
                 <Grid item xs={12} md={5}>
-                    {viewAddItemsToList?
-                        <MyItemsList myItemsList={myItemsList}/>
+                    {viwAddItemsScreen?
+                        <MyItemsList 
+                            myItemsList={myItemsList}
+                            increaseQty={increaseQty}
+                            decreaseQty={decreaseQty}
+                            clearQty={clearQty}
+                            />
                         :null
                     }
                     {viwPickupTime?

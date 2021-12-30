@@ -16,9 +16,10 @@ const Minutes = ['00','15','30','45',];
 const AMPM = ['AM','PM',];
 
 const PickupTime = (props) => {
-    const [immediateChecked, setImmediateChecked] = React.useState(true);
-    const [scheduleChecked, setScheduleChecked] = React.useState(false);
-    const [showHoursMinutesAmpm, setShowHoursMinutesAmpm] = React.useState(false);
+    const [immediateChecked, setImmediateChecked] = React.useState(!props.clickSchedule?true:false);
+    const [scheduleChecked, setScheduleChecked] = React.useState(props.clickSchedule?true:false);
+    const [showHoursMinutesAmpm, setShowHoursMinutesAmpm] = React.useState(props.clickSchedule?true:false);
+    const [showDateBox, setShowDateBox] = React.useState(props.clickSchedule?true:false);
     
     const [hoursBorder, setHoursBorder] = React.useState(false);
     const [minutesBorder, setMinutesBorder] = React.useState(false);
@@ -67,36 +68,37 @@ const PickupTime = (props) => {
         setAmpm(
             'AM',
         );
-        if(props.clickSchedule){
-            setImmediateChecked(false)
-            setScheduleChecked(true)
-            setShowHoursMinutesAmpm(true)
+        if(showDateBox){
             props.shedulePickupChange(true)
+        }else{
+            props.shedulePickupChange(false)
         }
-      }, [immediateChecked,scheduleChecked,props]);
+      }, [immediateChecked,scheduleChecked]);
 
     const handleIimmediateChecked = (event) => {
-        setImmediateChecked(event.target.checked);
+        setScheduleChecked(false);
+        setImmediateChecked(true);
         setShowHoursMinutesAmpm(false)
-        props.shedulePickupChange(false)
+        setShowDateBox(false)
 
-        if(scheduleChecked){
-            setScheduleChecked(!scheduleChecked);
-        }else{
-            setImmediateChecked(event.target.checked);
-        }
+        // if(scheduleChecked){
+        // }else{
+        //     setImmediateChecked(event.target.checked);
+        // }
     };
 
     const handleScheduleChecked = (event) => {
-        setScheduleChecked(event.target.checked);
+        setScheduleChecked(true);
         setShowHoursMinutesAmpm(true)
-        props.shedulePickupChange(true)
+        setImmediateChecked(false);
+        // props.shedulePickupChange(true)
+        setShowDateBox(true)
 
-        if(immediateChecked){
-            setImmediateChecked(false);
-        }else{
-            setScheduleChecked(event.target.checked);
-        }
+        // if(immediateChecked){
+        //     setImmediateChecked(false);
+        // }else{
+        //     setScheduleChecked(event.target.checked);
+        // }
     };
 
     return (

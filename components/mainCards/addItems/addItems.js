@@ -19,7 +19,7 @@ const AddItems = (props) => {
     const [scheduleVanChecked, setscheduleVanChecked] = React.useState(false);
     const [loading, setLoading] = React.useState(true);
     const [filteredData, setFilteredData] = React.useState([]);
-    const [selectedTaskList, setSelectedTaskList] = React.useState([]);
+    // const [selectedTaskList, setSelectedTaskList] = React.useState([]);
 
     const [expanded, setExpanded] = React.useState(false);
 
@@ -28,7 +28,7 @@ const AddItems = (props) => {
     };
 
     useEffect(() => {
-        setFilteredData(props.itemsList)
+        setFilteredData(props.allItemsList)
         // let filteredArray = itemsList
         // .filter((element) => 
         //     element.subitems.some((subElement) => subElement.quantity === 1))
@@ -47,122 +47,122 @@ const AddItems = (props) => {
         //     // return newElt.subitems.filter(subElement => subElement.quantity === '1');
         //     // }
         // )
-        let selectedTaskListItems = props.itemsList.map(k => k.subitems.filter(j => j.quantity !== 0));
+        // let selectedTaskListItems = props.itemsList.map(k => k.subitems.filter(j => j.quantity !== 0));
 
-        setSelectedTaskList(selectedTaskListItems)
+        // setSelectedTaskList(selectedTaskListItems)
 
         // console.log('SelectedTaskList', selectedTaskList)
-        props.addItemsToList(selectedTaskListItems)
+        // props.addItemsToList(selectedTaskListItems)
 
         setLoading(false)
 
-    }, [fillVanChecked,scheduleVanChecked]);
+    }, [fillVanChecked,scheduleVanChecked, props.allItemsList]);
 
     
 
     const filterData = (e) => {
         const filterValue = e.target.value
-        const editedTaskList = props.itemsList.filter((data) =>  JSON.stringify(data).toLowerCase().indexOf(filterValue.toLowerCase()) !== -1)
+        const editedTaskList = props.allItemsList.filter((data) =>  JSON.stringify(data).toLowerCase().indexOf(filterValue.toLowerCase()) !== -1)
         setFilteredData(editedTaskList)
     }
 
-    const increaseQty = (qty, ind, key) => {
-        let keys = key
-        // console.log('increaseQty', qty, key)
-        // console.log('increaseQty Id', qty.id, key)
+    // const increaseQty = (qty, ind, key) => {
+    //     let keys = key
+    //     // console.log('increaseQty', qty, key)
+    //     // console.log('increaseQty Id', qty.id, key)
 
-        // const findParent = filteredData.filter((data) =>  JSON.stringify(data).toLowerCase().indexOf(qty.id.toLowerCase()) !== -1)
-        // const findChild = findParent.map((child)=>(
-        //     child.subitems.filter((data) =>  JSON.stringify(data).toLowerCase().indexOf(qty.id.toLowerCase()) !== -1)
-        // ))
+    //     // const findParent = filteredData.filter((data) =>  JSON.stringify(data).toLowerCase().indexOf(qty.id.toLowerCase()) !== -1)
+    //     // const findChild = findParent.map((child)=>(
+    //     //     child.subitems.filter((data) =>  JSON.stringify(data).toLowerCase().indexOf(qty.id.toLowerCase()) !== -1)
+    //     // ))
 
-        // setFilteredData(prevState => ({
-        //     ...prevState,
-        //     subitems: {
-        //        ...prevState.subitems.id===qty.id,
-        //        quantity: {
-        //           ...prevState,
-        //           quantity: 3
-        //        }
-        //     }
-        //  }))
+    //     // setFilteredData(prevState => ({
+    //     //     ...prevState,
+    //     //     subitems: {
+    //     //        ...prevState.subitems.id===qty.id,
+    //     //        quantity: {
+    //     //           ...prevState,
+    //     //           quantity: 3
+    //     //        }
+    //     //     }
+    //     //  }))
 
-        const rooms = JSON.parse(JSON.stringify(filteredData));
-            console.log('rooms Key', JSON.parse(JSON.stringify(keys)))
-            console.log('rooms Id', JSON.parse(JSON.stringify(ind)))
-            rooms[JSON.parse(JSON.stringify(keys))].subitems[JSON.parse(JSON.stringify(ind))].quantity++;
-            setLoading(true)
+    //     const rooms = JSON.parse(JSON.stringify(filteredData));
+    //         console.log('rooms Key', JSON.parse(JSON.stringify(keys)))
+    //         console.log('rooms Id', JSON.parse(JSON.stringify(ind)))
+    //         rooms[JSON.parse(JSON.stringify(keys))].subitems[JSON.parse(JSON.stringify(ind))].quantity++;
+    //         setLoading(true)
 
-        setFilteredData(rooms);
+    //     setFilteredData(rooms);
 
-        // const rooms = filteredData.map((product)=>{   
-        //     return product.subitems.map(function(list){
-        //         console.log('rooms list', list)
-        //         return list.id===qty.id? 
-        //             {
-        //                 'id':qty.id,
-        //                 'title':'ffffffff',
-        //                 'quantity':30,
-        //                 'width':'30',
-        //                 'height':'23',
-        //                 'depth':'14',
-        //                 'instructions':'instructions here',
-        //             }
-        //             : list
+    //     // const rooms = filteredData.map((product)=>{   
+    //     //     return product.subitems.map(function(list){
+    //     //         console.log('rooms list', list)
+    //     //         return list.id===qty.id? 
+    //     //             {
+    //     //                 'id':qty.id,
+    //     //                 'title':'ffffffff',
+    //     //                 'quantity':30,
+    //     //                 'width':'30',
+    //     //                 'height':'23',
+    //     //                 'depth':'14',
+    //     //                 'instructions':'instructions here',
+    //     //             }
+    //     //             : list
                 
-        //     });
-        // });
-        // const rooms = itemsList.map((room, roomIndex) => 
-        //     ( { ...room, subitems: {...room[ind], quantity: 20 } } )
-        // );
-        // itemsList[key].subitems[0].quantity.push(10)
-        // itemsList.forEach(function iter(qty, key) {
-        //     console.log('increaseQty', iter)
-        //     if (key.includes(qty.id)) {
-        //         qty.quantity = 10;
-        //     }
-        //     Array.isArray( qty.children) && qty.children.forEach(iter);
-        // });
+    //     //     });
+    //     // });
+    //     // const rooms = itemsList.map((room, roomIndex) => 
+    //     //     ( { ...room, subitems: {...room[ind], quantity: 20 } } )
+    //     // );
+    //     // itemsList[key].subitems[0].quantity.push(10)
+    //     // itemsList.forEach(function iter(qty, key) {
+    //     //     console.log('increaseQty', iter)
+    //     //     if (key.includes(qty.id)) {
+    //     //         qty.quantity = 10;
+    //     //     }
+    //     //     Array.isArray( qty.children) && qty.children.forEach(iter);
+    //     // });
         
-        console.log('increaseQty rooms', rooms);
-        // console.log('increaseQty Parent', findParent)
-        // console.log('increaseQty Child ', findChild)
+    //     console.log('increaseQty rooms', rooms);
+    //     // console.log('increaseQty Parent', findParent)
+    //     // console.log('increaseQty Child ', findChild)
 
-        console.log('increaseQty setFilteredData ', setFilteredData)
-        let selectedRooms = rooms.map(k => k.subitems.filter(j => j.quantity !== 0));
-        props.addItemsToList(selectedRooms)
-        // setFilteredData[findParent].subitems[findChild]((prevState) => {
-        //     return({
-        //       ...prevState,
-        //       quantity: 3
-        //     });
-        //   });
+    //     console.log('increaseQty setFilteredData ', setFilteredData)
+    //     let selectedRooms = rooms.map(k => k.subitems.filter(j => j.quantity !== 0));
+    //     // props.addItemsToList(selectedRooms)
+    //     // setFilteredData[findParent].subitems[findChild]((prevState) => {
+    //     //     return({
+    //     //       ...prevState,
+    //     //       quantity: 3
+    //     //     });
+    //     //   });
 
-        // setFilteredData(rooms)
-        setLoading(false)
+    //     // setFilteredData(rooms)
+    //     setLoading(false)
 
-    }
+    // }
 
-    const decreaseQty = (qty, ind, key) => {
-        let kiy = key
-        const rooms = JSON.parse(JSON.stringify(filteredData));
-            console.log('rooms Key', JSON.parse(JSON.stringify(kiy)))
-            console.log('rooms Id', JSON.parse(JSON.stringify(ind)))
-            rooms[JSON.parse(JSON.stringify(kiy))].subitems[JSON.parse(JSON.stringify(ind))].quantity--;
+    // const decreaseQty = (qty, ind, key) => {
+    //     let kiy = key
+    //     const rooms = JSON.parse(JSON.stringify(filteredData));
+    //         console.log('rooms Key', JSON.parse(JSON.stringify(kiy)))
+    //         console.log('rooms Id', JSON.parse(JSON.stringify(ind)))
+    //         rooms[JSON.parse(JSON.stringify(kiy))].subitems[JSON.parse(JSON.stringify(ind))].quantity--;
             
             
         
-        setLoading(true)
-        setFilteredData(rooms);
+    //     setLoading(true)
+    //     setFilteredData(rooms);
 
-        let selectedRooms = rooms.map(k => k.subitems.filter(j => j.quantity !== 0));
-        props.addItemsToList(selectedRooms);
+    //     let selectedRooms = rooms.map(k => k.subitems.filter(j => j.quantity !== 0));
+    //     // props.addItemsToList(selectedRooms);
 
-        console.log('increaseQty selectedRooms', selectedRooms);
-        console.log('increaseQty setFilteredData ', setFilteredData)
-        setLoading(false)
+    //     console.log('increaseQty selectedRooms', selectedRooms);
+    //     console.log('increaseQty setFilteredData ', setFilteredData)
+    //     setLoading(false)
 
-    }
+    // }
     
     return (
         <>
@@ -199,13 +199,14 @@ const AddItems = (props) => {
                                     <Typography>
                                         
                                             {list.subitems.map((item,i)=>{
+                                                console.log('item>>>>> in MAIN', list.key)
                                                 return(
                                                     <div className="child-items" key={i}>
                                                         {item.title} - index{i}
                                                         <div className="cart">
-                                                            <Button key={"-"} className="cart-increase" onClick={()=>decreaseQty(item, i, list.key)}> - </Button>
+                                                            <Button key={"-"} className="cart-increase" onClick={()=>props.decreaseQty(item, i, list.key)}> - </Button>
                                                             <TextField id="qty" value={item.quantity} min={0}/>
-                                                            <Button key={"+"} className="cart-increase" onClick={()=>increaseQty(item, i, list.key)}> + </Button>
+                                                            <Button key={"+"} className="cart-increase" onClick={()=>props.increaseQty(item, i, list.key)}> + </Button>
                                                         </div>
                                                     </div>
                                                 )
@@ -217,7 +218,7 @@ const AddItems = (props) => {
                             )
                         })}
                     </div>
-                    <p>Cant find what you need? Add a custom item <span className="link">here</span></p>
+                    <p>Cant find what you need? Add a custom item <span className="link" onClick={props.customItem}>here</span></p>
                     </>
                                         }
             </div>
