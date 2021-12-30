@@ -92,6 +92,12 @@ const Cards = (props) => {
 
     const shedulePickupChange = (data) =>{
         setShedulePickupValue(data)
+        console.log('clickSchedule Main', data)
+        if(data){
+            setShedulePickupValue(data)
+        }else{
+            setShedulePickupValue(false)
+        }
     }
 
     const goNextServices = () => {
