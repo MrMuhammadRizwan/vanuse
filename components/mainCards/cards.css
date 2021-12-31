@@ -281,3 +281,55 @@
 .display-block{
     display: block;
 }
+
+
+
+.custom-title .text-input{
+    width: 100%;
+}
+.add-items-qty{
+    margin-bottom: 5px;
+}
+.add-items-qty .cart{
+    width: 100px;
+    display: inline-flex;
+}
+.add-items-qty .cart-list{
+    width: 100px;
+    display: inline-flex;
+}
+.add-items-qty .MuiOutlinedInput-notchedOutline{
+    border: none;
+}
+.add-items-qty .cart-increase{
+    min-width: 30px;
+    width: 30px;
+    background: #EFF0F7;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.add-items-qty .MuiInputBase-input {
+    padding: 0px;
+    height: 30px;
+    text-align: center;
+}
+.dimension-wrap{
+    display: block;
+}
+.dimension-box{
+    display: inline-flex;
+    justify-content: space-between;
+}
+.dimension-box .text-input{
+    width: 30%;
+}
+.dimension-box .dimension-text{
+    font-weight: 400;
+    font-size: 20px;
+    color: #23274F;
+}
+.instructions-wrap .text-input{
+    width: 100%;
+    height:89px;
+}

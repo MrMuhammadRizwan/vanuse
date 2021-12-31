@@ -187,34 +187,40 @@ const AddItems = (props) => {
                         {console.log('filteredData>>>>>', filteredData)}
                         {filteredData && filteredData.map((list,index)=>{
                             return(
-                                <Accordion expanded={expanded === list.key} onChange={handleChange(list.key)}>
-                                    <AccordionSummary
-                                        expandIcon={<ExpandMoreIcon />}
-                                        aria-controls="panel1bh-content"
-                                        id="panel1bh-header"
-                                    >
-                                    <Typography sx={{ color: 'text.secondary' }}>{list.title}</Typography>
-                                    </AccordionSummary>
-                                    <AccordionDetails>
-                                    <Typography>
-                                        
-                                            {list.subitems.map((item,i)=>{
-                                                console.log('item>>>>> in MAIN', list.key)
-                                                return(
-                                                    <div className="child-items" key={i}>
-                                                        {item.title} - index{i}
-                                                        <div className="cart">
-                                                            <Button key={"-"} className="cart-increase" onClick={()=>props.decreaseQty(item, i, list.key)}> - </Button>
-                                                            <TextField id="qty" value={item.quantity} min={0}/>
-                                                            <Button key={"+"} className="cart-increase" onClick={()=>props.increaseQty(item, i, list.key)}> + </Button>
-                                                        </div>
-                                                    </div>
-                                                )
-                                            })}
-                                           
-                                    </Typography>
-                                    </AccordionDetails>
-                                </Accordion>
+                                <>
+                                    {list.title!=='Custom Items'?
+                                    
+                                        <Accordion expanded={expanded === list.key} onChange={handleChange(list.key)}>
+                                            <AccordionSummary
+                                                expandIcon={<ExpandMoreIcon />}
+                                                aria-controls="panel1bh-content"
+                                                id="panel1bh-header"
+                                            >
+                                            <Typography sx={{ color: 'text.secondary' }}>{list.title}</Typography>
+                                            </AccordionSummary>
+                                            <AccordionDetails>
+                                            <Typography>
+                                                
+                                                    {list.subitems.map((item,i)=>{
+                                                        console.log('item>>>>> in MAIN', list.key)
+                                                        return(
+                                                            <div className="child-items" key={i}>
+                                                                {item.title} - index{i}
+                                                                <div className="cart">
+                                                                    <Button key={"-"} className="cart-increase" onClick={()=>props.decreaseQty(item, i, list.key)}> - </Button>
+                                                                    <TextField id="qty" value={item.quantity} min={0}/>
+                                                                    <Button key={"+"} className="cart-increase" onClick={()=>props.increaseQty(item, i, list.key)}> + </Button>
+                                                                </div>
+                                                            </div>
+                                                        )
+                                                    })}
+                                                
+                                            </Typography>
+                                            </AccordionDetails>
+                                        </Accordion>
+                                        :null
+                                    }
+                                </>
                             )
                         })}
                     </div>

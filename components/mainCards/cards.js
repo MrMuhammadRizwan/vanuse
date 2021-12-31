@@ -88,6 +88,7 @@ const Cards = (props) => {
     const [allItemsList, setAllItemsList] = React.useState(itemsList);
 
     const [viewCustomItemsScreen, setViewCustomItemsScreen] = React.useState(false);
+    const [viewCustomItemsScreenList, setViewCustomItemsScreenList] = React.useState(false);
     
     const [filteredData, setFilteredData] = React.useState([]);
 
@@ -117,6 +118,7 @@ const Cards = (props) => {
         setViwPickupTime(false)
         setViwServices(false)
         setViwAddItemsScreen(true)
+        setViewCustomItemsScreenList(true)
         setSliderValue(3)
     }
 
@@ -134,12 +136,14 @@ const Cards = (props) => {
         setSliderValue(2)
         setViewAddItemsToList(false)
         setViewCustomItemsScreen(false)
+        setViewCustomItemsScreenList(false)
     }
 
     const goBackThirdMainScreen = () => {
         setViwAddItemsScreen(true)
         setViewAddItemsToList(true)
         setViewCustomItemsScreen(false)
+        setViewCustomItemsScreenList(true)
     }
 
     // const addItemsToList = ( list ) => {
@@ -155,6 +159,8 @@ const Cards = (props) => {
         const rooms = JSON.parse(JSON.stringify(allItemsList));
             rooms[JSON.parse(JSON.stringify(keys))].subitems[JSON.parse(JSON.stringify(ind))].quantity++;
 
+        console.log('increaseQty rooms', rooms);
+
         setAllItemsList(rooms)
         setMyItemsList(rooms)
 
@@ -163,11 +169,15 @@ const Cards = (props) => {
     const decreaseQty = (qty, ind, key) => {
         let kiy = key
         const rooms = JSON.parse(JSON.stringify(allItemsList));
-            console.log('rooms Key', JSON.parse(JSON.stringify(kiy)))
-            console.log('rooms Id', JSON.parse(JSON.stringify(ind)))
+        
+        console.log('decreaseQty rooms', rooms);
+        
+        if(rooms[JSON.parse(JSON.stringify(kiy))].subitems[JSON.parse(JSON.stringify(ind))].quantity){
             rooms[JSON.parse(JSON.stringify(kiy))].subitems[JSON.parse(JSON.stringify(ind))].quantity--;
             
-        console.log('decreaseQty rooms', rooms);
+        }else{
+            rooms[JSON.parse(JSON.stringify(kiy))].subitems[JSON.parse(JSON.stringify(ind))].quantity=0;
+        }
         setAllItemsList(rooms)
 
         setMyItemsList(rooms)
@@ -192,6 +202,42 @@ const Cards = (props) => {
         setViwServices(false)
         setViewCustomItemsScreen(true)
     }
+
+    const getValueFromCustomForm = (formData) => {
+        console.log('getValueFromCustomForm', formData);
+        const getIndex = myItemsList.length - 1
+        // console.log('getValueFromCustomForm', getIndex);
+        // if(formData.subitems.length>0){
+        //     setMyItemsList(prevState => ([
+        //         ...prevState,
+        //         formData
+        //     ]))
+        // }
+        
+            setMyItemsList(prevState => ([
+                ...prevState,
+                    {
+                        'key':getIndex+1,
+                        'title':'Custom Items',
+                        'subitems':[
+                            formData
+                        ]
+                    }
+            ]))
+
+            setAllItemsList(prevState => ([
+                ...prevState,
+                    {
+                        'key':getIndex+1,
+                        'title':'Custom Items',
+                        'subitems':[
+                            formData
+                        ]
+                    }
+            ]))
+        console.log('getValueFromCustomForm myItemsList', myItemsList);
+
+    }
     
     useEffect(() => {
 
@@ -214,6 +260,7 @@ const Cards = (props) => {
                             {viewCustomItemsScreen?
                                 <CustomItems
                                     goBackThirdMainScreen={goBackThirdMainScreen} 
+                                    getValueFromCustomForm={getValueFromCustomForm}
                                     allItemsList={allItemsList}
                                     increaseQty={increaseQty}
                                     decreaseQty={decreaseQty}
@@ -252,7 +299,7 @@ const Cards = (props) => {
                     </div>
                 </Grid>
                 <Grid item xs={12} md={5}>
-                    {viwAddItemsScreen?
+                    {viewCustomItemsScreenList?
                         <MyItemsList 
                             myItemsList={myItemsList}
                             increaseQty={increaseQty}

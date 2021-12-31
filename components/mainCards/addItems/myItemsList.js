@@ -28,7 +28,7 @@ const MyItemsList = (props) => {
 
 
                 <div className="mb-31">
-                    {/* {console.log('props.myItemsList >>>', props.myItemsList)}rooms.map(k => k.subitems.filter(j => j.quantity !== 0)) */}
+                    {console.log('props.myItemsList >>>', props.myItemsList)}
                     {props.myItemsList && props.myItemsList.map((item,i)=>{
                         console.log('item>>>>> in LIST 1 >>>>>>>>>>>>>>', item)
                         return(
@@ -57,7 +57,7 @@ const MyItemsList = (props) => {
                     })}
                 </div>
 
-                <div className="card-buttons-grid text-center display-block">
+                {/* <div className="card-buttons-grid text-center display-block">
 
                     <Button
                         key={"Next"}
@@ -66,7 +66,7 @@ const MyItemsList = (props) => {
                     >
                         Next
                     </Button>  
-                </div>
+                </div> */}
             </div>
         </div>
     );
