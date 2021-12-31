@@ -61,9 +61,31 @@ const AddItems = (props) => {
     
 
     const filterData = (e) => {
-        const filterValue = e.target.value
-        const editedTaskList = props.allItemsList.filter((data) =>  JSON.stringify(data).toLowerCase().indexOf(filterValue.toLowerCase()) !== -1)
-        setFilteredData(editedTaskList)
+        const filterValue = [e.target.value]
+        // const editedTaskList = Object.keys(props.allItemsList).map((data) =>  (
+        //     props.allItemsList[data].map(
+        //         (ss) =>  console.log('filterData 2', ss.name.indexOf(filterValue) !== -1) 
+        //         )
+        // ))
+        const allowed = filterValue;
+        const filtered = Object.keys(props.allItemsList)
+            .filter(key => allowed.includes(key))
+            .reduce((obj, key) => {
+                obj[key] = props.allItemsList[key];
+                return obj;
+            }, {});
+
+            console.log('filterData', filtered, allowed, filterValue);
+        // const editedTaskList = Object.keys(props.allItemsList).map((data) =>  JSON.stringify(data).toLowerCase().indexOf(filterValue.toLowerCase()) !== -1)
+        
+        // console.log('filterData', editedTaskList)
+        // const incfiltr = inc.filter((data) =>  JSON.stringify(data).toLowerCase().indexOf(filterValue) !== -1)
+        // const setinc = incfiltr[0].quantity++;
+
+        
+        // const setinc = incfiltr[0].quantity++;
+        // console.log('filterData 2', qty, key)
+        setFilteredData(filtered)
     }
 
     // const increaseQty = (qty, ind, key) => {
@@ -184,7 +206,38 @@ const AddItems = (props) => {
                     {filteredData.length > 0 ? <p>Or quickly add items from a list of popular rooms:</p> : null}
                     {filteredData.length <= 0 ? <p>0 Items Found</p> : null}
                     <div className="items-list mb-20">
-                        {console.log('filteredData>>>>>', filteredData)}
+
+                        {Object.keys(props.allItemsList).map((obj, mainIndex) => (
+                                // console.log('DemoData {obj}', props.DemoData[obj])
+                                <Accordion expanded={expanded === mainIndex} onChange={handleChange(mainIndex)}>
+                                    <AccordionSummary
+                                        expandIcon={<ExpandMoreIcon />}
+                                        aria-controls="panel1bh-content"
+                                        id="panel1bh-header"
+                                    >
+                                    <Typography sx={{ color: 'text.secondary' }}>{obj}</Typography>
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                    <Typography>
+                                        {props.allItemsList[obj].length>0?
+                                            props.allItemsList[obj].map((child, childIndex) => (
+                                                <div className="child-items" key={childIndex}>
+                                                    {child.name}
+                                                    <div className="cart">
+                                                        <Button key={"-"} className="cart-increase" onClick={()=>props.decreaseQty(child, obj, child.id)}> - </Button>
+                                                        <TextField id="qty" value={child.quantity} min={0}/>
+                                                        <Button key={"+"} className="cart-increase" onClick={()=>props.increaseQty(child, obj, child.id)}> + </Button>
+                                                    </div>
+                                                </div>
+                                            ))
+                                        :
+                                        null
+                                        }
+                                    </Typography>
+                                    </AccordionDetails>
+                                </Accordion>
+                            ))}
+                        {/* {console.log('filteredData>>>>>', filteredData)}
                         {filteredData && filteredData.map((list,index)=>{
                             return(
                                 <Accordion expanded={expanded === list.key} onChange={handleChange(list.key)}>
@@ -216,7 +269,7 @@ const AddItems = (props) => {
                                     </AccordionDetails>
                                 </Accordion>
                             )
-                        })}
+                        })} */}
                     </div>
                     <p>Cant find what you need? Add a custom item <span className="link" onClick={props.customItem}>here</span></p>
                     </>

@@ -15,7 +15,7 @@ import SearchIcon from '@mui/icons-material/Search';
 
 
 const MyItemsList = (props) => {
-    // console.log('props.myItemsList', props.myItemsList)
+    console.log('DemoData', props.DemoData)
     // useEffect(() => {
     // }, [props]);
     return (
@@ -29,10 +29,33 @@ const MyItemsList = (props) => {
 
                 <div className="mb-31">
                     {/* {console.log('props.myItemsList >>>', props.myItemsList)}rooms.map(k => k.subitems.filter(j => j.quantity !== 0)) */}
-                    {props.myItemsList && props.myItemsList.map((item,i)=>{
+                    {/* {props.myItemsList && props.myItemsList.map((item,i)=>{
                         console.log('item>>>>> in LIST 1 >>>>>>>>>>>>>>', item)
                         return(
-                            item.subitems.length>0?
+                            <> */}
+                            {Object.keys(props.myItemsList).map((obj, mainIndex) => (
+                                // console.log('DemoData {obj}', props.DemoData[obj])
+                                props.myItemsList[obj].length>0?
+                                    props.myItemsList[obj].map((child, childIndex) => (
+                                        <>
+                                            {child.quantity>0?
+                                                <div className="child-items" key={mainIndex}>
+                                                    {child.name}
+                                                    <div className="cart-list">
+                                                        <Button key={"-"} className="cart-increase" onClick={()=>props.decreaseQty(child, obj, child.id)}> - </Button>
+                                                        <TextField id="qty" value={child.quantity}/>
+                                                        <Button key={"+"} className="cart-increase" onClick={()=>props.increaseQty(child, obj, child.id)}> + </Button>
+                                                        <Button key={"x"} className="cart-clear" onClick={()=>props.clearQty(child, obj, child.id)}><img src="/clear.svg" alt="Remove" /></Button>
+                                                    </div>
+                                                </div>
+                                            :null}
+                                        </>
+                                    ))
+                                :
+                                null
+                            ))}
+
+                            {/* {item.subitems.length>0?
                                 item.subitems.map((childitem,i)=>{
                                     console.log('item>>>>> in LIST 2 >>>>>>>>>>>>>>', item.key)
                                     return(
@@ -52,9 +75,10 @@ const MyItemsList = (props) => {
                                         </>
                                     )
                                 })
-                            :null
+                            :null} */}
+                            {/* </>
                         )
-                    })}
+                    })} */}
                 </div>
 
                 <div className="card-buttons-grid text-center display-block">
