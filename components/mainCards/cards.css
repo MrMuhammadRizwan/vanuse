@@ -333,3 +333,43 @@
     width: 100%;
     height:89px;
 }
+
+.van-wrap{
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.van-box{
+    padding: 7px;
+    text-align: center;
+    /* border: 2px solid #31B7B7; */
+    box-sizing: border-box;
+    border-radius: 5px;
+    vertical-align: bottom;
+    justify-content: center;
+    align-items: flex-end;
+    display: grid;
+    height: 105px;
+    width: 25%;
+    cursor: pointer;
+}
+.van-box-active{
+    border: 2px solid #31B7B7;
+    cursor: pointer;
+}
+.van-box-active svg path{
+    fill: #31B7B7;
+    color: #31B7B7;
+}
+.van-box-active p{
+    fill: #31B7B7;
+    color: #31B7B7;
+}
+.van-box p{
+    margin-bottom: 0px;
+    margin-top: -21px;
+}
+.van-box image{
+    margin-bottom: 0px;
+}

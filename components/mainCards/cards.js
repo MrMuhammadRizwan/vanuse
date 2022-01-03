@@ -8,6 +8,7 @@ import Services from "./services/services";
 import AddItems from "./addItems/addItems";
 import MyItemsList from "./addItems/myItemsList";
 import CustomItems from "./addItems/customItems";
+import SelectVan from "./selectVan/selectVan";
 
 
 const itemsList = [
@@ -89,6 +90,9 @@ const Cards = (props) => {
 
     const [viewCustomItemsScreen, setViewCustomItemsScreen] = React.useState(false);
     const [viewCustomItemsScreenList, setViewCustomItemsScreenList] = React.useState(false);
+
+    const [viewSelectaVan, setViewSelectaVan] = React.useState(false);
+
     
     const [filteredData, setFilteredData] = React.useState([]);
 
@@ -122,6 +126,13 @@ const Cards = (props) => {
         setSliderValue(3)
     }
 
+    const gotoSelectaVanScreen = () => {
+        setViwAddItemsScreen(false)
+        setViewCustomItemsScreenList(false)
+        setSliderValue(4)
+        setViewSelectaVan(true)
+    }
+
     const goBackSecondScreen = () => {
         setViwServices(false)
         setViwPickupTime(true)
@@ -144,6 +155,17 @@ const Cards = (props) => {
         setViewAddItemsToList(true)
         setViewCustomItemsScreen(false)
         setViewCustomItemsScreenList(true)
+        setSliderValue(3)
+        setViewSelectaVan(false)
+    }
+
+    const goBackItemsScreen = () => {
+        setViwAddItemsScreen(true)
+        setViewAddItemsToList(true)
+        setViewCustomItemsScreen(false)
+        setViewCustomItemsScreenList(true)
+        setSliderValue(3)
+        setViewSelectaVan(false)
     }
 
     // const addItemsToList = ( list ) => {
@@ -206,13 +228,6 @@ const Cards = (props) => {
     const getValueFromCustomForm = (formData) => {
         console.log('getValueFromCustomForm', formData);
         const getIndex = myItemsList.length - 1
-        // console.log('getValueFromCustomForm', getIndex);
-        // if(formData.subitems.length>0){
-        //     setMyItemsList(prevState => ([
-        //         ...prevState,
-        //         formData
-        //     ]))
-        // }
         
             setMyItemsList(prevState => ([
                 ...prevState,
@@ -262,6 +277,11 @@ const Cards = (props) => {
                                     disabled/>
                                 <span className="card-slider-count">{sliderValue}/5</span>
                             </div>
+                            {viewSelectaVan?
+                                <SelectVan
+                                    />
+                                :null
+                            }
                             {viewCustomItemsScreen?
                                 <CustomItems
                                     goBackThirdMainScreen={goBackThirdMainScreen} 
@@ -275,7 +295,7 @@ const Cards = (props) => {
                             {viwAddItemsScreen?
                                 <AddItems 
                                     goBackThirdScreen={goBackThirdScreen} 
-                                    // addItemsToList={addItemsToList} 
+                                    goNext={gotoSelectaVanScreen}
                                     allItemsList={allItemsList}
                                     increaseQty={increaseQty}
                                     decreaseQty={decreaseQty}
