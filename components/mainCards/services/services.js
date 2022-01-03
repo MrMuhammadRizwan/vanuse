@@ -16,8 +16,11 @@ const Services = (props) => {
 
         if(scheduleVanChecked){
             setscheduleVanChecked(!scheduleVanChecked);
+            localStorage.removeItem("fillVanChecked");
+
         }else{
             setfillVanChecked(event.target.checked);
+            localStorage.setItem("fillVanChecked", event.target.checked);
         }
     };
 
@@ -26,8 +29,10 @@ const Services = (props) => {
 
         if(fillVanChecked){
             setfillVanChecked(!fillVanChecked);
+            localStorage.removeItem("fillScheduleChecked");
         }else{
             setscheduleVanChecked(event.target.checked);
+            localStorage.setItem("fillScheduleChecked", event.target.checked);
         }
     };
     return (

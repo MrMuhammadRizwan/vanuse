@@ -73,6 +73,7 @@ const SearchCard = () => {
         }));
         console.log("result", result);
         setAllTitles(result);
+        localStorage.setItem("setStartTrip", JSON.stringify(result));
         console.log("allTitles", allTitles);
       })
       .catch(function (error) {
@@ -94,6 +95,7 @@ const SearchCard = () => {
         }));
         console.log("result", result);
         setAllTitles2(result);
+        localStorage.setItem("setEndTrip", JSON.stringify(result));
         console.log("allTitles 2", allTitles2);
       })
       .catch(function (error) {

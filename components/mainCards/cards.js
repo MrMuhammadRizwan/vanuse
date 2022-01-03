@@ -237,10 +237,15 @@ const Cards = (props) => {
             ]))
         console.log('getValueFromCustomForm myItemsList', myItemsList);
 
+        localStorage.setItem("allItems", JSON.stringify(myItemsList));
+
+        console.log('allItems localStorage', localStorage.getItem("allItems"));
+
+
     }
     
     useEffect(() => {
-
+        // localStorage.setItem("allItems", allItemsList);
     }, [viewAddItemsToList, allItemsList]);
 
 
