@@ -19,7 +19,7 @@ const MyItemsList = (props) => {
     // useEffect(() => {
     // }, [props]);
     return (
-        <div className="date-card">
+        <div className="white date-card">
             <div className="card-content">
                 <div className="card-heading mb-31">
                     <h2>My Items</h2>
@@ -27,7 +27,7 @@ const MyItemsList = (props) => {
                 </div>
 
 
-                <div className="mb-31">
+                <div className="mb-31 m-h-130">
                     {console.log('props.myItemsList >>>', props.myItemsList)}
                     {props.myItemsList && props.myItemsList.map((item,i)=>{
                         console.log('item>>>>> in LIST 1 >>>>>>>>>>>>>>', item)

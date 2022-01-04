@@ -242,7 +242,7 @@ const AddItems = (props) => {
                     key={"Next"}
                     className="darkbutton"
                     sx={{ mb: "16px" }}
-                    // onClick={props.goNext1}
+                    onClick={props.goNext}
                 >
                     Next
                 </Button>  

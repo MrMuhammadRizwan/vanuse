@@ -28,7 +28,7 @@ const itemsList = [
             {
                 'id':'9092',
                 'title':'zzzzzzz',
-                'quantity':0,
+                'quantity':1,
                 'width':'30',
                 'height':'23',
                 'depth':'14',
@@ -37,7 +37,7 @@ const itemsList = [
             {
                 'id':'9093',
                 'title':'cccccccc',
-                'quantity':0,
+                'quantity':1,
                 'width':'30',
                 'height':'23',
                 'depth':'14',
@@ -52,7 +52,7 @@ const itemsList = [
             {
                 'id':'9094',
                 'title':'dddddddd',
-                'quantity':0,
+                'quantity':2,
                 'width':'30',
                 'height':'23',
                 'depth':'14',
@@ -279,6 +279,7 @@ const Cards = (props) => {
                             </div>
                             {viewSelectaVan?
                                 <SelectVan
+                                    goBack={goBackItemsScreen}
                                     />
                                 :null
                             }
