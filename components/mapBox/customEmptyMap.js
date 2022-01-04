@@ -17,7 +17,7 @@ const CustomEmptyMap = () => {
           width: '100%'
         }}
         zoom={[14]}
-        center={[74.556022, 32.483556]}
+        center={[-81.25, 42.99]}
        />
     </div>
   );
