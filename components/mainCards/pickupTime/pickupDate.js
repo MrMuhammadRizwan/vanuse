@@ -9,11 +9,10 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 const PickupDate = (props) => {
   const [date, setDate] = React.useState(new Date());
 
-  const getMonth = moment(new Date()).format("MM")
-  const getDay = moment(new Date()).format("DD")-1
+  const getMonth = moment().add(1, 'M').startOf('month').format('YYYY-MM');
+  const getDay = moment(new Date()).format("DD")
   const minDate = new Date('2020-01-01T00:00:00.000');
-  const maxDate = new Date('2022-01-'+getDay.toString()+'T00:00:00.000');
-  
+  const maxDate = new Date(`${getMonth}-${getDay}T00:00:00.000`)
   const setDateNow = (newDate) =>{
     setDate(newDate)
     props.getDate(newDate)
