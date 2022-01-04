@@ -257,6 +257,9 @@
 .mb-32{
     margin-bottom: 32px;
 }
+.mb-50{
+    margin-bottom: 50px;
+}
 .mb-52{
     margin-bottom: 52px;
 }
@@ -332,4 +335,129 @@
 .instructions-wrap .text-input{
     width: 100%;
     height:89px;
+}
+
+.van-wrap{
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.van-box{
+    padding: 7px;
+    text-align: center;
+    /* border: 2px solid #31B7B7; */
+    box-sizing: border-box;
+    border-radius: 5px;
+    vertical-align: bottom;
+    justify-content: center;
+    align-items: flex-end;
+    display: grid;
+    height: 105px;
+    width: 25%;
+    cursor: pointer;
+}
+.van-box-active{
+    border: 2px solid #31B7B7;
+    cursor: pointer;
+}
+.van-box-active svg path{
+    fill: #31B7B7;
+    color: #31B7B7;
+}
+.van-box-active p{
+    fill: #31B7B7;
+    color: #31B7B7;
+}
+.van-box p{
+    margin-bottom: 0px;
+    margin-top: -21px;
+}
+.van-box image{
+    margin-bottom: 0px;
+}
+.yesno{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.yesno .lightbutton{
+    width: 45%;
+    border-radius: 30px;
+    font-weight: 700;
+}
+.yesno .darkbutton{
+    width: 45%;
+    border-radius: 30px;
+    font-weight: 700;
+}
+.price-wrap .text-large{
+    font-size: 32px;
+    font-weight: 700;
+}
+.delivery-options .MuiOutlinedInput-root{
+    border-radius: 15px;
+    background: #F7F7FC;
+    border: 0px;
+    width: 185px;
+    height: 44px;
+}
+.delivery-options .MuiOutlinedInput-notchedOutline{
+    border: 0px;
+}
+.delivery-options .MuiOutlinedInput-root{
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    border-radius: 15px;
+}
+.white{
+    background: #fff;
+}
+.white .card-content{
+    min-height: 300px;
+}
+.items-list{
+    max-height: 300px;
+    overflow: auto;
+}
+.items-list::-webkit-scrollbar{
+    width: 8px;
+    color: #D9DBE9;
+    transition: all .4s ease;
+}
+.items-list::-webkit-scrollbar-thumb {
+    background: #D9DBE9; 
+    border-radius: 4px;
+    width: 8px;
+    transition: all .4s ease;
+  }
+.items-list::-webkit-scrollbar-track {
+    background: #EFF0F7; 
+    border-radius: 4px;
+    width: 8px;
+  }
+.m-h-130{
+    max-height: 130px;
+    overflow: auto;
+}
+.m-h-130::-webkit-scrollbar{
+    width: 8px;
+    color: #D9DBE9;
+    transition: all .4s ease;
+}
+.m-h-130::-webkit-scrollbar-thumb {
+    background: #D9DBE9; 
+    border-radius: 4px;
+    width: 8px;
+    transition: all .4s ease;
+  }
+.m-h-130::-webkit-scrollbar-track {
+    background: #EFF0F7; 
+    border-radius: 4px;
+    width: 8px;
+  }
+.help-slection .MuiCheckbox-root{
+    color: #31B7B7;
 }
