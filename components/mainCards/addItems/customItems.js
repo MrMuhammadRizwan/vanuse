@@ -18,22 +18,18 @@ const CustomItems = (props) => {
     const [itemHeight, setItemHeight] = React.useState('');
     const [itemDepth, setItemDepth] = React.useState('');
     const [itemInstructions, setItemInstructions] = React.useState('');
-    
-    // useEffect(() => {
-    //     props.getValueFromCustomForm(customObject)
-    // }, []);
-
-    // useEffect(() => {
-    //     props.getValueFromCustomForm(customObject)
-    // }, []);
-
+  
     const increaseQty = () => {
         console.log('increaseQty', quantity)
-        setQuantity(++quantity)
+        if(quantity<1){
+            setQuantity(0)
+        }else{
+            setQuantity(++quantity)
+        }
     }
     const decreaseQty =() =>{
         console.log('decreaseQty', quantity)
-        if(quantity<=0){
+        if(quantity<1){
             setQuantity(0)
         }else{
             setQuantity(--quantity)
@@ -41,30 +37,16 @@ const CustomItems = (props) => {
     }
 
     const addToList = () => {
-        // setCustomObject(prevState => ({
-        //     ...prevState,
-        //         subitems:[
-        //             ...prevState.subitems,
-        //             {
-        //                 'id': ++itemId,
-        //                 'title':itemTitle,
-        //                 'quantity':quantity,
-        //                 'width':itemWidth,
-        //                 'height':itemHeight,
-        //                 'depth':itemDepth,
-        //                 'instructions':itemInstructions,
-        //             }
-        //         ]
-        //  }))
 
          const newData = {
                 'id': itemId,
-                'title':itemTitle,
+                'name':itemTitle,
                 'quantity':quantity,
-                'width':itemWidth,
-                'height':itemHeight,
-                'depth':itemDepth,
+                'dim_x':itemWidth,
+                'dim_y':itemHeight,
+                'dim_z':itemDepth,
                 'instructions':itemInstructions,
+                "itemcategory_id": 90
          }
 
          console.log('customObject', customObject)
@@ -75,12 +57,12 @@ const CustomItems = (props) => {
             (
                 setItemTitle(''),
                 setQuantity(0),
-                setItemWidth(''),
-                setItemHeight(''),
-                setItemDepth(''),
+                setItemWidth(0),
+                setItemHeight(0),
+                setItemDepth(0),
                 setItemInstructions('')
             )
-         }, 100);
+         }, 0);
 
     }
 
@@ -120,23 +102,23 @@ const CustomItems = (props) => {
             <div className="mb-31 dimension-wrap">
                 <p className="dimension-text">Dimensions (cm)</p>
                 <div className="dimension-box">
-                    <TextField id="outlined-basic" label="Width" className="text-input" variant="outlined" 
+                    <TextField id="outlined-basic" type="number" min={0} label="Width" className="text-input" variant="outlined" 
                         value={itemWidth} placeholder="-" 
-                        onChange={(e)=>setItemWidth(e.target.value)}
+                        onChange={(e)=>setItemWidth(e.target.value<1 ? 0 : e.target.value)}
                         InputLabelProps={{
                             shrink: true,
                         }}
                         />
-                    <TextField id="outlined-basic" label="Height" className="text-input" variant="outlined" 
+                    <TextField id="outlined-basic" type="number" min={0} label="Height" className="text-input" variant="outlined" 
                         value={itemHeight} placeholder="-" 
-                        onChange={(e)=>setItemHeight(e.target.value)}
+                        onChange={(e)=>setItemHeight(e.target.value<1 ? 0 : e.target.value)}
                         InputLabelProps={{
                             shrink: true,
                         }}
                         />
-                    <TextField id="outlined-basic" label="Depth"  className="text-input" variant="outlined" 
+                    <TextField id="outlined-basic" type="number" min={0} label="Depth"  className="text-input" variant="outlined" 
                         value={itemDepth} placeholder="-" 
-                        onChange={(e)=>setItemDepth(e.target.value)}
+                        onChange={(e)=>setItemDepth(e.target.value<1 ? 0 : e.target.value)}
                         InputLabelProps={{
                             shrink: true,
                         }}

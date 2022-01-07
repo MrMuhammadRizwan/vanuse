@@ -62,6 +62,7 @@ const SelectVan = (props) => {
                 typeof value === 'string' ? value.split(',') : value,
             );
         console.log('setFloor', floor)
+        localStorage.setItem("floor", JSON.stringify(floor));
     }
 
     const iNeedHelpFunc = (event) => {
@@ -114,7 +115,21 @@ const SelectVan = (props) => {
             <div className={"delivery-options-wrap mb-31"}>
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
-                        
+                        <div className="delivery-options">
+                            <p><strong>What floor are you on? </strong></p>
+                            <FormControl fullWidth>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={floor}
+                                    onChange={handleFloorChange}
+                                >
+                                    <MenuItem value={'Ground'}>Ground</MenuItem>
+                                    <MenuItem value={'Basement'}>Basement</MenuItem>
+                                    <MenuItem value={'First Floor'}>First Floor</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </div>
                     </Grid>
                     <Grid item xs={6}>
                         <div className="delivery-options">

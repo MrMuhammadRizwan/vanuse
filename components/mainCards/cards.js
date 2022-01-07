@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Axios from "axios";
 import Grid from '@mui/material/Grid';
 import Slider from '@mui/material/Slider';
 
@@ -9,6 +10,7 @@ import AddItems from "./addItems/addItems";
 import MyItemsList from "./addItems/myItemsList";
 import CustomItems from "./addItems/customItems";
 import SelectVan from "./selectVan/selectVan";
+import ApplyCoupon from "./coupons/coupons";
 
 
 const itemsList = [
@@ -19,7 +21,7 @@ const itemsList = [
             {
                 'id':'9090',
                 'title':'yyyyyy',
-                'quantity':1,
+                'quantity':0,
                 'width':'30',
                 'height':'23',
                 'depth':'14',
@@ -28,7 +30,7 @@ const itemsList = [
             {
                 'id':'9092',
                 'title':'zzzzzzz',
-                'quantity':1,
+                'quantity':0,
                 'width':'30',
                 'height':'23',
                 'depth':'14',
@@ -37,7 +39,7 @@ const itemsList = [
             {
                 'id':'9093',
                 'title':'cccccccc',
-                'quantity':1,
+                'quantity':0,
                 'width':'30',
                 'height':'23',
                 'depth':'14',
@@ -52,7 +54,7 @@ const itemsList = [
             {
                 'id':'9094',
                 'title':'dddddddd',
-                'quantity':2,
+                'quantity':0,
                 'width':'30',
                 'height':'23',
                 'depth':'14',
@@ -85,8 +87,8 @@ const Cards = (props) => {
     const [viwPickupTime, setViwPickupTime] = React.useState(true);
     const [viwAddItemsScreen, setViwAddItemsScreen] = React.useState(false);
     const [viewAddItemsToList, setViewAddItemsToList] = React.useState(false);
-    const [myItemsList, setMyItemsList] = React.useState(itemsList);
-    const [allItemsList, setAllItemsList] = React.useState(itemsList);
+    const [myItemsList, setMyItemsList] = React.useState([]);
+    const [allItemsList, setAllItemsList] = React.useState([]);
 
     const [viewCustomItemsScreen, setViewCustomItemsScreen] = React.useState(false);
     const [viewCustomItemsScreenList, setViewCustomItemsScreenList] = React.useState(false);
@@ -96,7 +98,18 @@ const Cards = (props) => {
     
     const [filteredData, setFilteredData] = React.useState([]);
 
-
+    const itemsListFromServer = () => {
+        Axios.get(`http://127.0.0.1:8000/item/category-wise/`)
+          .then(function (response) {
+            console.log(response.data);
+            let ApiRes = response.data
+            setMyItemsList(ApiRes)
+            setAllItemsList(ApiRes)
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      };
 
     const getDateFromComponent = (date) =>{
         setGettingDate(date)
@@ -232,8 +245,8 @@ const Cards = (props) => {
             setMyItemsList(prevState => ([
                 ...prevState,
                     {
-                        'key':getIndex+1,
-                        'title':'Custom Items',
+                        'id':getIndex+1,
+                        'name':'Custom Items',
                         'subitems':[
                             formData
                         ]
@@ -243,8 +256,8 @@ const Cards = (props) => {
             setAllItemsList(prevState => ([
                 ...prevState,
                     {
-                        'key':getIndex+1,
-                        'title':'Custom Items',
+                        'id':getIndex+1,
+                        'name':'Custom Items',
                         'subitems':[
                             formData
                         ]
@@ -261,7 +274,8 @@ const Cards = (props) => {
     
     useEffect(() => {
         // localStorage.setItem("allItems", allItemsList);
-    }, [viewAddItemsToList, allItemsList]);
+        itemsListFromServer()
+    }, [viewAddItemsToList]);
 
 
     return (
@@ -325,6 +339,10 @@ const Cards = (props) => {
                     </div>
                 </Grid>
                 <Grid item xs={12} md={5}>
+                    {viewSelectaVan?
+                        <ApplyCoupon/>
+                        :null
+                    }
                     {viewCustomItemsScreenList?
                         <MyItemsList 
                             myItemsList={myItemsList}

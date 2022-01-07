@@ -239,6 +239,9 @@
 .search-box .MuiFormControl-roo{
     width: 100%;
 }
+.search-box .MuiTextField-root{
+    width: 100%;
+}
 .search-box .MuiOutlinedInput-notchedOutline{
     border: 0px;
 }
@@ -419,7 +422,7 @@
     min-height: 300px;
 }
 .items-list{
-    max-height: 300px;
+    max-height: 245px;
     overflow: auto;
 }
 .items-list::-webkit-scrollbar{
@@ -438,10 +441,7 @@
     border-radius: 4px;
     width: 8px;
   }
-.m-h-130{
-    max-height: 130px;
-    overflow: auto;
-}
+
 .m-h-130::-webkit-scrollbar{
     width: 8px;
     color: #D9DBE9;
@@ -460,4 +460,24 @@
   }
 .help-slection .MuiCheckbox-root{
     color: #31B7B7;
+}
+.coupon h2{
+    margin-top: 0px;
+}
+.p-60{
+    padding: 60px;
+}
+.display-none{
+    display: none;
+}
+
+.position-relative{
+    display: none;
+}
+.position-relative:first-child{
+    display: block;
+}
+.m-h-130{
+    max-height: 135px;
+    overflow: auto;
 }
