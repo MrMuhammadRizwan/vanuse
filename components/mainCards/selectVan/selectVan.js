@@ -62,6 +62,7 @@ const SelectVan = (props) => {
                 typeof value === 'string' ? value.split(',') : value,
             );
         console.log('setFloor', floor)
+        localStorage.setItem("floor", JSON.stringify(floor));
     }
 
     const iNeedHelpFunc = (event) => {
