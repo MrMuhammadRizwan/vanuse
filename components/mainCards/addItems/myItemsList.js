@@ -45,7 +45,7 @@ const MyItemsList = (props) => {
                                                 </div>
                                             :
                                                 <p className={childitem.quantity>0? "display-none" : "position-relative"}>
-                                                    <span>0 Items, Add items to your list</span> 
+                                                    <span> Add items to your list</span> 
                                                 </p>
                                             }
                                             
