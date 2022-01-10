@@ -24,6 +24,7 @@ const MyItemsList = (props) => {
             return el.subitems.length>0;
         });
             console.log('ApiRes localStorage', filteredEmpty);
+            localStorage.setItem("ApiRes == 1", JSON.stringify(filteredEmpty));
     }, [props]);
     return (
         <div className="white date-card">
