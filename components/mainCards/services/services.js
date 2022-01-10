@@ -79,7 +79,7 @@ const Services = (props) => {
                     key={"Next"}
                     className="darkbutton"
                     sx={{ mb: "16px" }}
-                    onClick={props.goNextFourScreen}
+                    onClick={fillVanChecked ? props.goDirectlyVanScreen: props.goNextFourScreen}
                 >
                     Next
                 </Button>  

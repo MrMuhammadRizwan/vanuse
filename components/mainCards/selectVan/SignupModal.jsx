@@ -31,17 +31,14 @@ const SignupModal = ({open,onSignUp,handleOpenLoginModal}) => {
         aria-describedby="transition-modal-description"
         open={open}
         closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-        timeout: 500,
-        }}
+        
     >
         <Fade in={open}>
             <Box sx={style} className="signup-modal">
                 <Typography id="transition-modal-title" variant="h6" component="h2">
                     <div className="card-heading mb-28">
                         <h2 className="mb-18">Sign up</h2>
-                        <p className="mb-28">Already have an account? <a  onClick={handleOpenLoginModal}> Login here</a></p>
+                        <p className="mb-28">Already have an account? <a className="cursor-pointer" onClick={handleOpenLoginModal}> Login here</a></p>
                     </div>
                 </Typography>
                 <Box id="transition-modal-description" sx={{ mt: 2 }}>

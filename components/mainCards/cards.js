@@ -89,7 +89,7 @@ const Cards = (props) => {
     const [viewAddItemsToList, setViewAddItemsToList] = React.useState(false);
     const [myItemsList, setMyItemsList] = React.useState([]);
     const [allItemsList, setAllItemsList] = React.useState([]);
-
+    const [fillVan, setFillVan] = React.useState(false)
     const [viewCustomItemsScreen, setViewCustomItemsScreen] = React.useState(false);
     const [viewCustomItemsScreenList, setViewCustomItemsScreenList] = React.useState(false);
 
@@ -137,6 +137,7 @@ const Cards = (props) => {
     const goNextFourScreen = () => {
         setViwPickupTime(false)
         setViwServices(false)
+        setFillVan(false)
         setViwAddItemsScreen(true)
         setViewCustomItemsScreenList(true)
         setSliderValue(3)
@@ -149,6 +150,13 @@ const Cards = (props) => {
         setViewSelectaVan(true)
     }
 
+    const goDirectlyVanScreen = () => {
+        setViwPickupTime(false)
+        setViwServices(false)
+        setSliderValue(4)
+        setFillVan(true)
+        setViewSelectaVan(true)
+    }
     const goBackSecondScreen = () => {
         setViwServices(false)
         setViwPickupTime(true)
@@ -164,6 +172,17 @@ const Cards = (props) => {
         setViewAddItemsToList(false)
         setViewCustomItemsScreen(false)
         setViewCustomItemsScreenList(false)
+    }
+    const goBackDirectlyThirdScreen = () => {
+        setViwPickupTime(false)
+        setViwAddItemsScreen(false)
+        setViwServices(true)
+        setSliderValue(2)
+        setFillVan(false)
+        setViewAddItemsToList(false)
+        setViewCustomItemsScreen(false)
+        setViewCustomItemsScreenList(false)
+        setViewSelectaVan(false)
     }
 
     const goBackThirdMainScreen = () => {
@@ -297,6 +316,8 @@ const Cards = (props) => {
                             {viewSelectaVan?
                                 <SelectVan
                                     goBack={goBackItemsScreen}
+                                    goBackThirdScreen={goBackDirectlyThirdScreen}
+                                    fillVan={fillVan}
                                     />
                                 :null
                             }
@@ -325,6 +346,7 @@ const Cards = (props) => {
                                 <Services 
                                     goBackSecondScreen={goBackSecondScreen} 
                                     goNextFourScreen={goNextFourScreen}
+                                    goDirectlyVanScreen = {goDirectlyVanScreen}
                                     />
                                 :null
                             }

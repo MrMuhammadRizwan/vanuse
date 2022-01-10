@@ -181,7 +181,7 @@ const SelectVan = (props) => {
                 <Button 
                     key={"Back"} 
                     className="lightbutton"
-                    onClick={props.goBack}
+                    onClick={props.fillVan ? props.goBackThirdScreen :props.goBack}
                 >
                     Back
                 </Button>

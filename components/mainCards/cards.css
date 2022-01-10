@@ -492,3 +492,7 @@
   max-height: 135px;
   overflow: auto;
 }
+
+.cursor-pointer{
+  cursor: pointer;
+}
