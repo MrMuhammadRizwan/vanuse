@@ -14,23 +14,22 @@ const Services = (props) => {
 
     const handleIfillVanChecked = (event) => {
         setfillVanChecked(event.target.checked);
-
+        localStorage.removeItem("is_van_filled");
+        localStorage.setItem("is_van_filled", JSON.stringify(true));
         if(scheduleVanChecked){
             setscheduleVanChecked(!scheduleVanChecked);
-            // localStorage.setItem("is_van_filled", JSON.stringify(false));
 
         }else{
             setfillVanChecked(event.target.checked);
-            // localStorage.setItem("is_van_filled", JSON.stringify(true));
         }
     };
 
     const handlescheduleVanChecked = (event) => {
         setscheduleVanChecked(event.target.checked);
-
+        localStorage.removeItem("is_van_filled");
+        localStorage.setItem("is_van_filled", JSON.stringify(false));
         if(fillVanChecked){
             setfillVanChecked(!fillVanChecked);
-            // localStorage.setItem("is_van_filled", JSON.stringify(true));
         }else{
             setscheduleVanChecked(event.target.checked);
             // localStorage.setItem("is_van_filled", JSON.stringify(false));
