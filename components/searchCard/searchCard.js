@@ -73,7 +73,6 @@ const SearchCard = () => {
         }));
         console.log("result", result);
         setAllTitles(result);
-        localStorage.setItem("pick_address_line_1", JSON.stringify(result));
         console.log("allTitles", allTitles);
       })
       .catch(function (error) {
@@ -95,7 +94,6 @@ const SearchCard = () => {
         }));
         console.log("result", result);
         setAllTitles2(result);
-        localStorage.setItem("pick_address_line_2", JSON.stringify(result));
         console.log("allTitles 2", allTitles2);
       })
       .catch(function (error) {
@@ -201,6 +199,7 @@ const SearchCard = () => {
                     value={value}
                     onKeyUp={(e) => getValueInput(e)}
                     onChange={(event, newValue) => {
+                    localStorage.setItem("pick_address_line_1", JSON.stringify(newValue));
                       if (typeof newValue === "string") {
                         setDrawPoints(false);
                         setTimeout(() => {
@@ -276,6 +275,7 @@ const SearchCard = () => {
                     value={value2}
                     onKeyUp={(e) => getValueInput2(e)}
                     onChange={(event, newValue) => {
+                      localStorage.setItem("pick_address_line_2", JSON.stringify(newValue));
                       if (typeof newValue === "string") {
                         setTimeout(() => {
                           setDrawPoints(false);

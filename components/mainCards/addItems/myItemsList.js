@@ -16,6 +16,14 @@ import SearchIcon from '@mui/icons-material/Search';
 
 const MyItemsList = (props) => {
     useEffect(() => {
+        let filteredArray = props.myItemsList.map((element) => {
+            // return {...element, subElements: element.subitems.filter((subElement) => subElement.quantity === 1)}
+            return {...element, subitems: element.subitems.filter((subElement) => subElement.quantity > 0)}
+          }) 
+        var filteredEmpty = filteredArray.filter(function (el) {
+            return el.subitems.length>0;
+        });
+            console.log('ApiRes localStorage', filteredEmpty);
     }, [props]);
     return (
         <div className="white date-card">
