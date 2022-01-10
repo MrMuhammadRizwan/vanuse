@@ -80,7 +80,6 @@ const PickupTime = (props) => {
         setImmediateChecked(true);
         setShowHoursMinutesAmpm(false)
         setShowDateBox(false)
-
         // if(scheduleChecked){
         // }else{
         //     setImmediateChecked(event.target.checked);

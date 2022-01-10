@@ -8,32 +8,31 @@ const Services = (props) => {
     const [scheduleVanChecked, setscheduleVanChecked] = React.useState(false);
 
     useEffect(() => {
-        localStorage.setItem("is_van_filled", true);
+        // localStorage.setItem("is_van_filled", JSON.stringify(fillVanChecked));
     }, [fillVanChecked,scheduleVanChecked]);
 
 
     const handleIfillVanChecked = (event) => {
         setfillVanChecked(event.target.checked);
-
+        localStorage.removeItem("is_van_filled");
+        localStorage.setItem("is_van_filled", JSON.stringify(true));
         if(scheduleVanChecked){
             setscheduleVanChecked(!scheduleVanChecked);
-            localStorage.removeItem("is_van_filled");
 
         }else{
             setfillVanChecked(event.target.checked);
-            localStorage.setItem("is_van_filled", true);
         }
     };
 
     const handlescheduleVanChecked = (event) => {
         setscheduleVanChecked(event.target.checked);
-
+        localStorage.removeItem("is_van_filled");
+        localStorage.setItem("is_van_filled", JSON.stringify(false));
         if(fillVanChecked){
             setfillVanChecked(!fillVanChecked);
-            localStorage.removeItem("is_van_filled");
         }else{
             setscheduleVanChecked(event.target.checked);
-            localStorage.setItem("is_van_filled", false);
+            // localStorage.setItem("is_van_filled", JSON.stringify(false));
         }
     };
     return (

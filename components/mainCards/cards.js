@@ -105,8 +105,8 @@ const Cards = (props) => {
             let ApiRes = response.data
             setMyItemsList(ApiRes)
             setAllItemsList(ApiRes)
-            localStorage.setItem("ApiRes", JSON.stringify(ApiRes));
-            console.log('ApiRes localStorage', localStorage.getItem("allItems"));
+            // localStorage.setItem("ApiRes", JSON.stringify(ApiRes));
+            
           })
           .catch(function (error) {
             console.log(error);
@@ -131,6 +131,7 @@ const Cards = (props) => {
         setViwPickupTime(false)
         setViwServices(true)
         setSliderValue(2)
+        localStorage.setItem("pickup_time", JSON.stringify(gettingDate));
     }
     
     const goNextFourScreen = () => {
@@ -274,8 +275,10 @@ const Cards = (props) => {
     
     useEffect(() => {
         // localStorage.setItem("allItems", allItemsList);
+        
+        // console.log('ApiRes localStorage', localStorage.getItem("allItems"));
         itemsListFromServer()
-    }, [viewAddItemsToList]);
+    }, [viewAddItemsToList,]);
 
 
     return (

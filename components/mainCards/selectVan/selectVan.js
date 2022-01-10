@@ -82,11 +82,17 @@ const SelectVan = (props) => {
                 typeof value === 'string' ? value.split(',') : value,
             );
         console.log('setFloor', floor)
-        localStorage.setItem("floor", JSON.stringify(floor));
+        localStorage.setItem("floor_number", JSON.stringify(floor));
     }
 
     const iNeedHelpFunc = (event) => {
         setINeedHelp(event.target.checked);
+        localStorage.setItem("is_load_assistant_required", JSON.stringify(event.target.checked));
+    };
+
+    const haveElevator = (event) => {
+        setElevator(event);
+        localStorage.setItem("has_elevator", JSON.stringify(event));
     };
 
     return (
@@ -155,10 +161,10 @@ const SelectVan = (props) => {
                         <div className="delivery-options">
                             <p><strong>Is there an Elevator? </strong></p>
                             <div className="yesno">
-                                <Button key={"Yes"} className={elevator?"darkbutton":"lightbutton"} onClick={()=>setElevator(true)}>
+                                <Button key={"Yes"} className={elevator?"darkbutton":"lightbutton"} onClick={()=>haveElevator(true)}>
                                     Yes
                                 </Button>
-                                <Button key={"No"} className={elevator?"lightbutton":"darkbutton"} onClick={()=>setElevator(false)}>
+                                <Button key={"No"} className={elevator?"lightbutton":"darkbutton"} onClick={()=>haveElevator(false)}>
                                     No
                                 </Button>
                             </div>
