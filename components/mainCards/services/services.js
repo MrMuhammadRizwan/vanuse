@@ -37,7 +37,7 @@ const Services = (props) => {
     };
     return (
         <>
-            <div className="card-heading mb-71">
+            <div className="card-heading mb-43">
                 <h2>Services</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing</p>
             </div>
@@ -56,7 +56,7 @@ const Services = (props) => {
                 <p>Book a van up to 30 days in advance </p>
             </div>
 
-            <div className={scheduleVanChecked ? "card-slection mb-71 selection" : "card-slection mb-71"}>
+            <div className={scheduleVanChecked ? "card-slection mb-75 selection" : "card-slection mb-75"}>
                 <Checkbox
                     checked={scheduleVanChecked}
                     onChange={handlescheduleVanChecked}
