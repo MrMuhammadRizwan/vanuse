@@ -7,6 +7,24 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
+import Backdrop from '@mui/material/Backdrop';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import Fade from '@mui/material/Fade';
+import Typography from '@mui/material/Typography';
+
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+
 const SelectVan = (props) => {
     const [sVan, setSVan] = React.useState(false);
     const [price, setPrice] = React.useState(15);
@@ -16,7 +34,9 @@ const SelectVan = (props) => {
     const [iNeedHelp, setINeedHelp] = React.useState(true);
     const [elevator, setElevator] = React.useState(false);
     const [floor, setFloor] = React.useState('Ground');
-    
+
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
     const setActiveVan = (value) => {
         console.log('setActiveVan', value)
         switch (value) {
@@ -167,10 +187,32 @@ const SelectVan = (props) => {
                     key={"Next"}
                     className="darkbutton"
                     sx={{ mb: "16px" }}
+                    onClick={handleOpen}
                 >
                     Add payment option
                 </Button>  
             </div>
+            <Modal
+                aria-labelledby="transition-modal-title"
+                aria-describedby="transition-modal-description"
+                open={open}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                timeout: 500,
+                }}
+            >
+                <Fade in={open}>
+                <Box sx={style}>
+                    <Typography id="transition-modal-title" variant="h6" component="h2">
+                    Text in a modal
+                    </Typography>
+                    <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+                    Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+                    </Typography>
+                </Box>
+                </Fade>
+            </Modal>
         </>
     );
 };
