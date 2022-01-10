@@ -26,7 +26,7 @@ const MyItemsList = (props) => {
                 </div>
 
 
-                <div className="mb-31 m-h-130">
+                <div className="m-h-130">
                     {props.myItemsList && props.myItemsList.map((item,i)=>{
                         return(
                             item.subitems.length>0?

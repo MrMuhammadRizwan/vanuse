@@ -105,6 +105,8 @@ const Cards = (props) => {
             let ApiRes = response.data
             setMyItemsList(ApiRes)
             setAllItemsList(ApiRes)
+            localStorage.setItem("ApiRes", JSON.stringify(ApiRes));
+            console.log('ApiRes localStorage', localStorage.getItem("allItems"));
           })
           .catch(function (error) {
             console.log(error);
@@ -265,9 +267,7 @@ const Cards = (props) => {
             ]))
         console.log('getValueFromCustomForm myItemsList', myItemsList);
 
-        localStorage.setItem("allItems", JSON.stringify(myItemsList));
-
-        console.log('allItems localStorage', localStorage.getItem("allItems"));
+        
 
 
     }
