@@ -1,3 +1,4 @@
+import Axios from "axios";
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import FormControl from '@mui/material/FormControl';
@@ -20,8 +21,25 @@ const SelectVan = (props) => {
 
     const [open, setOpen] = React.useState(false);
     const [openLoginModal, setOpenLoginModal] = React.useState(false);
-    const onSignUp=()=>{
-        setOpen(false)
+    const onSignUp=(newData)=>{
+        console.log('newData', newData)
+        // setOpen(false)
+        Axios.post(
+            `http://127.0.0.1:8000/signup/`,
+                {
+                    "email": "rizwan@gmail.com",
+                    "username": "rizwan",
+                    "password":"123456",
+                    "phone_number":"123134564564"
+                }
+            
+          )
+            .then(function (response) {
+              console.log("signup result", result);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
     }
     const onLogin=()=>{
         setOpenLoginModal(false)

@@ -26,6 +26,13 @@ const style = {
     p: 4,
 };
 const SignupModal = ({open,onSignUp,handleOpenLoginModal}) => {
+    
+    const [email, setEmail] = React.useState('');
+    const [password, setPassword] = React.useState('');
+    const [phoneNumber, setPhoneNumber] = React.useState(null);
+    const [userName, setUserName] = React.useState('');
+
+
     return ( <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
