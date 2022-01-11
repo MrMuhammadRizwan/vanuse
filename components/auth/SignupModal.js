@@ -26,12 +26,15 @@ const style = {
     p: 4,
 };
 const SignupModal = ({open,onSignUp,handleOpenLoginModal}) => {
-    
-    const [email, setEmail] = React.useState('');
-    const [password, setPassword] = React.useState('');
-    const [phoneNumber, setPhoneNumber] = React.useState(null);
-    const [userName, setUserName] = React.useState('');
 
+    const [email, setEmail] = React.useState(null);
+    const [password, setPassword] = React.useState(null);
+    const [confirmPassword, setConfirmPassword] = React.useState(null);
+    const [phoneNumber, setPhoneNumber] = React.useState(null);
+
+    const onSignUpClick = () => {
+        onSignUp(email,password,phoneNumber)
+    }
 
     return ( <Modal
         aria-labelledby="transition-modal-title"
@@ -52,14 +55,12 @@ const SignupModal = ({open,onSignUp,handleOpenLoginModal}) => {
                     <Box  className="main-div" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         <TextField
                             className="input"
-                            required
                             label="First Name"
                             type="text"
                             sx={{ marginRight: 'auto'}}
                         />
                         <TextField
                             className="input"
-                            required
                             label="Last Name"
                             type="text"
                         />                            
@@ -67,8 +68,10 @@ const SignupModal = ({open,onSignUp,handleOpenLoginModal}) => {
                     <Box>
                         <TextField
                             className="input"
-                            required
                             label="Email"
+                            required
+                            value={email}
+                            onChange={(e)=>setEmail(e.target.value)}
                             type="text"
                             sx={{ width: '100%'}}
                         />                            
@@ -90,7 +93,9 @@ const SignupModal = ({open,onSignUp,handleOpenLoginModal}) => {
                         <TextField
                             className="input"
                             required
-                            label="Password"
+                            label="Phone"
+                            value={phoneNumber}
+                            onChange={(e)=>setPhoneNumber(e.target.value)}
                             type="number"
                             sx={{width: '100%'}}
                         />  
@@ -100,6 +105,8 @@ const SignupModal = ({open,onSignUp,handleOpenLoginModal}) => {
                             className="input"
                             required
                             label="Password"
+                            value={password}
+                            onChange={(e)=>setPassword(e.target.value)}
                             type="password"
                             sx={{ width: '100%'}}
                         />                         
@@ -109,6 +116,8 @@ const SignupModal = ({open,onSignUp,handleOpenLoginModal}) => {
                             className="input"
                             required
                             label="Confirm Password"
+                            value={confirmPassword}
+                            onChange={(e)=>setConfirmPassword(e.target.value)}
                             type="password"
                             sx={{ width: '100%', marginBottom: '13px !important'}}
                         />                            
@@ -117,7 +126,7 @@ const SignupModal = ({open,onSignUp,handleOpenLoginModal}) => {
                 <Box className="termsPolicy" sx={{textAlign: 'center'}}>
                     By clicking “Sign Up” you agree to our <a type='button' className='cursor-pointer'> Terms of Service </a> as well as our <a type='button' className='cursor-pointer'> Privacy Policy</a>
                 </Box>
-                <Button type="button" onClick={onSignUp} className="signup-btn">
+                <Button type="button" onClick={onSignUpClick} disabled={(email && phoneNumber && password) ? false : true} className="signup-btn">
                     Sign Up
                 </Button>
             </Box>

@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
@@ -5,7 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import Grid from '@mui/material/Grid';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-import React from "react";
+import Snackbar from '@mui/material/Snackbar';
 import SignupModal from "../../auth/SignupModal";
 import LoginModal from "../../auth/LoginModal";
 
@@ -21,28 +22,56 @@ const SelectVan = (props) => {
 
     const [open, setOpen] = React.useState(false);
     const [openLoginModal, setOpenLoginModal] = React.useState(false);
-    const onSignUp=(newData)=>{
-        console.log('newData', newData)
-        // setOpen(false)
+    const [showToast, setShowToast] = React.useState(false);
+    const [signupValue, setSignupValue] = React.useState(false);
+    const [isLogin, setIsLogin] = React.useState(false);
+
+    const onSignUp=(email,password,phoneNumber)=>{
+        console.log('newData', email,password,phoneNumber)
         Axios.post(
             `http://127.0.0.1:8000/signup/`,
                 {
-                    "email": "rizwan@gmail.com",
-                    "username": "rizwan",
-                    "password":"123456",
-                    "phone_number":"123134564564"
+                    "email": email,
+                    "username": email,
+                    "password": password,
+                    "phone_number": phoneNumber
                 }
-            
-          )
+            )
             .then(function (response) {
-              console.log("signup result", result);
+                setShowToast(true)
+                console.log("signup result", response);
+                setSignupValue(true)
+                setOpen(false)
             })
             .catch(function (error) {
               console.log(error);
             });
     }
-    const onLogin=()=>{
-        setOpenLoginModal(false)
+
+    const onLogin=(userName,password)=>{
+        console.log('onLogin newData', userName,password)
+        Axios.post(
+            `http://127.0.0.1:8000/login/`,
+                {
+                    "username": userName,
+                    "password": password
+                }
+            )
+            .then(function (response) {
+                setShowToast(true)
+                if(response.status==200){
+                    console.log("onLogin result", response.data.token);
+                    setSignupValue(false)
+                    setOpenLoginModal(false)
+                    localStorage.setItem("token", response.data.token)
+                }
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+    }
+    const clearToken = () => {
+        // localStorage.removeItem("token")
     }
     const handleOpenLoginModal=()=>{
         setOpenLoginModal(true)
@@ -109,9 +138,29 @@ const SelectVan = (props) => {
         setElevator(event);
         localStorage.setItem("has_elevator", JSON.stringify(event));
     };
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+        setShowToast(false);
+      };
+
+    useEffect(() => {
+        let localstg = localStorage.getItem("token")
+        if(localStorage.getItem("token")!==null){
+            setIsLogin(true)
+        }
+    }, []);
 
     return (
         <>
+            <Snackbar
+                open={showToast}
+                onClose={handleClose}
+                message={signupValue?"Signup Successfully!":"Login Successfully"}
+                autoHideDuration={1000}
+                key='topright'
+            />
             <div className="card-heading mb-23">
                 <h2>Select a van size</h2>
             </div>
@@ -203,15 +252,14 @@ const SelectVan = (props) => {
                 >
                     Back
                 </Button>
-
                 <Button
                     key={"Next"}
                     className="darkbutton"
                     sx={{ mb: "16px" }}
-                    onClick={handleOpenLoginModal}
+                    onClick={isLogin?clearToken:handleOpenLoginModal}
                 >
                     Add payment option
-                </Button>  
+                </Button> 
             </div>
             <SignupModal open={open} onSignUp={onSignUp} handleOpenLoginModal={handleOpenLoginModal} />
             <LoginModal open={openLoginModal} onLogin={onLogin} handleOpenSignUpModal={handleOpen} />

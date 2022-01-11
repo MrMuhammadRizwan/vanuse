@@ -26,6 +26,12 @@ const style = {
   };
 
 const LoginModal = ({open,onLogin,handleOpenSignUpModal}) => {
+    const [password, setPassword] = React.useState(null);
+    const [userName, setUserName]= React.useState(null);
+
+    const onLoginClick = () => {
+        onLogin(userName,password)
+    }
     return (  <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -48,6 +54,8 @@ const LoginModal = ({open,onLogin,handleOpenSignUpModal}) => {
                             className="input"
                             required
                             label="Email"
+                            value={userName}
+                            onChange={(e)=>setUserName(e.target.value)}
                             type="text"
                             sx={{ width: '100%'}}
                         />                            
@@ -58,6 +66,8 @@ const LoginModal = ({open,onLogin,handleOpenSignUpModal}) => {
                             className="input"
                             required
                             label="Password"
+                            value={password}
+                            onChange={(e)=>setPassword(e.target.value)}
                             type="password"
                             sx={{ width: '100%'}}
                         />                         
@@ -67,7 +77,7 @@ const LoginModal = ({open,onLogin,handleOpenSignUpModal}) => {
                 <Box className="termsPolicy" sx={{textAlign: 'center'}}>
                     
                 </Box>
-                <Button className="signup-btn login-btn" onClick={onLogin}>
+                <Button className="signup-btn login-btn" onClick={onLoginClick} disabled={(userName && password) ? false : true}>
                     Login
                 </Button>
                 <Box className="forgot-password" onClick={onLogin}>
