@@ -187,10 +187,10 @@ const Cards = (props) => {
   };
 
   const goToPaymentScreen = () => {
-    setViwAddItemsScreen(true);
-    setViewAddItemsToList(true);
+    setViwAddItemsScreen(false);
+    setViewAddItemsToList(false);
     setViewCustomItemsScreen(false);
-    setViewCustomItemsScreenList(true);
+    setViewCustomItemsScreenList(false);
     setSliderValue(5);
     setViewSelectaVan(false);
     setViewPayment(true);
@@ -303,7 +303,12 @@ const Cards = (props) => {
                 />
                 <span className="card-slider-count">{sliderValue}/5</span>
               </div>
-              {viewSelectaVan ? <SelectVan goBack={goBackItemsScreen} /> : null}
+              {viewSelectaVan ? (
+                <SelectVan
+                  goBack={goBackItemsScreen}
+                  goToPaymentScreen={goToPaymentScreen}
+                />
+              ) : null}
               {viewCustomItemsScreen ? (
                 <CustomItems
                   goBackThirdMainScreen={goBackThirdMainScreen}

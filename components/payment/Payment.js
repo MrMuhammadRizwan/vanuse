@@ -14,11 +14,11 @@ const Payment = () => {
   return (
     <>
       <div className="card-heading mb-31">
-        <h2>Add Items</h2>
+        <h2>Payment Methods</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing</p>
       </div>
 
-      <Box
+      {/* <Box
         sx={{ display: "flex", alignItems: "center" }}
         className="mb-31 search-box"
       >
@@ -29,9 +29,9 @@ const Payment = () => {
           placeholder="Search"
           onChange={filterData}
         />
-      </Box>
+      </Box> */}
 
-      <div className="mb-31">
+      {/* <div className="mb-31">
         {loading ? (
           "Loading Data..."
         ) : (
@@ -44,9 +44,9 @@ const Payment = () => {
             </p>
           </>
         )}
-      </div>
+      </div> */}
 
-      <div className="card-buttons-grid">
+      {/* <div className="card-buttons-grid">
         <Button
           key={"Back"}
           className="lightbutton"
@@ -63,7 +63,7 @@ const Payment = () => {
         >
           Next
         </Button>
-      </div>
+      </div> */}
     </>
   );
 };
