@@ -5,8 +5,8 @@ import Grid from '@mui/material/Grid';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import React from "react";
-import SignupModal from "./SignupModal";
-import LoginModal from "./LoginModal";
+import SignupModal from "../../auth/SignupModal";
+import LoginModal from "../../auth/LoginModal";
 
 const SelectVan = (props) => {
     const [sVan, setSVan] = React.useState(false);
