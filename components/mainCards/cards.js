@@ -206,6 +206,15 @@ const Cards = (props) => {
         setViewSelectaVan(false)
     }
 
+    const goToPaymentScreen = () => {
+    setViwAddItemsScreen(true);
+    setViewAddItemsToList(false);
+    setViewCustomItemsScreen(false);
+    setSliderValue(5);
+    setViewSelectaVan(false);
+    setViewPayment(true);
+  };
+
     // const addItemsToList = ( list ) => {
     //     console.log('addItems >>>', list)
     //     setViewAddItemsToList(true)
