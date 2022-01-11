@@ -14,8 +14,6 @@ const Services = (props) => {
 
     const handleIfillVanChecked = (event) => {
         setfillVanChecked(event.target.checked);
-        localStorage.removeItem("is_van_filled");
-        localStorage.setItem("is_van_filled", JSON.stringify(true));
         if(scheduleVanChecked){
             setscheduleVanChecked(!scheduleVanChecked);
 
@@ -26,8 +24,6 @@ const Services = (props) => {
 
     const handlescheduleVanChecked = (event) => {
         setscheduleVanChecked(event.target.checked);
-        localStorage.removeItem("is_van_filled");
-        localStorage.setItem("is_van_filled", JSON.stringify(false));
         if(fillVanChecked){
             setfillVanChecked(!fillVanChecked);
         }else{

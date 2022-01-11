@@ -138,6 +138,7 @@ const Cards = (props) => {
         setViwPickupTime(false)
         setViwServices(false)
         setFillVan(false)
+        localStorage.setItem("is_van_filled", JSON.stringify(false));
         setViwAddItemsScreen(true)
         setViewCustomItemsScreenList(true)
         setSliderValue(3)
@@ -155,6 +156,7 @@ const Cards = (props) => {
         setViwServices(false)
         setSliderValue(4)
         setFillVan(true)
+        localStorage.setItem("is_van_filled", JSON.stringify(true));
         setViewSelectaVan(true)
     }
     const goBackSecondScreen = () => {
@@ -179,6 +181,7 @@ const Cards = (props) => {
         setViwServices(true)
         setSliderValue(2)
         setFillVan(false)
+        localStorage.setItem("is_van_filled", JSON.stringify(false));
         setViewAddItemsToList(false)
         setViewCustomItemsScreen(false)
         setViewCustomItemsScreenList(false)
