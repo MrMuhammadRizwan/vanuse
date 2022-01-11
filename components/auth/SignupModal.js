@@ -24,7 +24,7 @@ const style = {
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
-  };
+};
 const SignupModal = ({open,onSignUp,handleOpenLoginModal}) => {
     return ( <Modal
         aria-labelledby="transition-modal-title"
@@ -108,7 +108,7 @@ const SignupModal = ({open,onSignUp,handleOpenLoginModal}) => {
                     </Box>
                 </Box>
                 <Box className="termsPolicy" sx={{textAlign: 'center'}}>
-                    By clicking “Sign Up” you agree to our <a> Terms of Service </a> as well as our <a> Privacy Policy</a>
+                    By clicking “Sign Up” you agree to our <a type='button' className='cursor-pointer'> Terms of Service </a> as well as our <a type='button' className='cursor-pointer'> Privacy Policy</a>
                 </Box>
                 <Button type="button" onClick={onSignUp} className="signup-btn">
                     Sign Up
@@ -117,5 +117,18 @@ const SignupModal = ({open,onSignUp,handleOpenLoginModal}) => {
         </Fade>
     </Modal> );
 }
- 
+
+
+// This is for the asterisk color
+
+// overrides: {
+//     MuiFormLabel: {
+//         asterisk: {
+//             color: '#31b7b7',
+//             '&$error': {
+//                 color: '#31b7b7'
+//             },
+//         }
+//     }
+// }
 export default SignupModal;
