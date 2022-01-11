@@ -496,3 +496,54 @@
 .cursor-pointer{
   cursor: pointer;
 }
+
+
+.master-card {
+  background: #fcfcfc;
+  border: 2px solid #31b7b7;
+  border-radius: 5px;
+  padding: 9px 13px 10px 19px;
+  margin-bottom: 16px;
+}
+.master-card h6,
+.visa-card h6 {
+  font-weight: bold;
+  font-size: 16px;
+  color: #23274f;
+  margin-bottom: 0;
+}
+.master-card p,
+.visa-card p {
+  font-size: 14px;
+  color: #5a5d77;
+  margin-bottom: 0;
+}
+.master-card .heading,
+.visa-card .heading {
+  margin-right: auto;
+  margin-left: 24px;
+}
+.visa-card {
+  background: #f7f7fc;
+  border-radius: 5px;
+  padding: 9px 13px 10px 19px;
+  margin-bottom: 109px;
+}
+.add-btns .add-payment {
+  background: #fcfcfc;
+  border-radius: 5px;
+  border: 2px solid #d9dbe9;
+  font-weight: bold;
+  font-size: 16px;
+  color: #1f3d6d;
+  text-align: center;
+  margin-bottom: 16px;
+}
+.add-btns .next {
+  background: #23274f;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+  color: #fcfcfc;
+}
