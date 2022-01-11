@@ -9,8 +9,6 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
-import master from "./master.jpeg"
-import visa from "./visa.jpeg"
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 const Payment = () => {
@@ -29,7 +27,7 @@ const Payment = () => {
           }}
           className="master-card"
         >
-          <img src={master} alt="master" />
+          <img src="/master.svg" alt="master" />
           <Box className="heading">
             <Typography variant="h6" gutterBottom component="h6">
               Cash Payment
@@ -48,7 +46,7 @@ const Payment = () => {
           }}
           className="visa-card"
         >
-          <img src={visa} alt="visa" />
+          <img src="/visa.svg" alt="master" />
           <Box className="heading">
             <Typography variant="h6" gutterBottom component="h6">
               **** **** **** 3802
