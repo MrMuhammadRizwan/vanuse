@@ -36,7 +36,21 @@ const SelectVan = (props) => {
   const [floor, setFloor] = React.useState("Ground");
 
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+  const [openLoginModal, setOpenLoginModal] = React.useState(false);
+  const onSignUp = () => {
+    setOpen(false);
+  };
+  const onLogin = () => {
+    setOpenLoginModal(false);
+  };
+  const handleOpenLoginModal = () => {
+    setOpenLoginModal(true);
+    setOpen(false);
+  };
+  const handleOpen = () => {
+    setOpenLoginModal(false);
+    setOpen(true);
+  };
   const setActiveVan = (value) => {
     console.log("setActiveVan", value);
     switch (value) {
@@ -80,11 +94,21 @@ const SelectVan = (props) => {
     } = event;
     setFloor(typeof value === "string" ? value.split(",") : value);
     console.log("setFloor", floor);
+    localStorage.setItem("floor_number", JSON.stringify(floor));
     localStorage.setItem("floor", JSON.stringify(floor));
   };
 
   const iNeedHelpFunc = (event) => {
     setINeedHelp(event.target.checked);
+    localStorage.setItem(
+      "is_load_assistant_required",
+      JSON.stringify(event.target.checked)
+    );
+  };
+
+  const haveElevator = (event) => {
+    setElevator(event);
+    localStorage.setItem("has_elevator", JSON.stringify(event));
   };
 
   return (
@@ -210,14 +234,14 @@ const SelectVan = (props) => {
                 <Button
                   key={"Yes"}
                   className={elevator ? "darkbutton" : "lightbutton"}
-                  onClick={() => setElevator(true)}
+                  onClick={() => haveElevator(true)}
                 >
                   Yes
                 </Button>
                 <Button
                   key={"No"}
                   className={elevator ? "lightbutton" : "darkbutton"}
-                  onClick={() => setElevator(false)}
+                  onClick={() => haveElevator(false)}
                 >
                   No
                 </Button>
@@ -237,40 +261,33 @@ const SelectVan = (props) => {
       </div>
 
       <div className="card-buttons-grid">
-        <Button key={"Back"} className="lightbutton" onClick={props.goBack}>
-          Back
+        <Button
+          key={"Back"}
+          className="lightbutton"
+          onClick={props.fillVan ? props.goBackThirdScreen : props.goBack}
+        >
+          Yes
         </Button>
-
         <Button
           key={"Next"}
           className="darkbutton"
           sx={{ mb: "16px" }}
-          onClick={props.goToPaymentScreen}
+          onClick={handleOpenLoginModal}
         >
-          Add payment option
+          No
         </Button>
       </div>
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
+
+      <SignupModal
         open={open}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-      >
-        <Fade in={open}>
-          <Box sx={style}>
-            <Typography id="transition-modal-title" variant="h6" component="h2">
-              Text in a modal
-            </Typography>
-            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-            </Typography>
-          </Box>
-        </Fade>
-      </Modal>
+        onSignUp={onSignUp}
+        handleOpenLoginModal={handleOpenLoginModal}
+      />
+      <LoginModal
+        open={openLoginModal}
+        onLogin={onLogin}
+        handleOpenSignUpModal={handleOpen}
+      />
     </>
   );
 };

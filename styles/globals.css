@@ -5,13 +5,13 @@ body {
   /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
 }
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
 a {
   color: inherit;
   text-decoration: none;
 }
-p{
-  color: #5A5D77;
+p {
+  color: #5a5d77;
 }
 
 * {
@@ -35,7 +35,6 @@ main {
   justify-content: center;
   align-items: center;
 }
-
 
 a {
   color: inherit;
@@ -74,8 +73,8 @@ code {
   border-radius: 5px;
   padding: 0.75rem;
   font-size: 1.1rem;
-  font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-    DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
+    Bitstream Vera Sans Mono, Courier New, monospace;
 }
 
 .grid {
@@ -127,68 +126,68 @@ code {
     width: 100%;
     flex-direction: column;
   }
-  .main-content{
+  .main-content {
     padding: 15px;
   }
 }
 
 .start-field-active {
-  border: 2px solid #31B7B7;
+  border: 2px solid #31b7b7;
 }
 
-.card-form form{
+.card-form form {
   height: 50px;
 }
 
-.darkbutton{
-  background-color: #1F3D6D;
+.darkbutton {
+  background-color: #1f3d6d;
   color: #fff !important;
 }
 
-.darkbutton:hover{
-  background-color: #1F3D6D;
+.darkbutton:hover {
+  background-color: #1f3d6d;
   color: #fff !important;
 }
 
-.darkbutton-disable{
+.darkbutton-disable {
   background-color: #ccc;
   color: #fff !important;
   cursor: not-allowed;
 }
 
-.darkbutton-disable:hover{
+.darkbutton-disable:hover {
   background-color: #ccc;
   color: #fff !important;
   cursor: not-allowed;
 }
 
-.mobileMenu{
-  background-color: #1F3D6D;
+.mobileMenu {
+  background-color: #1f3d6d;
   color: #fff !important;
   justify-content: space-between;
 }
-.mobileMenu:hover{
-  background-color: #1F3D6D;
+.mobileMenu:hover {
+  background-color: #1f3d6d;
   color: #fff !important;
   justify-content: space-between;
 }
-.lightbutton{
+.lightbutton {
   background-color: #fff;
-  border: 2px solid #D9DBE9;
+  border: 2px solid #d9dbe9;
   box-sizing: border-box;
   box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.06);
   border-radius: 5px;
-  color: #23274F;
+  color: #23274f;
 }
 
-.login-buttons .MuiButton-root{
+.login-buttons .MuiButton-root {
   margin-right: 20px;
 }
-.MuiButton-root{
+.MuiButton-root {
   height: 48px;
 }
 
-.main-content{
+.main-content {
   min-height: 100vh;
   height: 100%;
   background: url(/web-background.png);
@@ -197,7 +196,7 @@ code {
   padding: 10px;
 }
 
-.banner-container{
+.banner-container {
   width: 100%;
   /* max-width: 1099px; */
   padding-top: 21px;
@@ -205,18 +204,18 @@ code {
   padding-right: 86px; */
   position: relative;
 }
-.banner-card{
+.banner-card {
   width: 100%;
   max-width: 540px;
   margin-left: auto;
   /* float: left; */
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 0px 8px 16px rgba(17, 17, 17, 0.06);
   border-radius: 16px;
   overflow: hidden;
   z-index: 1;
 }
-.card-content{
+.card-content {
   padding: 60px;
   padding-top: 48px;
 }
@@ -232,98 +231,189 @@ code {
   top: -5px;
   left: 10px;
 } */
-.card-content h2{
+.card-content h2 {
   margin: 0px;
   margin-bottom: 5px;
 }
-.card-content p{
+.card-content p {
   margin-top: 0px;
 }
-.card-buttons{
+.card-buttons {
   display: grid;
 }
-.right-heading{
+.right-heading {
   margin-top: 20px;
 }
-.right-heading .bluecar{
+.right-heading .bluecar {
   position: absolute;
   top: 50%;
   transform: translate(-15%, 35%);
   z-index: 0;
 }
-.right-heading h1{
+.right-heading h1 {
   font-weight: bold;
   font-size: 48px;
   line-height: 50px;
   letter-spacing: 1px;
-  color: #FFFFFF;
+  color: #ffffff;
   margin-bottom: 51px;
 }
-.right-heading p{
+.right-heading p {
   font-weight: bold;
   font-size: 32px;
   line-height: 36px;
   display: flex;
   align-items: center;
-  color: #FFFFFF;
+  color: #ffffff;
 }
-.custom-input .MuiOutlinedInput-notchedOutline{
+.custom-input .MuiOutlinedInput-notchedOutline {
   border: 0px;
 }
 
-.custom-input .MuiOutlinedInput-root{
+.custom-input .MuiOutlinedInput-root {
   padding: 0px;
 }
-@media (max-width: 1120px){
-  .right-heading .bluecar{
+
+/* Sing Up Modal */
+.signup-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  overflow-y: scroll;
+  max-height: 100%;
+  display: block;
+  padding: 60px;
+  box-shadow: unset;
+  border: 0;
+  border-radius: 16px;
+  width: 540px;
+}
+.signup-modal h2 {
+  font-size: 32px;
+  color: #23274f;
+  font-weight: 700;
+  margin-top: 0;
+}
+.signup-modal p,
+.signup-modal .termsPolicy {
+  color: #5a5d77;
+  font-size: 16px;
+  font-weight: 400;
+}
+.signup-modal p a,
+.signup-modal .termsPolicy a {
+  color: #31b7b7;
+  font-weight: 700;
+}
+.signup-modal .termsPolicy {
+  font-size: 12px;
+  padding: 0 40px;
+}
+.signup-modal .forgot-password {
+  cursor: pointer;
+}
+.signup-modal .input {
+  margin-bottom: 32px;
+}
+.signup-modal .age {
+  width: 122px;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.signup-modal .signup-btn {
+  width: 100%;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  background-color: #23274f;
+  border-radius: 5px;
+  margin-top: 13px;
+}
+.signup-modal .login-btn {
+  margin-top: 39px;
+}
+.forgot-password {
+  margin-top: 33px;
+  text-align: center;
+  color: #31b7b7;
+  font-weight: 700;
+  font-size: 14px;
+}
+.signup-modal .cursor-pointer {
+  cursor: pointer;
+}
+.signup-modal .termsPolicy .cursor-pointer {
+  text-decoration: underline;
+}
+.signup-modal::-webkit-scrollbar {
+  width: 0.2em;
+  height: 0.2rem;
+}
+.signup-modal::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+}
+@media (max-width: 1120px) {
+  .right-heading .bluecar {
     width: 50%;
-    transform: translate(-16% , 50%);
+    transform: translate(-16%, 50%);
   }
 }
 @media (min-width: 768px) and (max-width: 1024px) {
-  .MuiAppBar-root .MuiButton-root{
+  .MuiAppBar-root .MuiButton-root {
     margin-right: 10px;
   }
 }
-@media (max-width: 991px){
+@media (max-width: 991px) {
   .right-heading {
     margin-left: 32px;
   }
-  .banner-card{
+  .banner-card {
     margin: auto;
   }
-  .right-heading .bluecar{
+  .right-heading .bluecar {
     display: none;
   }
 }
-@media (max-width: 767px){
+@media (max-width: 767px) {
   .right-heading {
     margin-left: 30px;
     margin-bottom: 30px;
   }
-  .banner-container{
+  .banner-container {
     flex-direction: column-reverse;
     margin: 0 30px;
   }
-  .banner-card{
+  .banner-card {
     margin: auto;
     margin-bottom: 70px;
   }
-  .banner-section{
+  .banner-section {
     flex-direction: column-reverse;
   }
 }
-@media (max-width: 575px){
+@media (max-width: 575px) {
   .right-heading {
     margin-left: 10px;
   }
-  .right-heading h1{
+  .right-heading h1 {
     font-size: 32px;
   }
-  .right-heading p{
+  .right-heading p {
     font-size: 24px;
   }
   .card-content {
     padding: 30px;
   }
+  .signup-modal {
+    width: 100%;
+    padding: 24px;
+  }
 }
+/* @media (max-width: 400px) {
+  .signup-modal .main-div {
+    display: block;
+  }
+} */

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect } from "react";
 import moment from 'moment';
 
@@ -80,7 +81,6 @@ const PickupTime = (props) => {
         setImmediateChecked(true);
         setShowHoursMinutesAmpm(false)
         setShowDateBox(false)
-
         // if(scheduleChecked){
         // }else{
         //     setImmediateChecked(event.target.checked);

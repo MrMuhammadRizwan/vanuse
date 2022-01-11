@@ -80,6 +80,7 @@ const itemsList = [
 ];
 
 const Cards = (props) => {
+
   const [sliderValue, setSliderValue] = React.useState(1);
   const [gettingDate, setGettingDate] = React.useState(new Date());
   const [shedulePickupValue, setShedulePickupValue] = React.useState(false);
@@ -89,44 +90,141 @@ const Cards = (props) => {
   const [viewAddItemsToList, setViewAddItemsToList] = React.useState(false);
   const [myItemsList, setMyItemsList] = React.useState([]);
   const [allItemsList, setAllItemsList] = React.useState([]);
-
-  const [viewCustomItemsScreen, setViewCustomItemsScreen] =
-    React.useState(false);
-  const [viewCustomItemsScreenList, setViewCustomItemsScreenList] =
-    React.useState(false);
-
-  const [viewSelectaVan, setViewSelectaVan] = React.useState(false);
+      const [viewCustomItemsScreen, setViewCustomItemsScreen] =
+        React.useState(false);
+      const [viewCustomItemsScreenList, setViewCustomItemsScreenList] =
+        React.useState(false);
+         const [viewSelectaVan, setViewSelectaVan] = React.useState(false);
 
   const [viewPayment, setViewPayment] = React.useState(false);
 
   const [filteredData, setFilteredData] = React.useState([]);
 
-  const itemsListFromServer = () => {
-    Axios.get(`http://127.0.0.1:8000/item/category-wise/`)
-      .then(function (response) {
-        console.log(response.data);
-        let ApiRes = response.data;
-        setMyItemsList(ApiRes);
-        setAllItemsList(ApiRes);
-        localStorage.setItem("ApiRes", JSON.stringify(ApiRes));
-        console.log("ApiRes localStorage", localStorage.getItem("allItems"));
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
+    const shedulePickupChange = (data) =>{
+        setShedulePickupValue(data)
+        console.log('clickSchedule Main', data)
+        if(data){
+            setShedulePickupValue(data)
+        }else{
+            setShedulePickupValue(false)
+        }
+    }
 
-  const getDateFromComponent = (date) => {
-    setGettingDate(date);
-  };
+    const goNextServices = () => {
+        setViwPickupTime(false)
+        setViwServices(true)
+        setSliderValue(2)
+        localStorage.setItem("pickup_time", JSON.stringify(gettingDate));
+    }
+    
+    const goNextFourScreen = () => {
+        setViwPickupTime(false)
+        setViwServices(false)
+        setFillVan(false)
+        localStorage.setItem("is_van_filled", JSON.stringify(false));
+        setViwAddItemsScreen(true)
+        setViewCustomItemsScreenList(true)
+        setSliderValue(3)
+    }
 
-  const shedulePickupChange = (data) => {
-    setShedulePickupValue(data);
-    console.log("clickSchedule Main", data);
-    if (data) {
-      setShedulePickupValue(data);
-    } else {
-      setShedulePickupValue(false);
+    const gotoSelectaVanScreen = () => {
+        setViwAddItemsScreen(false)
+        setViewCustomItemsScreenList(false)
+        setSliderValue(4)
+        setViewSelectaVan(true)
+    }
+
+    const goDirectlyVanScreen = () => {
+        setViwPickupTime(false)
+        setViwServices(false)
+        setSliderValue(4)
+        setFillVan(true)
+        localStorage.setItem("is_van_filled", JSON.stringify(true));
+        setViewSelectaVan(true)
+    }
+    const goBackSecondScreen = () => {
+        setViwServices(false)
+        setViwPickupTime(true)
+        setSliderValue(1)
+        setViewAddItemsToList(false)
+    }
+
+    const goBackThirdScreen = () => {
+        setViwPickupTime(false)
+        setViwAddItemsScreen(false)
+        setViwServices(true)
+        setSliderValue(2)
+        setViewAddItemsToList(false)
+        setViewCustomItemsScreen(false)
+        setViewCustomItemsScreenList(false)
+    }
+    const goBackDirectlyThirdScreen = () => {
+        setViwPickupTime(false)
+        setViwAddItemsScreen(false)
+        setViwServices(true)
+        setSliderValue(2)
+        setFillVan(false)
+        localStorage.setItem("is_van_filled", JSON.stringify(false));
+        setViewAddItemsToList(false)
+        setViewCustomItemsScreen(false)
+        setViewCustomItemsScreenList(false)
+        setViewSelectaVan(false)
+    }
+
+    const goBackThirdMainScreen = () => {
+        setViwAddItemsScreen(true)
+        setViewAddItemsToList(true)
+        setViewCustomItemsScreen(false)
+        setViewCustomItemsScreenList(true)
+        setSliderValue(3)
+        setViewSelectaVan(false)
+    }
+
+    const goBackItemsScreen = () => {
+        setViwAddItemsScreen(true)
+        setViewAddItemsToList(true)
+        setViewCustomItemsScreen(false)
+        setViewCustomItemsScreenList(true)
+        setSliderValue(3)
+        setViewSelectaVan(false)
+    }
+
+    // const addItemsToList = ( list ) => {
+    //     console.log('addItems >>>', list)
+    //     setViewAddItemsToList(true)
+    //     setMyItemsList(list)
+    // }
+
+
+    const increaseQty = (qty, ind, key) => {
+        console.log('increaseQty rooms', qty, ind, key);
+        let keys = key
+        const rooms = JSON.parse(JSON.stringify(allItemsList));
+            rooms[JSON.parse(JSON.stringify(keys))].subitems[JSON.parse(JSON.stringify(ind))].quantity++;
+
+        console.log('increaseQty rooms', rooms);
+
+        setAllItemsList(rooms)
+        setMyItemsList(rooms)
+
+    }
+
+    const decreaseQty = (qty, ind, key) => {
+        let kiy = key
+        const rooms = JSON.parse(JSON.stringify(allItemsList));
+        
+        console.log('decreaseQty rooms', rooms);
+        
+        if(rooms[JSON.parse(JSON.stringify(kiy))].subitems[JSON.parse(JSON.stringify(ind))].quantity){
+            rooms[JSON.parse(JSON.stringify(kiy))].subitems[JSON.parse(JSON.stringify(ind))].quantity--;
+            
+        }else{
+            rooms[JSON.parse(JSON.stringify(kiy))].subitems[JSON.parse(JSON.stringify(ind))].quantity=0;
+        }
+        setAllItemsList(rooms)
+
+        setMyItemsList(rooms)
+
     }
   };
 

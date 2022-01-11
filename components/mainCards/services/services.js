@@ -8,37 +8,32 @@ const Services = (props) => {
     const [scheduleVanChecked, setscheduleVanChecked] = React.useState(false);
 
     useEffect(() => {
-        localStorage.setItem("is_van_filled", true);
+        // localStorage.setItem("is_van_filled", JSON.stringify(fillVanChecked));
     }, [fillVanChecked,scheduleVanChecked]);
 
 
     const handleIfillVanChecked = (event) => {
         setfillVanChecked(event.target.checked);
-
         if(scheduleVanChecked){
             setscheduleVanChecked(!scheduleVanChecked);
-            localStorage.removeItem("is_van_filled");
 
         }else{
             setfillVanChecked(event.target.checked);
-            localStorage.setItem("is_van_filled", true);
         }
     };
 
     const handlescheduleVanChecked = (event) => {
         setscheduleVanChecked(event.target.checked);
-
         if(fillVanChecked){
             setfillVanChecked(!fillVanChecked);
-            localStorage.removeItem("is_van_filled");
         }else{
             setscheduleVanChecked(event.target.checked);
-            localStorage.setItem("is_van_filled", false);
+            // localStorage.setItem("is_van_filled", JSON.stringify(false));
         }
     };
     return (
         <>
-            <div className="card-heading mb-71">
+            <div className="card-heading mb-43">
                 <h2>Services</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing</p>
             </div>
@@ -57,7 +52,7 @@ const Services = (props) => {
                 <p>Book a van up to 30 days in advance </p>
             </div>
 
-            <div className={scheduleVanChecked ? "card-slection mb-71 selection" : "card-slection mb-71"}>
+            <div className={scheduleVanChecked ? "card-slection mb-75 selection" : "card-slection mb-75"}>
                 <Checkbox
                     checked={scheduleVanChecked}
                     onChange={handlescheduleVanChecked}
@@ -80,7 +75,7 @@ const Services = (props) => {
                     key={"Next"}
                     className="darkbutton"
                     sx={{ mb: "16px" }}
-                    onClick={props.goNextFourScreen}
+                    onClick={fillVanChecked ? props.goDirectlyVanScreen: props.goNextFourScreen}
                 >
                     Next
                 </Button>  
