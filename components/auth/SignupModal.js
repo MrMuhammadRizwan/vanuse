@@ -48,7 +48,7 @@ const SignupModal = ({open,onSignUp,handleOpenLoginModal}) => {
                             required
                             label="First Name"
                             type="text"
-                            sx={{ marginRight: '20px'}}
+                            sx={{ marginRight: 'auto'}}
                         />
                         <TextField
                             className="input"
