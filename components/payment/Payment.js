@@ -1,19 +1,49 @@
-import React, { useState, useEffect } from "react";
-import Checkbox from "@mui/material/Checkbox";
-import Button from "@mui/material/Button";
-import Accordion from "@mui/material/Accordion";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import SearchIcon from "@mui/icons-material/Search";
+import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
+import Typography from "@mui/material/Typography";
+import React, { useEffect, useState} from "react";
+import { getAllCards, postSecret } from "../../pages/api/paymentApi";
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
-const Payment = () => {
+const stripePromise = loadStripe("pi_3KGrs1AnCtxHwdDo0Cy1sLPR_secret_2x6YeTGBDktZ8SfWLktj9dsYp");
+
+const Payment = () => { 
+const [error, setError] = useState(null);
+   const stripe = useStripe();
+        const elements = useElements();
+  // Handle real-time validation errors from the CardElement.
+  const handleChange = (event) => {
+    if (event.error) {
+      setError(event.error.message);
+    } else {
+      setError(null);
+    }
+  };
+    useEffect(async()=>{
+       let cards = await getAllCards()
+       console.log("cards",cards)
+    },[])
+
+    const doPayment=async()=>{
+      
+      let secret = await postSecret()
+      console.log("secret",secret)
+
+      const { paymentMethod, error } = await stripe.createPaymentMethod({
+      type: 'card',
+      card: elements.getElement(CardElement),
+    });
+
+      console.log("paymentMethod",paymentMethod,error)
+    }
+
   return (
-    <>
+ <>         <CardElement id="card-element" onChange={handleChange} />
+
       <div className="card-heading mb-31">
         <h2>Payment Methods</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing</p>
@@ -59,11 +89,21 @@ const Payment = () => {
         </Box>
         <Box className="add-btns">
           <Button className="w-100 add-payment">Add Payment Method</Button>
-          <Button className="w-100 next">No</Button>
+          <Button className="w-100 next" onClick={doPayment}>Next</Button>
         </Box>
       </div>
-    </>
+      </>
+
   );
 };
 
-export default Payment;
+const Wrapper = (props) => {
+
+  return (
+    <Elements stripe={stripePromise}>
+      <Payment />
+    </Elements>
+  );
+}
+
+export default Wrapper;

@@ -28,7 +28,7 @@ instance.interceptors.request.use(
     // if (token != null) {
     //   await validateRefreshToken();
     //   token = getToken();
-    //   config.headers.Authorization = "Bearer " + token.replace(/['"]+/g, "");
+      config.headers.Authorization = "Token " + "6b495eac06f41f33f6f27f9d26cf5b171f7171f1";
     // }
     return config;
   },
