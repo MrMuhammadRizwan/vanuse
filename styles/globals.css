@@ -276,11 +276,17 @@ code {
 
 /* Sing Up Modal */
 .signup-modal {
-  width: 540px;
-  box-shadow: 0px 8px 16px rgba(17, 17, 17, 0.06);
-  border-radius: 16px;
-  border: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  overflow-y: scroll;
+  max-height: 100%;
+  display: block;
   padding: 60px;
+  box-shadow: unset;
+  border: 0;
+  border-radius: 16px;
+  width: 540px;
 }
 .signup-modal h2 {
   font-size: 32px;
@@ -301,6 +307,10 @@ code {
 }
 .signup-modal .termsPolicy {
   font-size: 12px;
+  padding: 0 40px;
+}
+.signup-modal .forgot-password {
+  cursor: pointer;
 }
 .signup-modal .input {
   margin-bottom: 32px;
@@ -331,6 +341,19 @@ input[type="number"]::-webkit-outer-spin-button {
   color: #31b7b7;
   font-weight: 700;
   font-size: 14px;
+}
+.signup-modal .cursor-pointer {
+  cursor: pointer;
+}
+.signup-modal .termsPolicy .cursor-pointer {
+  text-decoration: underline;
+}
+.signup-modal::-webkit-scrollbar {
+  width: 0.2em;
+  height: 0.2rem;
+}
+.signup-modal::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
 }
 @media (max-width: 1120px) {
   .right-heading .bluecar {
@@ -386,10 +409,11 @@ input[type="number"]::-webkit-outer-spin-button {
   }
   .signup-modal {
     width: 100%;
+    padding: 24px;
   }
 }
-@media (max-width: 400px) {
+/* @media (max-width: 400px) {
   .signup-modal .main-div {
     display: block;
   }
-}
+} */
