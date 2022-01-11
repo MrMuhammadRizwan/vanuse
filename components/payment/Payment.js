@@ -1,4 +1,4 @@
-@@ -0,0 +1,71 @@
+ 
 import React, { useState, useEffect } from "react";
 import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
@@ -15,7 +15,7 @@ const Payment = () => {
   return (
     <>
       <div className="card-heading mb-31">
-        <h2>Add Items</h2>
+        <h2>Payment method</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing</p>
       </div>
     </>

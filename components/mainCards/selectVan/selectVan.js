@@ -72,6 +72,7 @@ const SelectVan = (props) => {
     }
     const clearToken = () => {
         // localStorage.removeItem("token")
+        
     }
     const handleOpenLoginModal=()=>{
         setOpenLoginModal(true)
@@ -256,7 +257,8 @@ const SelectVan = (props) => {
                     key={"Next"}
                     className="darkbutton"
                     sx={{ mb: "16px" }}
-                    onClick={isLogin?clearToken:handleOpenLoginModal}
+                    // onClick={isLogin?clearToken:handleOpenLoginModal}
+                    onClick={props.goToPaymentScreen}
                 >
                     Add payment option
                 </Button> 

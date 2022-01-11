@@ -11,6 +11,7 @@ import MyItemsList from "./addItems/myItemsList";
 import CustomItems from "./addItems/customItems";
 import SelectVan from "./selectVan/selectVan";
 import ApplyCoupon from "./coupons/coupons";
+import Payment from "../payment/Payment";
 
 
 const itemsList = [
@@ -92,10 +93,8 @@ const Cards = (props) => {
     const [fillVan, setFillVan] = React.useState(false)
     const [viewCustomItemsScreen, setViewCustomItemsScreen] = React.useState(false);
     const [viewCustomItemsScreenList, setViewCustomItemsScreenList] = React.useState(false);
-
     const [viewSelectaVan, setViewSelectaVan] = React.useState(false);
-
-    
+    const [viewPayment, setViewPayment] = React.useState(false);
     const [filteredData, setFilteredData] = React.useState([]);
 
     const itemsListFromServer = () => {
@@ -207,13 +206,13 @@ const Cards = (props) => {
     }
 
     const goToPaymentScreen = () => {
-    setViwAddItemsScreen(true);
-    setViewAddItemsToList(false);
-    setViewCustomItemsScreen(false);
-    setSliderValue(5);
-    setViewSelectaVan(false);
-    setViewPayment(true);
-  };
+      setViwAddItemsScreen(false);
+      setViewAddItemsToList(false);
+      setViewCustomItemsScreen(false);
+      setSliderValue(5);
+      setViewSelectaVan(false);
+      setViewPayment(true);
+    };
 
     // const addItemsToList = ( list ) => {
     //     console.log('addItems >>>', list)
@@ -329,6 +328,7 @@ const Cards = (props) => {
                                 <SelectVan
                                     goBack={goBackItemsScreen}
                                     goBackThirdScreen={goBackDirectlyThirdScreen}
+                                    goToPaymentScreen={goToPaymentScreen}
                                     fillVan={fillVan}
                                     />
                                 :null
@@ -372,6 +372,8 @@ const Cards = (props) => {
                                     />
                                 :null
                             }
+                            {viewPayment? <Payment />
+                                :null}
                         </div>
                     </div>
                 </Grid>
