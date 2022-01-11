@@ -34,7 +34,7 @@ const SelectVan = (props) => {
                     "email": email,
                     "username": email,
                     "password": password,
-                    "phone_number": phoneNumber
+                    "phone_number": "+44 "+phoneNumber
                 }
             )
             .then(function (response) {
