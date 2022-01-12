@@ -72,9 +72,10 @@ const SelectVan = (props) => {
     }
 
     const addPaymentNow = () => {
-        // post to cart
+        // post to trip
+        // console.log("api1 result", localStorage.sgetItem("token"));
             Axios.post(
-                `http://127.0.0.1:8000/api1/`, 'data'
+                `http://127.0.0.1:8000/trip/`, 'data'
                 )
             .then(function (response) {
                     console.log("api1 result", response);
@@ -83,25 +84,15 @@ const SelectVan = (props) => {
                   console.log(error);
             });
         // post to pickup
-            Axios.post(
-                `http://127.0.0.1:8000/api2/`, 'data'
-                )
-            .then(function (response) {
-                    console.log("api2 result", response);
-                })
-            .catch(function (error) {
-                  console.log(error);
-            });
-        // post to payment
-            Axios.post(
-                `http://127.0.0.1:8000/api3/`, 'data'
-                )
-            .then(function (response) {
-                    console.log("api2 result", response);
-                })
-            .catch(function (error) {
-                  console.log(error);
-            });
+            // Axios.post(
+            //     `http://127.0.0.1:8000/api2/`, 'data'
+            //     )
+            // .then(function (response) {
+            //         console.log("api2 result", response);
+            //     })
+            // .catch(function (error) {
+            //       console.log(error);
+            // });
     }
 
     const handleOpenLoginModal=()=>{
