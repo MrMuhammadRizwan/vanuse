@@ -8,7 +8,7 @@ const Services = (props) => {
     const [scheduleVanChecked, setscheduleVanChecked] = React.useState(false);
 
     useEffect(() => {
-        // localStorage.setItem("is_van_filled", JSON.stringify(fillVanChecked));
+        localStorage.setItem("is_van_filled", JSON.stringify(fillVanChecked));
     }, [fillVanChecked,scheduleVanChecked]);
 
 

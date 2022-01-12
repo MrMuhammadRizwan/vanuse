@@ -34,7 +34,7 @@ const SelectVan = (props) => {
                     "email": email,
                     "username": email,
                     "password": password,
-                    "phone_number": phoneNumber
+                    "phone_number": "+44 "+phoneNumber
                 }
             )
             .then(function (response) {
@@ -64,6 +64,7 @@ const SelectVan = (props) => {
                     setSignupValue(false)
                     setOpenLoginModal(false)
                     localStorage.setItem("token", response.data.token)
+                    setIsLogin(true)
                 }
             })
             .catch(function (error) {
@@ -166,7 +167,9 @@ const SelectVan = (props) => {
         }
         setShowToast(false);
       };
-
+    const gotoPayment = ()=>{
+        console.log('logged in')
+    }
     useEffect(() => {
         let localstg = localStorage.getItem("token")
         if(localStorage.getItem("token")!==null){
@@ -278,7 +281,7 @@ const SelectVan = (props) => {
                     key={"Next"}
                     className="darkbutton"
                     sx={{ mb: "16px" }}
-                    onClick={isLogin?addPaymentNow:handleOpenLoginModal}
+                    onClick={!isLogin? handleOpenLoginModal:gotoPayment}
                 >
                     Add payment option
                 </Button> 
