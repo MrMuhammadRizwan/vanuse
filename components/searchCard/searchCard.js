@@ -14,7 +14,7 @@ import CustomEmptyMap from "../mapBox/customEmptyMap";
 import Cards from "../mainCards/cards";
 import Typography from '@mui/material/Typography';
 
-const SearchCard = () => {
+const SearchCard = (props) => {
   const [value, setValue] = React.useState(null);
   const [value2, setValue2] = React.useState(null);
   const [allTitles, setAllTitles] = React.useState([]);
@@ -142,7 +142,7 @@ const SearchCard = () => {
 
   return (
     sliderCard?
-      <Cards goBack={goBack} clickSchedule={clickSchedule}/> 
+      <Cards goBack={goBack} clickSchedule={clickSchedule} authorized={props.authorized}/> 
       :
       <>
       <Grid container spacing={10} className="banner-section">
@@ -167,7 +167,7 @@ const SearchCard = () => {
               ) : (
                 <div>
                   <h2>Need help with a move?</h2>
-                  <p class="mb-52">Book on demand or a pre-scheduled van.</p>
+                  <p className="mb-52">Book on demand or a pre-scheduled van.</p>
                 </div>
               )}
 
@@ -349,7 +349,7 @@ const SearchCard = () => {
           </div>
         </Grid>
         <Grid item sm={12} md={6}>
-        <div class="right-heading">
+        <div className="right-heading">
             <Typography variant="h1"  gutterBottom component="h1">
               Order a van <br/>
               any time, <br/>

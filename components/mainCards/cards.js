@@ -318,6 +318,7 @@ const Cards = (props) => {
                                     goBack={goBackItemsScreen}
                                     goBackThirdScreen={goBackDirectlyThirdScreen}
                                     fillVan={fillVan}
+                                    authorized={props.authorized}
                                     />
                                 :null
                             }
@@ -386,7 +387,7 @@ const Cards = (props) => {
                         </>
                         :null
                     }
-                    <div class="right-heading">
+                    <div className="right-heading">
                         <img src="/blue-car.svg" alt="Banner Car" className="bluecar" />
                     </div>
                 </Grid>
