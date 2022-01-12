@@ -12,6 +12,7 @@ import CustomItems from "./addItems/customItems";
 import SelectVan from "./selectVan/selectVan";
 import ApplyCoupon from "./coupons/coupons";
 import Payment from "../payment/Payment";
+import AddCard from "../payment/AddCard";
 
 
 const itemsList = [
@@ -377,6 +378,9 @@ const Cards = (props) => {
                         </div>
                     </div>
                 </Grid>
+                 {viewPayment? <Grid item xs={12} md={4}>
+                    <AddCard />
+                </Grid> :null}
                 <Grid item xs={12} md={5}>
                     {viewSelectaVan?
                         <ApplyCoupon/>
@@ -400,10 +404,12 @@ const Cards = (props) => {
                         </>
                         :null
                     }
+                     
                     <div class="right-heading">
                         <img src="/blue-car.svg" alt="Banner Car" className="bluecar" />
                     </div>
                 </Grid>
+              
             </Grid>
         </>
     );
