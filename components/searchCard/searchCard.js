@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
-import Grid from '@mui/material/Grid';
+import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
@@ -12,7 +12,7 @@ import CustomMap from "../mapBox/customMap";
 import CustomEmptyMap from "../mapBox/customEmptyMap";
 
 import Cards from "../mainCards/cards";
-import Typography from '@mui/material/Typography';
+import Typography from "@mui/material/Typography";
 
 const SearchCard = () => {
   const [value, setValue] = React.useState(null);
@@ -29,7 +29,7 @@ const SearchCard = () => {
   const [sliderCard, setSliderCard] = React.useState(false);
 
   useEffect(() => {
-    console.log(drawPoints)
+    console.log(drawPoints);
   }, [value, value2, drawPoints, focusActive, sliderCard]);
 
   const handleClose = () => {
@@ -57,7 +57,6 @@ const SearchCard = () => {
     longitude: "",
     latitude: "",
   });
-
 
   // starting trip actions
   const getValueInput = (e) => {
@@ -121,30 +120,28 @@ const SearchCard = () => {
     setFocusActiveEnd(!focusActiveEnd);
   };
 
-
   const scheduleNow = () => {
-    console.log('scheduleNow')
-    setClickSchedule(false)
-    setSliderCard(true)
-  }
+    console.log("scheduleNow");
+    setClickSchedule(false);
+    setSliderCard(true);
+  };
 
   const scheduleLater = () => {
-    console.log('scheduleLater')
-    setSliderCard(true)
-    setClickSchedule(true)
-  }
+    console.log("scheduleLater");
+    setSliderCard(true);
+    setClickSchedule(true);
+  };
 
   const goBack = () => {
-    console.log('goBack')
-    setGoBackValue(true)
-    setSliderCard(false)
-  }
+    console.log("goBack");
+    setGoBackValue(true);
+    setSliderCard(false);
+  };
 
-  return (
-    sliderCard?
-      <Cards goBack={goBack} clickSchedule={clickSchedule}/> 
-      :
-      <>
+  return sliderCard ? (
+    <Cards goBack={goBack} clickSchedule={clickSchedule} />
+  ) : (
+    <>
       <Grid container spacing={10} className="banner-section">
         <Grid item sm={12} md={6}>
           <div className="banner-card">
@@ -162,12 +159,15 @@ const SearchCard = () => {
             <div className="card-content">
               {value && value2 ? (
                 <div>
-                <h2>Does this look correct?</h2><br/>
+                  <h2>Does this look correct?</h2>
+                  <br />
                 </div>
               ) : (
                 <div>
                   <h2>Need help with a move?</h2>
-                  <p class="mb-52">Book on demand or a pre-scheduled van.</p>
+                  <p className="mb-52">
+                    Book on demand or a pre-scheduled van.
+                  </p>
                 </div>
               )}
 
@@ -199,7 +199,10 @@ const SearchCard = () => {
                     value={value}
                     onKeyUp={(e) => getValueInput(e)}
                     onChange={(event, newValue) => {
-                    localStorage.setItem("pick_address_line_1", JSON.stringify(newValue));
+                      localStorage.setItem(
+                        "pick_address_line_1",
+                        JSON.stringify(newValue)
+                      );
                       if (typeof newValue === "string") {
                         setDrawPoints(false);
                         setTimeout(() => {
@@ -221,8 +224,8 @@ const SearchCard = () => {
                       } else {
                         setDrawPoints(false);
                         setValue(newValue);
-                        if(newValue && value2){
-                          setDrawPoints(true)
+                        if (newValue && value2) {
+                          setDrawPoints(true);
                         }
                       }
                     }}
@@ -248,13 +251,18 @@ const SearchCard = () => {
                     sx={{ ml: 1, flex: 1 }}
                     freeSolo
                     renderInput={(params) => (
-                      <TextField {...params} placeholder="Enter pickup address" />
+                      <TextField
+                        {...params}
+                        placeholder="Enter pickup address"
+                      />
                     )}
                   />
                 </Paper>
                 <Paper
                   component="form"
-                  className={focusActiveEnd ? "start-field-active" : "start-field"}
+                  className={
+                    focusActiveEnd ? "start-field-active" : "start-field"
+                  }
                   onMouseOver={selectOnFocusFuncEnd}
                   onMouseOut={unselectOnFocusFuncEnd}
                   onBlur={unselectOnFocusFuncEnd}
@@ -269,13 +277,20 @@ const SearchCard = () => {
                   }}
                 >
                   <IconButton sx={{ p: "10px" }} aria-label="icon">
-                    <img src="/search-end.png" alt="search end" className="icons" />
+                    <img
+                      src="/search-end.png"
+                      alt="search end"
+                      className="icons"
+                    />
                   </IconButton>
                   <Autocomplete
                     value={value2}
                     onKeyUp={(e) => getValueInput2(e)}
                     onChange={(event, newValue) => {
-                      localStorage.setItem("pick_address_line_2", JSON.stringify(newValue));
+                      localStorage.setItem(
+                        "pick_address_line_2",
+                        JSON.stringify(newValue)
+                      );
                       if (typeof newValue === "string") {
                         setTimeout(() => {
                           setDrawPoints(false);
@@ -297,8 +312,8 @@ const SearchCard = () => {
                       } else {
                         setDrawPoints(false);
                         setValue2(newValue);
-                        if(value && newValue){
-                          setDrawPoints(true)
+                        if (value && newValue) {
+                          setDrawPoints(true);
                         }
                       }
                     }}
@@ -336,12 +351,17 @@ const SearchCard = () => {
                   key={"Request Now"}
                   className="darkbutton"
                   sx={{ mb: "16px" }}
-                  disabled={value && value2 ? false: true}
-                  onClick={()=>scheduleNow()}
+                  disabled={value && value2 ? false : true}
+                  onClick={() => scheduleNow()}
                 >
                   Request Now
                 </Button>
-                <Button key={"Schedule Later"} className="lightbutton" onClick={()=>scheduleLater()} disabled={value && value2 ? false: true}>
+                <Button
+                  key={"Schedule Later"}
+                  className="lightbutton"
+                  onClick={() => scheduleLater()}
+                  disabled={value && value2 ? false : true}
+                >
                   Schedule Later
                 </Button>
               </div>
@@ -349,10 +369,10 @@ const SearchCard = () => {
           </div>
         </Grid>
         <Grid item sm={12} md={6}>
-        <div class="right-heading">
-            <Typography variant="h1"  gutterBottom component="h1">
-              Order a van <br/>
-              any time, <br/>
+          <div className="right-heading">
+            <Typography variant="h1" gutterBottom component="h1">
+              Order a van <br />
+              any time, <br />
               any place in the UK.
             </Typography>
             <Typography variant="subtitle1" gutterBottom component="p">
@@ -363,7 +383,7 @@ const SearchCard = () => {
           </div>
         </Grid>
       </Grid>
-      </>
+    </>
   );
 };
 export default SearchCard;
