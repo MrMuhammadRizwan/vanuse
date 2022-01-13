@@ -5,18 +5,19 @@ export const getAllCards = async (req, res) => {
     const response = await axiosHelper.getRequest(
       "http://127.0.0.1:8000/payment/my_cards"
     );
-    return response.data;
+    return response;
   } catch (err) {
     console.log(err);
   }
 };
 
-export const postSecret = async (req, res) => {
+export const postSecret = async (id) => {
   try {
     const response = await axiosHelper.postRequest(
       "http://127.0.0.1:8000/payment/secret",
       {
-        card_id: "pm_1KGrEJAnCtxHwdDokTzWAZFV",
+        // card_id: "pm_1KGrEJAnCtxHwdDokTzWAZFV",
+        card_id: id,
       }
     );
     console.log("response", response);

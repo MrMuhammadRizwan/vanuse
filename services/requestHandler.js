@@ -3,7 +3,7 @@ import axios from "axios";
 let configHeaders = {
   "Content-Type": "application/json",
   Accept: "application/json",
- };
+};
 
 /**
  * axios instance
@@ -22,28 +22,27 @@ let instance = axios.create({
 // request header
 instance.interceptors.request.use(
   async (config) => {
-  
-     
     // let token = getToken();
     // if (token != null) {
     //   await validateRefreshToken();
     //   token = getToken();
-      config.headers.Authorization = "Token " + "6b495eac06f41f33f6f27f9d26cf5b171f7171f1";
+    config.headers.Authorization =
+      "Token " + "6b495eac06f41f33f6f27f9d26cf5b171f7171f1";
     // }
     return config;
   },
   (error) => {
-     return Promise.reject(error);
+    return Promise.reject(error);
   }
 );
 
 // response parse
 instance.interceptors.response.use(
   (response) => {
-     return parseBody(response);
+    return parseBody(response);
   },
   (error) => {
-     if (error && error.response && error.response.status === 401) {
+    if (error && error.response && error.response.status === 401) {
       alert(error.response.data.message);
       window.location.reload();
     }
@@ -68,7 +67,6 @@ function parseError(messages) {
   }
 }
 
- 
 /**
  * parse response
  */
@@ -79,5 +77,5 @@ function parseBody(response) {
     return this.parseError(response.data.messages);
   }
 }
-  
+
 export default instance;

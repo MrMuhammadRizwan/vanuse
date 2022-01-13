@@ -7,6 +7,7 @@ import { getAllCards, postSecret } from "../../pages/api/paymentApi";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
+import axios from "axios";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 const stripePromise = loadStripe("pk_test_DfG4Kda9PiRu28UAJxXIOhC3");
@@ -16,55 +17,52 @@ const Payment = ({ addPaymentMethod }) => {
   const stripe = useStripe();
   const elements = useElements();
   // Handle real-time validation errors from the CardElement.
+
+  const [cardsData, setCardsData] = useState([]);
+  const [currentPaymentMethod, setCurrentPaymentMethod] = useState(-1);
+  const [secretKey, setSecretKey] = useState(null);
+
   const handleChange = (event) => {
     if (event.error) {
-      setError(event.error.message);
+      console.log("ffff", event.error.message);
     } else {
-      setError(null);
+      console.log("ffff", null);
     }
   };
   useEffect(async () => {
-    let cards = await getAllCards();
-    console.log("cards", cards);
+    let cardsTemp = await getAllCards();
+    console.log("cardsTemp", cardsTemp);
+    setCardsData(cardsTemp);
   }, []);
 
   const doPayment = async () => {
-    let secret = await postSecret();
-    console.log("secret", secret);
+    stripe
+      .confirmCardPayment(secretKey)
+      .then((res) => {
+        console.log("Status", res.paymentIntent.status);
+      })
+      .catch((err) => {
+        console.log("ssss", err);
+      });
 
-    const options = {
-      clientSecret: secret,
-      // Fully customizable with appearance API.
-      appearance: {
-        /*...*/
-      },
-    };
-
-    // Set up Stripe.js and Elements to use in checkout form, passing the client secret obtained in step 2
-    const elements = stripe.elements(options);
-
-    // Create and mount the Payment Element
-    const paymentElement = elements.create("payment");
-    // paymentElement.mount("#payment-element");
-    try {
-      await stripe
-        .confirmPayment({
-          //`Elements` instance that was used to create the Payment Element
-          elements,
-          confirmParams: {
-            return_url:
-              "https://stripe.com/docs/payments/payment-intents/verifying-status",
-          },
-        })
-        .then((res) => {
-          console.log("res", res);
-        })
-        .catch((err) => {
-          console.log("catcc.message", err);
-        });
-    } catch (err) {
-      console.log("caught.message", err);
-    }
+    //Working
+    // axios
+    //   .post(
+    //     "https://api.stripe.com/v1/payment_intents/pi_3KHX5SAnCtxHwdDo0svu1DHN/confirm",
+    //     {},
+    //     {
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //         Authorization: "Bearer sk_test_tI8nQS04DpscWtU7jwnghhzQ",
+    //       },
+    //     }
+    //   )
+    //   .then((res) => {
+    //     console.log("res", res);
+    //   })
+    //   .catch((err) => {
+    //     console.log("ssss", err);
+    //   });
 
     // stripe.retrievePaymentIntent(secret).then(({ paymentIntent }) => {
     //   console.log("paymentIntent", paymentIntent);
@@ -133,7 +131,6 @@ const Payment = ({ addPaymentMethod }) => {
 
   return (
     <>
-      <div id="payment-element"></div>
       <div className="card-heading mb-31">
         <h2>Payment Methods</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing</p>
@@ -156,32 +153,60 @@ const Payment = ({ addPaymentMethod }) => {
               Default method
             </Typography>
           </Box>
-          <Checkbox {...label} defaultChecked />
+          <Checkbox
+            checked={currentPaymentMethod === -1}
+            onClick={() => {
+              setSecretKey(null);
+              setCurrentPaymentMethod(-1);
+            }}
+            {...label}
+            defaultChecked
+          />
         </Box>
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-          className="visa-card"
-        >
-          <img src="/visa.svg" alt="master" />
-          <Box className="heading">
-            <Typography variant="h6" gutterBottom component="h6">
-              **** **** **** 3802
-            </Typography>
-            <Typography variant="subtitle1" gutterBottom component="p">
-              Expires 10/27
-            </Typography>
-          </Box>
-          <Checkbox />
-        </Box>
+        {cardsData?.map((m, i) => {
+          return (
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+              className="visa-card"
+            >
+              <img src="/visa.svg" alt="master" />
+
+              <Box className="heading">
+                <Typography variant="h6" gutterBottom component="h6">
+                  **** **** **** {m.card.last4}
+                </Typography>
+                <Typography variant="subtitle1" gutterBottom component="p">
+                  Expires {m.card.exp_month}/{m.card.exp_year}
+                </Typography>
+              </Box>
+
+              <Checkbox
+                checked={currentPaymentMethod === i}
+                onClick={async () => {
+                  await setSecretKey(null);
+                  console.log("card id", m.id);
+                  setCurrentPaymentMethod(i);
+                  let secret = await postSecret(m.id);
+                  setSecretKey(secret);
+                }}
+              />
+            </Box>
+          );
+        })}
+
         <Box className="add-btns">
           <Button onClick={addPaymentMethod} className="w-100 add-payment">
             Add Payment Method
           </Button>
-          <Button className="w-100 next" onClick={doPayment}>
+          <Button
+            disabled={!secretKey}
+            className="w-100 next"
+            onClick={doPayment}
+          >
             Next
           </Button>
         </Box>
