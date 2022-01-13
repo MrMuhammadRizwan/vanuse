@@ -26,16 +26,17 @@ export const postSecret = async (id) => {
     console.log(err);
   }
 };
-export const addCard = async (req, res) => {
+export const addCard = async (form) => {
   try {
     const response = await axiosHelper.postRequest(
       "http://127.0.0.1:8000/payment/add_card",
-      {
-        number: "4242424242424242",
-        exp_month: 12,
-        exp_year: 2025,
-        cvc: "111",
-      }
+      form
+      // {
+      //   number: "4242424242424242",
+      //   exp_month: 12,
+      //   exp_year: 2025,
+      //   cvc: "111",
+      // }
     );
     console.log("response", response);
     return response;
