@@ -1,66 +1,66 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
+import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 
-
-const AddCard = () => { 
-
-
+const AddCard = () => {
   return (
- <div style={{backgroundColor: "white"}} >          
-
-      <div className="card-heading mb-31">
-        <h2>Add Card</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+    <div className="add-card" style={{ backgroundColor: "white" }}>
+      <div className="card-heading mb-33">
+        <Typography className="mb-5" variant="h6" gutterBottom component="h2">
+          Add Card Details
+        </Typography>
+        <Typography variant="p" gutterBottom component="p">
+          Lorem ipsum dolor sit amet
+        </Typography>
       </div>
       <div>
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-          className="master-card"
-        >
-          <img src="/master.svg" alt="master" />
-          <Box className="heading">
-            <Typography variant="h6" gutterBottom component="h6">
-              Cash Payment
-            </Typography>
-            <Typography variant="subtitle1" gutterBottom component="p">
-              Default method
-            </Typography>
-          </Box>
+        <Box>
+          <TextField
+            required
+            className="w-100 input"
+            label="Name on card"
+            variant="outlined"
+            type="text"
+          />
+        </Box>
+        <Box>
+          <TextField
+            required
+            className="w-100 input"
+            label="Card number"
+            variant="outlined"
+            type="number"
+          />
         </Box>
         <Box
           sx={{
             display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
+            justifyCotent: "space-between",
+            alignItem: "center",
           }}
-          className="visa-card"
         >
-          <img src="/visa.svg" alt="master" />
-          <Box className="heading">
-            <Typography variant="h6" gutterBottom component="h6">
-              **** **** **** 3802
-            </Typography>
-            <Typography variant="subtitle1" gutterBottom component="p">
-              Expires 10/27
-            </Typography>
-          </Box>
-          <Checkbox />
+          <TextField
+            required
+            className="w-100 input mr-20"
+            label="Expires"
+            variant="outlined"
+            type="number"
+          />
+          <TextField
+            required
+            className="w-100 input"
+            label="CVV"
+            variant="outlined"
+            type="number"
+          />
         </Box>
-        <Box className="add-btns">
-          <Button className="w-100 add-payment">Add Payment Method</Button>
-        </Box>
+        <Button className="w-100 payment">Add Payment Method</Button>
       </div>
-      </div>
-
+    </div>
   );
 };
-
 
 export default AddCard;
