@@ -11,7 +11,7 @@ import { Elements } from "@stripe/react-stripe-js";
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 const stripePromise = loadStripe("pk_test_DfG4Kda9PiRu28UAJxXIOhC3");
 
-const Payment = () => {
+const Payment = ({ addPaymentMethod }) => {
   const [error, setError] = useState(null);
   const stripe = useStripe();
   const elements = useElements();
@@ -45,7 +45,7 @@ const Payment = () => {
 
     // Create and mount the Payment Element
     const paymentElement = elements.create("payment");
-    paymentElement.mount("#payment-element");
+    // paymentElement.mount("#payment-element");
     try {
       await stripe
         .confirmPayment({
@@ -178,7 +178,9 @@ const Payment = () => {
           <Checkbox />
         </Box>
         <Box className="add-btns">
-          <Button className="w-100 add-payment">Add Payment Method</Button>
+          <Button onClick={addPaymentMethod} className="w-100 add-payment">
+            Add Payment Method
+          </Button>
           <Button className="w-100 next" onClick={doPayment}>
             Next
           </Button>

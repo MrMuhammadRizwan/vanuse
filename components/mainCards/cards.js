@@ -310,6 +310,12 @@ const Cards = (props) => {
     itemsListFromServer();
   }, [viewAddItemsToList]);
 
+  const [addPayment, setAddPayment] = useState(false);
+
+  const addPaymentMethod = () => {
+    setAddPayment(true);
+  };
+
   return (
     <>
       <Grid container spacing={10}>
@@ -368,11 +374,13 @@ const Cards = (props) => {
                   clickSchedule={props.clickSchedule}
                 />
               ) : null}
-              {viewPayment ? <Payment /> : null}
+              {viewPayment ? (
+                <Payment addPaymentMethod={addPaymentMethod} />
+              ) : null}
             </div>
           </div>
         </Grid>
-        {viewPayment ? (
+        {addPayment ? (
           <Grid item xs={12} md={4}>
             <AddCard />
           </Grid>
