@@ -209,9 +209,42 @@ const Cards = (props) => {
     //     setMyItemsList(list)
     // }
 
+    
+
 
     const increaseQty = (qty, ind, key) => {
-        console.log('increaseQty rooms', qty, ind, key);
+        // var submitedArray = {
+        //     'items': [],
+        //     'custom item': [
+        //         {
+        //             "is_custom": true,
+        //             "quantity": 0,
+        //             "name": "Custom1",
+        //             "description": "desc",
+        //             "dim_x": 2.0,
+        //             "dim_y": 2.0,
+        //             "dim_z": 2.0
+        //         },
+        //     ]
+        // }
+        // console.log('increaseQty rooms', qty, ind, key);
+        // console.log('increaseQty rooms >>>>>>>>>>>>', qty.id, qty.quantity);
+        // console.log('increaseQty rooms >>>>>>>>>>>> submitedArray 0', qty, qty.quantity);
+            // const submitedArrayNew = submitedArray['items'].push([
+            //     ...submitedArray['items'],
+            //     {
+            //         'id': qty.id, 
+            //         'quantity': qty.quantity
+            //     }
+            // ]
+            // )
+        
+        // console.log('increaseQty rooms >>>>>>>>>>>> submitedArray 0.1', submitedArrayNew);
+        // console.log('increaseQty rooms >>>>>>>>>>>> submitedArray 0.2', key2);
+
+        // key1.Object.keys(0)
+        // console.log('increaseQty rooms >>>>>>>>>>>> submitedArray 1', submitedArray[0]);
+
         let keys = key
         const rooms = JSON.parse(JSON.stringify(allItemsList));
             rooms[JSON.parse(JSON.stringify(keys))].subitems[JSON.parse(JSON.stringify(ind))].quantity++;
@@ -286,8 +319,8 @@ const Cards = (props) => {
                     }
             ]))
         console.log('getValueFromCustomForm myItemsList', myItemsList);
-
-        
+        setViewCustomItemsScreen(false)
+        setViwAddItemsScreen(true)
 
 
     }
@@ -297,7 +330,7 @@ const Cards = (props) => {
         
         // console.log('ApiRes localStorage', localStorage.getItem("allItems"));
         itemsListFromServer()
-    }, [viewAddItemsToList,]);
+    }, [viewAddItemsToList]);
 
 
     return (

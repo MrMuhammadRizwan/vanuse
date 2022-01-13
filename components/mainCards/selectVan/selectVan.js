@@ -53,87 +53,107 @@ const SelectVan = (props) => {
       });
   };
 
-  const onLogin = (userName, password) => {
-    console.log("onLogin newData", userName, password);
-    Axios.post(`http://127.0.0.1:8000/login/`, {
-      username: userName,
-      password: password,
-    })
-      .then(function (response) {
-        setShowToast(true);
-        if (response.status == 200) {
-          console.log("onLogin result", response.data.token);
-          setSignupValue(false);
-          setOpenLoginModal(false);
-          dispatch({
-            type: "SET_USER_DATA",
-            payload: response.data.token,
-          });
-          localStorage.setItem("token", response.data.token);
-          setIsLogin(true);
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-        dispatch({
-          type: "SET_UNAUTHORIZED",
-        });
-      });
-  };
-
-  const handleOpenLoginModal = () => {
-    setOpenLoginModal(true);
-    setOpen(false);
-  };
-  const handleOpen = () => {
-    setOpenLoginModal(false);
-    setOpen(true);
-  };
-  const setActiveVan = (value) => {
-    console.log("setActiveVan", value);
-    switch (value) {
-      case "s-van":
-        return (
-          setSVan(true),
-          setMVan(false),
-          setLVan(false),
-          setXVan(false),
-          setPrice(21)
-        );
-      case "m-van":
-        return (
-          setSVan(false),
-          setMVan(true),
-          setLVan(false),
-          setXVan(false),
-          setPrice(25)
-        );
-      case "l-van":
-        return (
-          setSVan(false),
-          setMVan(false),
-          setLVan(true),
-          setXVan(false),
-          setPrice(70)
-        );
-      case "x-van":
-        return (
-          setSVan(false),
-          setMVan(false),
-          setLVan(false),
-          setXVan(true),
-          setPrice(100)
-        );
+    const onLogin=(userName,password)=>{
+        console.log('onLogin newData', userName,password)
+        Axios.post(
+            `http://127.0.0.1:8000/login/`,
+                {
+                    "username": userName,
+                    "password": password
+                }
+            )
+            .then(function (response) {
+                setShowToast(true)
+                if(response.status==200){
+                  setSignupValue(false);
+                  setOpenLoginModal(false);
+                  dispatch({
+                    type: "SET_USER_DATA",
+                    payload: response.data.token,
+                  });
+                  localStorage.setItem("token", response.data.token);
+                  setIsLogin(true);
+                }
+            })
+            .catch(function (error) {
+              console.log(error);
+              dispatch({
+                type: "SET_UNAUTHORIZED",
+              });
+            });
     }
-  };
-  const handleFloorChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setFloor(typeof value === "string" ? value.split(",") : value);
-    console.log("setFloor", floor);
-    localStorage.setItem("floor_number", JSON.stringify(floor));
-  };
+
+    const addPaymentNow = () => {
+        // post to trip
+        // console.log("api1 result", localStorage.sgetItem("token"));
+            Axios.post(
+                `http://127.0.0.1:8000/trip/`, 'data'
+                )
+            .then(function (response) {
+                    console.log("api1 result", response);
+                })
+            .catch(function (error) {
+                  console.log(error);
+            });
+        
+    }
+
+    const handleOpenLoginModal=()=>{
+        setOpenLoginModal(true)
+        setOpen(false)
+    }
+    const handleOpen = () => {
+        setOpenLoginModal(false); 
+        setOpen(true);
+    }
+    const setActiveVan = (value) => {
+        console.log('setActiveVan', value)
+        switch (value) {
+            case 's-van':
+              return(
+                     setSVan(true),
+                     setMVan(false),
+                     setLVan(false),
+                     setXVan(false),
+                     setPrice(21)
+                    )
+            case 'm-van':
+                return(
+                    setSVan(false),
+                    setMVan(true),
+                    setLVan(false),
+                    setXVan(false),
+                    setPrice(25)
+                   )
+            case 'l-van':
+                return(
+                    setSVan(false),
+                    setMVan(false),
+                    setLVan(true),
+                    setXVan(false),
+                    setPrice(70)
+                   )
+            case 'x-van':
+                return(
+                    setSVan(false),
+                    setMVan(false),
+                    setLVan(false),
+                    setXVan(true),
+                    setPrice(100)
+                   )
+          }
+    }
+    const handleFloorChange = (event) =>{
+        const {
+            target: { value },
+            } = event;
+            setFloor(
+                typeof value === 'string' ? value.split(',') : value,
+            );
+        console.log('setFloor', floor)
+        localStorage.setItem("floor_number", JSON.stringify(floor));
+  }
+
 
   const iNeedHelpFunc = (event) => {
     setINeedHelp(event.target.checked);
