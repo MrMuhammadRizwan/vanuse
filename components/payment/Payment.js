@@ -190,10 +190,10 @@ const Payment = ({ addPaymentMethod }) => {
   );
 };
 
-const Wrapper = (props) => {
+const Wrapper = ({ addPaymentMethod }) => {
   return (
     <Elements stripe={stripePromise}>
-      <Payment />
+      <Payment addPaymentMethod={addPaymentMethod} />
     </Elements>
   );
 };

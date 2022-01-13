@@ -313,6 +313,7 @@ const Cards = (props) => {
   const [addPayment, setAddPayment] = useState(false);
 
   const addPaymentMethod = () => {
+    console.log("addPaymentMethod");
     setAddPayment(true);
   };
 
