@@ -98,7 +98,7 @@ const SelectVan = (props) => {
 
         const tripNow = JSON.parse(localStorage.getItem("TripObject"))
         // const tokenNow = 'Token '+localStorage.getItem("token") // will be change when user login is dynamic
-        const tokenNow = 'Token 74a2ee8cbefa5dcd406191b415099c2b5ef33159'
+        const tokenNow = 'Token '+localStorage.getItem("token")
         const pickAddressLine1 = JSON.parse(localStorage.getItem("pick_address_line_1"))
         const pickAddressLine2 = JSON.parse(localStorage.getItem("pick_address_line_2"))
         const floorNumber = JSON.parse(localStorage.getItem("floor_number"))
