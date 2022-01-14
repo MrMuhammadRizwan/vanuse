@@ -153,6 +153,7 @@ const SelectVan = (props) => {
     })
       .then(function (response) {
         console.log("localstorageFinal POST TRIP", response);
+        props.goToPaymentScreen();
       })
       .catch(function (error) {
         console.log(error);

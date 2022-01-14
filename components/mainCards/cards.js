@@ -341,6 +341,7 @@ const Cards = (props) => {
                   goBack={goBackItemsScreen}
                   goBackThirdScreen={goBackDirectlyThirdScreen}
                   fillVan={fillVan}
+                  goToPaymentScreen={goToPaymentScreen}
                   authorized={props.authorized}
                 />
               ) : null}
