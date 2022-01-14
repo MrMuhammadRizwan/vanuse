@@ -102,6 +102,10 @@ const SelectVan = (props) => {
         setOpenLoginModal(true)
         setOpen(false)
     }
+    const handleCloseModal = () => {
+      setOpenLoginModal(false);
+      setOpen(false);
+    };
     const handleOpen = () => {
         setOpenLoginModal(false); 
         setOpen(true);
@@ -357,11 +361,14 @@ const SelectVan = (props) => {
         open={open}
         onSignUp={onSignUp}
         handleOpenLoginModal={handleOpenLoginModal}
+        handleClose={handleCloseModal}
       />
       <LoginModal
         open={openLoginModal}
         onLogin={onLogin}
+        handleModal={setOpenLoginModal}
         handleOpenSignUpModal={handleOpen}
+        handleClose={handleCloseModal}
       />
     </>
   );

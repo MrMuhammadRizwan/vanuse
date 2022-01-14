@@ -1,18 +1,15 @@
 import React from 'react';
-import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
-
 import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
 import FormControl from '@mui/material/FormControl';
-import Grid from '@mui/material/Grid';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import CloseIcon from '@mui/icons-material/Close';
 
 const style = {
     position: 'absolute',
@@ -25,7 +22,7 @@ const style = {
     boxShadow: 24,
     p: 4,
 };
-const SignupModal = ({open,onSignUp,handleOpenLoginModal}) => {
+const SignupModal = ({open,onSignUp,handleOpenLoginModal, handleClose}) => {
 
     const [email, setEmail] = React.useState(null);
     const [password, setPassword] = React.useState(null);
@@ -46,6 +43,7 @@ const SignupModal = ({open,onSignUp,handleOpenLoginModal}) => {
         <Fade in={open}>
             <Box sx={style} className="signup-modal">
                 <Typography id="transition-modal-title" variant="h6" component="h2">
+                <CloseIcon className="cross-icon" onClick={handleClose} />
                     <div className="card-heading mb-28">
                         <h2 className="mb-18">Sign up</h2>
                         <p className="mb-28">Already have an account? <a className="cursor-pointer" onClick={handleOpenLoginModal}> Login here</a></p>
