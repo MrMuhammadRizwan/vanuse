@@ -85,16 +85,70 @@ const SelectVan = (props) => {
 
     const addPaymentNow = () => {
         // post to trip
-        // console.log("api1 result", localStorage.sgetItem("token"));
-            Axios.post(
-                `http://127.0.0.1:8000/trip/`, 'data'
-                )
-            .then(function (response) {
-                    console.log("api1 result", response);
-                })
-            .catch(function (error) {
+        // console.log("localstorage > ApiRes", localStorage.getItem("ApiRes"));
+        // console.log("localstorageFinal > TripObject", localStorage.getItem("TripObject"));
+        // console.log("localstorageFinal > token", localStorage.getItem("token"));
+        // console.log("localstorageFinal > pick_address_line_1", localStorage.getItem("pick_address_line_1"));
+        // console.log("localstorageFinal > pick_address_line_2", localStorage.getItem("pick_address_line_2"));
+        // console.log("localstorageFinal > floor_number", localStorage.getItem("floor_number"));
+        // console.log("localstorageFinal > pickup_time", localStorage.getItem("pickup_time"));
+        // console.log("localstorageFinal > has_elevator", localStorage.getItem("has_elevator"));
+        // console.log("localstorageFinal > is_van_filled", localStorage.getItem("is_van_filled"));
+        // console.log("localstorageFinal > is_load_assistant_required", localStorage.getItem("is_load_assistant_required"));
+
+        const tripNow = JSON.parse(localStorage.getItem("TripObject"))
+        // const tokenNow = 'Token '+localStorage.getItem("token") // will be change when user login is dynamic
+        const tokenNow = 'Token 74a2ee8cbefa5dcd406191b415099c2b5ef33159'
+        const pickAddressLine1 = JSON.parse(localStorage.getItem("pick_address_line_1"))
+        const pickAddressLine2 = JSON.parse(localStorage.getItem("pick_address_line_2"))
+        const floorNumber = JSON.parse(localStorage.getItem("floor_number"))
+        const pickupTime = JSON.parse(localStorage.getItem("pickup_time"))
+        const hasElevator = localStorage.getItem("has_elevator")
+        const isVanFilled = localStorage.getItem("is_van_filled")
+        const isLoadAssistantRequired = localStorage.getItem("is_load_assistant_required")
+
+
+            Axios({
+              method: 'post',
+              headers: {'Authorization': tokenNow},
+              url: `http://127.0.0.1:8000/cart-item/add_items_in_cart/`,
+              data: tripNow
+            }).then(function (response) {
+                    console.log("localstorageFinal POST ITEMS", response);
+                }).catch(function (error) {
                   console.log(error);
-            });
+                });
+
+            Axios({
+              method: 'post',
+              headers: {'Authorization': tokenNow},
+              url: `http://127.0.0.1:8000/trip/`,
+              data: {
+                "customer_first_name": "Rizwan",
+                "customer_last_name": "Rizwan",
+                "customer_contact_number": "03217448878",
+                "pickup_address_line_1": pickAddressLine1.title,
+                "pickup_address_line_2": pickAddressLine2.title,
+                "pickup_suburb": "pickup suburb",
+                "pickup_county": pickAddressLine1.title,
+                "pickup_city": pickAddressLine1.title,
+                "pickup_postal_code": "q",
+                "pickup_latitude": pickAddressLine1.latitude,
+                "pickup_longitude": pickAddressLine1.longitude,
+                "destination_address_line_1": pickAddressLine2.title,
+                "destination_address_line_2": pickAddressLine2.title,
+                "destination_suburb": "pickup_suburb",
+                "destination_county": pickAddressLine2.title,
+                "destination_city": pickAddressLine2.title,
+                "destination_postal_code": "q",
+                "destination_latitude": pickAddressLine2.latitude,
+                "destination_longitude": pickAddressLine2.longitude,
+            }
+            }).then(function (response) {
+                    console.log("localstorageFinal POST TRIP", response);
+                }).catch(function (error) {
+                  console.log(error);
+                });
         
     }
 
@@ -177,9 +231,7 @@ const SelectVan = (props) => {
     }
     setShowToast(false);
   };
-  const gotoPayment = () => {
-    console.log("logged in");
-  };
+  
   useEffect(() => {
     setIsLogin(props.authorized);
   }, [props.authorized]);
@@ -352,7 +404,7 @@ const SelectVan = (props) => {
           key={"Next"}
           className="darkbutton"
           sx={{ mb: "16px" }}
-          onClick={!isLogin ? handleOpenLoginModal : gotoPayment}
+          onClick={!isLogin ? handleOpenLoginModal : addPaymentNow}
         >
           Add payment option
         </Button>

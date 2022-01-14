@@ -29,8 +29,8 @@ const MyItemsList = (props) => {
             return el.subitems.length>0;
         });
 
-        console.log('ApiRes localStorage', filteredEmpty);
-        localStorage.setItem("ApiRes == 1", JSON.stringify(filteredEmpty));
+        // console.log('ApiRes localStorage', filteredEmpty);
+        // localStorage.setItem("ApiRes == 1", JSON.stringify(filteredEmpty));
 
         let filteredArrayForPush = props.myItemsList.map((element,i) => {
             console.log('sssss main map', element)
