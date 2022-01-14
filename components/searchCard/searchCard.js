@@ -14,7 +14,7 @@ import CustomEmptyMap from "../mapBox/customEmptyMap";
 import Cards from "../mainCards/cards";
 import Typography from "@mui/material/Typography";
 
-const SearchCard = () => {
+const SearchCard = (props) => {
   const [value, setValue] = React.useState(null);
   const [value2, setValue2] = React.useState(null);
   const [allTitles, setAllTitles] = React.useState([]);
@@ -61,7 +61,7 @@ const SearchCard = () => {
   // starting trip actions
   const getValueInput = (e) => {
     Axios.get(
-      `https://api.mapbox.com/geocoding/v5/mapbox.places/${e.target.value}.json?access_token=pk.eyJ1IjoiaGFyaXNjczQ5OTciLCJhIjoiY2t4OHhuYjd2MzQwZjJycHo2aWZ6dW5xNiJ9.XF4Rwzg_G7nton8noZ7VVA`
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${e.target.value}.json?country=gb&access_token=pk.eyJ1IjoiaGFyaXNjczQ5OTciLCJhIjoiY2t4OHhuYjd2MzQwZjJycHo2aWZ6dW5xNiJ9.XF4Rwzg_G7nton8noZ7VVA`
     )
       .then(function (response) {
         console.log("coordinates >>>>>", response.data.features);
@@ -82,7 +82,7 @@ const SearchCard = () => {
   // end trip actions
   const getValueInput2 = (e) => {
     Axios.get(
-      `https://api.mapbox.com/geocoding/v5/mapbox.places/${e.target.value}.json?access_token=pk.eyJ1IjoiaGFyaXNjczQ5OTciLCJhIjoiY2t4OHhuYjd2MzQwZjJycHo2aWZ6dW5xNiJ9.XF4Rwzg_G7nton8noZ7VVA`
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${e.target.value}.json?country=gb&access_token=pk.eyJ1IjoiaGFyaXNjczQ5OTciLCJhIjoiY2t4OHhuYjd2MzQwZjJycHo2aWZ6dW5xNiJ9.XF4Rwzg_G7nton8noZ7VVA`
     )
       .then(function (response) {
         console.log("coordinates >>>>>", response.data.features);
@@ -139,7 +139,11 @@ const SearchCard = () => {
   };
 
   return sliderCard ? (
-    <Cards goBack={goBack} clickSchedule={clickSchedule} />
+    <Cards
+      goBack={goBack}
+      clickSchedule={clickSchedule}
+      authorized={props.authorized}
+    />
   ) : (
     <>
       <Grid container spacing={10} className="banner-section">

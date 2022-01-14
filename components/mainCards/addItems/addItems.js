@@ -80,7 +80,6 @@ const AddItems = (props) => {
                                             <Typography>
                                                 
                                                     {list.subitems.map((item,i)=>{
-                                                        console.log('item>>>>> in MAIN', list.id)
                                                         return(
                                                             <div className="child-items" key={i}>
                                                                 {item.name}

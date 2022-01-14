@@ -340,8 +340,8 @@ const Cards = (props) => {
                 <SelectVan
                   goBack={goBackItemsScreen}
                   goBackThirdScreen={goBackDirectlyThirdScreen}
-                  goToPaymentScreen={goToPaymentScreen}
                   fillVan={fillVan}
+                  authorized={props.authorized}
                 />
               ) : null}
               {viewCustomItemsScreen ? (
@@ -412,10 +412,9 @@ const Cards = (props) => {
               ) : null}
             </>
           ) : null}
-
-          {/* <div class="right-heading">
+          <div className="right-heading">
             <img src="/blue-car.svg" alt="Banner Car" className="bluecar" />
-          </div> */}
+          </div>
         </Grid>
       </Grid>
     </>
