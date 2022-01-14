@@ -103,9 +103,9 @@ const SelectVan = (props) => {
         const pickAddressLine2 = JSON.parse(localStorage.getItem("pick_address_line_2"))
         const floorNumber = JSON.parse(localStorage.getItem("floor_number"))
         const pickupTime = JSON.parse(localStorage.getItem("pickup_time"))
-        const hasElevator = JSON.parse(localStorage.getItem("has_elevator"))
-        const isVanFilled = JSON.parse(localStorage.getItem("is_van_filled"))
-        const isLoadAssistantRequired = JSON.parse(localStorage.getItem("is_load_assistant_required"))
+        const hasElevator = localStorage.getItem("has_elevator")
+        const isVanFilled = localStorage.getItem("is_van_filled")
+        const isLoadAssistantRequired = localStorage.getItem("is_load_assistant_required")
 
 
             Axios({
