@@ -317,6 +317,10 @@ const Cards = (props) => {
     setAddPayment(true);
   };
 
+  const cardAdded = () => {
+    setAddPayment(false);
+  };
+
   return (
     <>
       <Grid container spacing={10}>
@@ -383,7 +387,12 @@ const Cards = (props) => {
         </Grid>
         {addPayment ? (
           <Grid item xs={12} md={4}>
-            <AddCard />
+            <AddCard
+              cardAdded={cardAdded}
+              handleCloseCard={() => {
+                setAddPayment(false);
+              }}
+            />
           </Grid>
         ) : null}
         <Grid item xs={12} md={5}>

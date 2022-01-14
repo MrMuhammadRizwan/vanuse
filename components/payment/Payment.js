@@ -3,11 +3,16 @@ import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
 import Typography from "@mui/material/Typography";
 import React, { useEffect, useState } from "react";
-import { getAllCards, postSecret } from "../../pages/api/paymentApi";
+import {
+  getAllCards,
+  postSecret,
+  removeCard,
+} from "../../pages/api/paymentApi";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
-import axios from "axios";
+import { IconButton } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 const stripePromise = loadStripe("pk_test_DfG4Kda9PiRu28UAJxXIOhC3");
@@ -29,11 +34,15 @@ const Payment = ({ addPaymentMethod }) => {
       console.log("ffff", null);
     }
   };
-  useEffect(async () => {
+  useEffect(() => {
+    getCardLocalFn();
+  }, []);
+
+  const getCardLocalFn = async () => {
     let cardsTemp = await getAllCards();
     console.log("cardsTemp", cardsTemp);
     setCardsData(cardsTemp);
-  }, []);
+  };
 
   const doPayment = async () => {
     stripe
@@ -44,89 +53,16 @@ const Payment = ({ addPaymentMethod }) => {
       .catch((err) => {
         console.log("ssss", err);
       });
-
-    //Working
-    // axios
-    //   .post(
-    //     "https://api.stripe.com/v1/payment_intents/pi_3KHX5SAnCtxHwdDo0svu1DHN/confirm",
-    //     {},
-    //     {
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //         Authorization: "Bearer sk_test_tI8nQS04DpscWtU7jwnghhzQ",
-    //       },
-    //     }
-    //   )
-    //   .then((res) => {
-    //     console.log("res", res);
-    //   })
-    //   .catch((err) => {
-    //     console.log("ssss", err);
-    //   });
-
-    // stripe.retrievePaymentIntent(secret).then(({ paymentIntent }) => {
-    //   console.log("paymentIntent", paymentIntent);
-    //   // Inspect the PaymentIntent `status` to indicate the status of the payment
-    //   // to your customer.
-    //   //
-    //   // Some payment methods will [immediately succeed or fail][0] upon
-    //   // confirmation, while others will first enter a `processing` state.
-    //   //
-    //   // [0]: https://stripe.com/docs/payments/payment-methods#payment-notification
-    //   switch (paymentIntent.status) {
-    //     case "succeeded":
-    //       console.log("Success! Payment received.");
-    //       break;
-
-    //     case "processing":
-    //       console.log(
-    //         "Payment processing. We'll update you when payment is received."
-    //       );
-    //       break;
-
-    //     case "requires_payment_method":
-    //       // Redirect your user back to your payment page to attempt collecting
-    //       // payment again
-    //       console.log("Payment failed. Please try another payment method.");
-    //       break;
-
-    //     default:
-    //       console.log("Something went wrong.");
-    //       break;
-    //   }
-    // });
-
-    // const { error } = await stripe.confirmPayment({
-    //   //`Elements` instance that was used to create the Payment Element
-    //   elements: stripe.elements({
-    //     clientSecret: secret,
-    //   }),
-    //   confirmParams: {
-    //     return_url: "https://my-site.com/order/123/complete",
-    //   },
-    // });
-    // if (error) {
-    //   // This point will only be reached if there is an immediate error when
-    //   // confirming the payment. Show error to your customer (for example, payment
-    //   // details incomplete)
-
-    //   console.log("error.message", error.message);
-    // } else {
-    //   console.log("success", error.message);
-
-    //   // Your customer will be redirected to your `return_url`. For some payment
-    //   // methods like iDEAL, your customer will be redirected to an intermediate
-    //   // site first to authorize the payment, then redirected to the `return_url`.
-    // }
-
-    // const { paymentMethod, error } = await stripe.createPaymentMethod({
-    //   type: "card",
-    //   card: stripe.elements({
-    //     clientSecret: secret,
-    //   }),
-    // });
-
-    // console.log("paymentMethod", paymentMethod, error);
+  };
+  const deleteCard = (id) => {
+    removeCard(id)
+      .then((res) => {
+        console.log("res", res);
+        getCardLocalFn();
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
   };
 
   return (
@@ -153,6 +89,7 @@ const Payment = ({ addPaymentMethod }) => {
               Default method
             </Typography>
           </Box>
+
           <Checkbox
             checked={currentPaymentMethod === -1}
             onClick={() => {
@@ -166,6 +103,7 @@ const Payment = ({ addPaymentMethod }) => {
         {cardsData?.map((m, i) => {
           return (
             <Box
+              key={i}
               sx={{
                 display: "flex",
                 alignItems: "center",
@@ -174,7 +112,6 @@ const Payment = ({ addPaymentMethod }) => {
               className="visa-card"
             >
               <img src="/visa.svg" alt="master" />
-
               <Box className="heading">
                 <Typography variant="h6" gutterBottom component="h6">
                   **** **** **** {m.card.last4}
@@ -183,7 +120,9 @@ const Payment = ({ addPaymentMethod }) => {
                   Expires {m.card.exp_month}/{m.card.exp_year}
                 </Typography>
               </Box>
-
+              <IconButton onClick={() => deleteCard(m.id)} aria-label="delete">
+                <DeleteIcon />
+              </IconButton>
               <Checkbox
                 checked={currentPaymentMethod === i}
                 onClick={async () => {

@@ -44,20 +44,19 @@ export const addCard = async (form) => {
     console.log(err);
   }
 };
-export const removeCard = async (req, res) => {
+export const removeCard = async (id) => {
   try {
     const response = await axiosHelper.postRequest(
       "http://127.0.0.1:8000/payment/remove_card",
       {
-        number: "4242424242424242",
-        exp_month: 12,
-        exp_year: 2025,
-        cvc: "111",
+        card_id: id,
       }
     );
     console.log("response", response);
     return response;
   } catch (err) {
+    console.log("err", err);
+
     console.log(err);
   }
 };

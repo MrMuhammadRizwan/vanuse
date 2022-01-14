@@ -1,15 +1,16 @@
+import DeleteIcon from "@mui/icons-material/Delete";
+import { IconButton } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import React, { useEffect, useState } from "react";
-import { CardNumberElement, Elements } from "@stripe/react-stripe-js";
+import { Elements, useElements, useStripe } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import React, { useState } from "react";
 import { addCard } from "../../pages/api/paymentApi";
-
+import CloseIcon from "@mui/icons-material/Close";
 const stripePromise = loadStripe("pk_test_DfG4Kda9PiRu28UAJxXIOhC3");
-const AddCard = () => {
+const AddCard = ({ cardAdded, handleCloseCard }) => {
   const elements = useElements();
   const stripe = useStripe();
 
@@ -22,10 +23,26 @@ const AddCard = () => {
   });
 
   const addCardApi = async () => {
-    console.log("form", form);
+    if (form.name.length < 1) {
+      setErrors({ ...errors, name: true });
+      return;
+    }
+    if (form.expires.length < 7) {
+      setErrors({ ...errors, expires: true });
+      return;
+    }
+    if (errors.number || errors.cvc) {
+      return;
+    }
+    setErrors({
+      number: "",
+      expires: "",
+      cvc: "",
+    });
     let exp = form.expires.split("/");
     addCard({ ...form, exp_month: exp[0], exp_year: exp[1] }).then((res) => {
       console.log("res");
+      cardAdded && cardAdded();
     });
   };
   const handleChange = (e) => {
@@ -51,21 +68,68 @@ const AddCard = () => {
         textTemp = textTemp[0];
       }
     }
+    if (textTemp.length === 7) {
+      setErrors({ ...errors, expires: null });
+    }
     setForm({
       ...form,
       [e.target.name]: textTemp,
     });
   };
+  const [errors, setErrors] = useState({
+    number: "",
+    expires: "",
+    cvc: "",
+  });
+  const creditCardValidation = ({ target: { value, name } }) => {
+    if (String(value).length <= 16) {
+      setForm({
+        ...form,
+        [name]: value,
+      });
+      let regEx =
+        /^4[1-5][0-9]{14}$|^2(?:2(?:2[1-9]|[3-9][0-9])|[3-6][0-9][0-9]|7(?:[01][0-9]|20))[0-9]{12}$/;
+      if (value.match(regEx)) {
+        console.log("Please true");
+        setErrors({ ...errors, number: null });
+        return true;
+      } else {
+        console.log("Please enter a valid credit card number.");
+        setErrors({ ...errors, number: true });
+        return false;
+      }
+    }
+  };
+  const handleChangeCVC = ({ target: { value, name } }) => {
+    if (String(value).length <= 3) {
+      setForm({
+        ...form,
+        [name]: value,
+      });
+      if (String(value).length === 3) {
+        setErrors({ ...errors, cvc: null });
+      } else setErrors({ ...errors, cvc: true });
+    }
+  };
   return (
     <div className="add-card" style={{ backgroundColor: "white" }}>
       <div className="card-heading mb-33">
-        <Typography className="mb-5" variant="h6" gutterBottom component="h2">
-          Add Card Details
-        </Typography>
+        <div style={{ display: "flex" }}>
+          <Typography className="mb-5" variant="h6" gutterBottom component="h2">
+            Add Card Details
+          </Typography>
+          <CloseIcon
+            style={{ flex: "auto", justifyContent: "end" }}
+            onClick={handleCloseCard}
+            fontSize="inherit"
+          />
+        </div>
+
         <Typography variant="p" gutterBottom component="p">
           Lorem ipsum dolor sit amet
         </Typography>
       </div>
+
       <div>
         <Box>
           <TextField
@@ -77,12 +141,14 @@ const AddCard = () => {
             type="text"
             value={form.name}
             onChange={handleChange}
+            error={form.name.length < 1}
+            helperText={form.name.length < 1 ? "Please Enter Name" : ""}
           />
         </Box>
         {/* <CardElement
           id="payment-element-add-card"
-          onChange={() => {
-            console.log("onCHange");
+          onChange={(e) => {
+            console.log("onChange", e, elements);
           }}
         /> */}
         <Box>
@@ -92,10 +158,12 @@ const AddCard = () => {
             className="w-100 input"
             label="Card number"
             variant="outlined"
-            inputProps={{ maxLength: 16, max: 16 }}
+            inputProps={{ maxLength: "16" }}
             type="number"
             value={form.number}
-            onChange={handleChange}
+            onChange={creditCardValidation}
+            error={errors.number}
+            helperText={errors.number ? "Invalid Card" : ""}
           />
         </Box>
         <Box
@@ -114,16 +182,21 @@ const AddCard = () => {
             inputProps={{ maxLength: "7" }}
             value={form.expires}
             onChange={handleChangeExpiry}
+            error={errors.expires}
+            helperText={errors.expires ? "Invalid Expiry date" : ""}
           />
           <TextField
             required
             name="cvc"
+            type="number"
             className="w-100 input"
             label="CVV"
             variant="outlined"
-            type="number"
+            inputProps={{ maxLength: "3" }}
             value={form.cvc}
-            onChange={handleChange}
+            onChange={handleChangeCVC}
+            error={errors.cvc}
+            helperText={errors.cvc ? "Wrong CVV" : ""}
           />
         </Box>
         <Button className="w-100 payment" onClick={addCardApi}>
@@ -134,10 +207,10 @@ const AddCard = () => {
   );
 };
 
-const Wrapper = () => {
+const Wrapper = ({ cardAdded, handleCloseCard }) => {
   return (
     <Elements stripe={stripePromise}>
-      <AddCard />
+      <AddCard cardAdded={cardAdded} handleCloseCard={handleCloseCard} />
     </Elements>
   );
 };
