@@ -164,7 +164,7 @@ const HeaderBar = (props) => {
               <Button
                 key={"signup"}
                 className="darkbutton"
-                onClick={handleOpenLoginModal}
+                onClick={handleOpen}
               >
                 Sign Up
               </Button>
@@ -231,7 +231,7 @@ const HeaderBar = (props) => {
                   </MenuItem>
                   <MenuItem
                     key={"signup"}
-                    onClick={handleOpenLoginModal}
+                    onClick={handleOpen}
                     sx={{ display: { xs: "block", md: "none" } }}
                   >
                     Sign Up

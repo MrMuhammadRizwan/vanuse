@@ -320,7 +320,7 @@ code {
 }
 .cross-icon{
   position: absolute;
-  right: 0;
+  right: 10px;
   top:10px;
   cursor: pointer;
 }
