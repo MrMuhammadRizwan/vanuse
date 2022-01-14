@@ -81,6 +81,7 @@ const SignupModal = ({open,onSignUp,handleOpenLoginModal, handleClose}) => {
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 label="44"
+                                value={'+44'}
                                 required
                             >
                                 <MenuItem value={'+44'} selected>+44</MenuItem>

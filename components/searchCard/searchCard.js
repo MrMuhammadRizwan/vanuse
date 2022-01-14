@@ -62,7 +62,7 @@ const SearchCard = (props) => {
   // starting trip actions
   const getValueInput = (e) => {
     Axios.get(
-      `https://api.mapbox.com/geocoding/v5/mapbox.places/${e.target.value}.json?access_token=pk.eyJ1IjoiaGFyaXNjczQ5OTciLCJhIjoiY2t4OHhuYjd2MzQwZjJycHo2aWZ6dW5xNiJ9.XF4Rwzg_G7nton8noZ7VVA`
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${e.target.value}.json?country=gb&access_token=pk.eyJ1IjoiaGFyaXNjczQ5OTciLCJhIjoiY2t4OHhuYjd2MzQwZjJycHo2aWZ6dW5xNiJ9.XF4Rwzg_G7nton8noZ7VVA`
     )
       .then(function (response) {
         console.log("coordinates >>>>>", response.data.features);
@@ -83,7 +83,7 @@ const SearchCard = (props) => {
   // end trip actions
   const getValueInput2 = (e) => {
     Axios.get(
-      `https://api.mapbox.com/geocoding/v5/mapbox.places/${e.target.value}.json?access_token=pk.eyJ1IjoiaGFyaXNjczQ5OTciLCJhIjoiY2t4OHhuYjd2MzQwZjJycHo2aWZ6dW5xNiJ9.XF4Rwzg_G7nton8noZ7VVA`
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${e.target.value}.json?country=gb&access_token=pk.eyJ1IjoiaGFyaXNjczQ5OTciLCJhIjoiY2t4OHhuYjd2MzQwZjJycHo2aWZ6dW5xNiJ9.XF4Rwzg_G7nton8noZ7VVA`
     )
       .then(function (response) {
         console.log("coordinates >>>>>", response.data.features);
