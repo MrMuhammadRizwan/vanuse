@@ -386,16 +386,7 @@ const Cards = (props) => {
             </div>
           </div>
         </Grid>
-        {addPayment ? (
-          <Grid item xs={12} md={4}>
-            <AddCard
-              cardAdded={cardAdded}
-              handleCloseCard={() => {
-                setAddPayment(false);
-              }}
-            />
-          </Grid>
-        ) : null}
+
         <Grid item xs={12} md={5}>
           {viewSelectaVan ? <ApplyCoupon /> : null}
           {viewCustomItemsScreenList ? (
@@ -413,9 +404,23 @@ const Cards = (props) => {
               ) : null}
             </>
           ) : null}
-          <div className="right-heading">
-            <img src="/blue-car.svg" alt="Banner Car" className="bluecar" />
-          </div>
+          {addPayment ? (
+            <Grid style={{ zIndex: 999 }} item xs={12} md={4}>
+              <AddCard
+                cardAdded={cardAdded}
+                handleCloseCard={() => {
+                  setAddPayment(false);
+                }}
+              />
+            </Grid>
+          ) : null}
+          {!addPayment ? (
+            <div className="right-heading">
+              <img src="/blue-car.svg" alt="Banner Car" className="bluecar" />
+            </div>
+          ) : (
+            <></>
+          )}
         </Grid>
       </Grid>
     </>
