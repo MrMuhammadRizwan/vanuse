@@ -381,7 +381,10 @@ const Cards = (props) => {
                 />
               ) : null}
               {viewPayment ? (
-                <Payment addPaymentMethod={addPaymentMethod} />
+                <Payment
+                  addPaymentMethod={addPaymentMethod}
+                  addPayment={addPayment}
+                />
               ) : null}
             </div>
           </div>
