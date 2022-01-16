@@ -17,7 +17,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 const stripePromise = loadStripe("pk_test_DfG4Kda9PiRu28UAJxXIOhC3");
 
-const Payment = ({ addPaymentMethod }) => {
+const Payment = ({ addPaymentMethod, addPayment }) => {
   const [error, setError] = useState(null);
   const stripe = useStripe();
   const elements = useElements();
@@ -35,8 +35,12 @@ const Payment = ({ addPaymentMethod }) => {
     }
   };
   useEffect(() => {
-    getCardLocalFn();
-  }, []);
+    if (!addPayment) getCardLocalFn();
+  }, [addPayment]);
+
+  // useEffect(() => {
+  //   getCardLocalFn();
+  // }, []);
 
   const getCardLocalFn = async () => {
     let cardsTemp = await getAllCards();
@@ -154,10 +158,10 @@ const Payment = ({ addPaymentMethod }) => {
   );
 };
 
-const Wrapper = ({ addPaymentMethod }) => {
+const Wrapper = ({ addPaymentMethod, addPayment }) => {
   return (
     <Elements stripe={stripePromise}>
-      <Payment addPaymentMethod={addPaymentMethod} />
+      <Payment addPaymentMethod={addPaymentMethod} addPayment={addPayment} />
     </Elements>
   );
 };

@@ -409,7 +409,7 @@ const SelectVan = (props) => {
           key={"Next"}
           className="darkbutton"
           sx={{ mb: "16px" }}
-          onClick={!isLogin ? handleOpenLoginModal : props.goToPaymentScreen}
+          onClick={!isLogin ? handleOpenLoginModal : addPaymentNow}
         >
           Add payment option
         </Button>
