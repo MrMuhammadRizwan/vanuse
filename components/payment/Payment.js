@@ -146,7 +146,7 @@ const Payment = ({ addPaymentMethod, addPayment }) => {
             Add Payment Method
           </Button>
           <Button
-            disabled={!secretKey}
+            disabled={!secretKey || cardsData.length === 0}
             className="w-100 next"
             onClick={doPayment}
           >
