@@ -6,7 +6,7 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { Elements, useElements, useStripe } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { addCard } from "../../pages/api/paymentApi";
 import CloseIcon from "@mui/icons-material/Close";
 const stripePromise = loadStripe("pk_test_DfG4Kda9PiRu28UAJxXIOhC3");
@@ -27,7 +27,7 @@ const AddCard = ({ cardAdded, handleCloseCard }) => {
       setErrors({ ...errors, name: true });
       return;
     }
-    if (form.expires.length < 7) {
+    if (form.expires.length < 5) {
       setErrors({ ...errors, expires: true });
       return;
     }
@@ -68,7 +68,7 @@ const AddCard = ({ cardAdded, handleCloseCard }) => {
         textTemp = textTemp[0];
       }
     }
-    if (textTemp.length === 7) {
+    if (textTemp.length === 5) {
       setErrors({ ...errors, expires: null });
     }
     setForm({
@@ -82,15 +82,22 @@ const AddCard = ({ cardAdded, handleCloseCard }) => {
     cvc: "",
   });
   const creditCardValidation = ({ target: { value, name } }) => {
-    if (String(value).length <= 16) {
+    if (String(value).length <= 19) {
+      let v = value;
+      if (
+        String(value).length === 4 ||
+        String(value).length === 9 ||
+        String(value).length === 14
+      ) {
+        v = value + " ";
+      }
       setForm({
         ...form,
-        [name]: value,
+        [name]: v,
       });
       let regEx =
         /^4[1-5][0-9]{14}$|^2(?:2(?:2[1-9]|[3-9][0-9])|[3-6][0-9][0-9]|7(?:[01][0-9]|20))[0-9]{12}$/;
-      if (value.match(regEx)) {
-        console.log("Please true");
+      if (value.replaceAll(" ", "").match(regEx)) {
         setErrors({ ...errors, number: null });
         return true;
       } else {
@@ -111,6 +118,29 @@ const AddCard = ({ cardAdded, handleCloseCard }) => {
       } else setErrors({ ...errors, cvc: true });
     }
   };
+
+  // const handleSubmit = (e) => {
+  //   // e.preventDefault();
+  //   // stripe.createToken(form, function (status, response) {
+  //   //   console.log("tttttttttt", status, response);
+  //   // });
+  //   var form = document.getElementById("card-element");
+  //   form.addEventListener("submit", function (e) {
+  //     console.log("eventmmmmm--", e);
+
+  //     e.preventDefault();
+  //     // createToken();
+  //   });
+  // };
+
+  // const handleChange_ = (e) => {
+  //   let card = form.card;
+  //   console.log("e.target.value", e.target.value);
+  //   // card[e.target.name] = e.target.value;
+  //   console.log("card", card);
+  //   // this.setState(card);
+  // };
+
   return (
     <div className="add-card" style={{ backgroundColor: "white" }}>
       <div className="card-heading mb-33">
@@ -141,16 +171,10 @@ const AddCard = ({ cardAdded, handleCloseCard }) => {
             type="text"
             value={form.name}
             onChange={handleChange}
-            error={form.name.length < 1}
-            helperText={form.name.length < 1 ? "Please Enter Name" : ""}
+            // error={form.name.length < 1}
+            // helperText={form.name.length < 1 ? "Please Enter Name" : ""}
           />
         </Box>
-        {/* <CardElement
-          id="payment-element-add-card"
-          onChange={(e) => {
-            console.log("onChange", e, elements);
-          }}
-        /> */}
         <Box>
           <TextField
             required
@@ -158,8 +182,8 @@ const AddCard = ({ cardAdded, handleCloseCard }) => {
             className="w-100 input"
             label="Card number"
             variant="outlined"
-            inputProps={{ maxLength: "16" }}
-            type="number"
+            inputProps={{ maxLength: "19" }}
+            type="text"
             value={form.number}
             onChange={creditCardValidation}
             error={errors.number}
@@ -179,7 +203,7 @@ const AddCard = ({ cardAdded, handleCloseCard }) => {
             className="w-100 input mr-20"
             label="Expires"
             variant="outlined"
-            inputProps={{ maxLength: "7" }}
+            inputProps={{ maxLength: "5" }}
             value={form.expires}
             onChange={handleChangeExpiry}
             error={errors.expires}
