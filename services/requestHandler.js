@@ -27,7 +27,7 @@ instance.interceptors.request.use(
     //   await validateRefreshToken();
     //   token = getToken();
     config.headers.Authorization =
-      "Token " + "6b495eac06f41f33f6f27f9d26cf5b171f7171f1"; //+localStorage.getItem("token");
+      "Token " + localStorage.getItem("token");
     // }
     return config;
   },

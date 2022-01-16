@@ -17,6 +17,7 @@
     "@mui/lab": "^5.0.0-alpha.61",
     "@mui/material": "^5.2.4",
     "@stripe/react-stripe-js": "^1.7.0",
+    "@stripe/stripe-js": "^1.22.0",
     "axios": "^0.24.0",
     "date-fns": "^2.27.0",
     "mapbox-gl": "^2.6.1",
