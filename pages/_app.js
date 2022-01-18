@@ -5,6 +5,7 @@ import '../components/mapBox/customMap.css'
 import '../components/mainCards/cards.css'
 import 'mapbox-gl/dist/mapbox-gl.css';
 import '../components/searchCard/searchCard.css'
+import '../components/confirmBooking/confirmBooking.css'
 import {Provider} from 'react-redux'
 import store from '../store/store'
 
