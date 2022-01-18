@@ -321,7 +321,7 @@ code {
 .cross-icon{
   position: absolute;
   right: 10px;
-  top:10px;
+  top:74px;
   cursor: pointer;
 }
 input[type="number"]::-webkit-inner-spin-button,
@@ -416,6 +416,9 @@ input[type="number"]::-webkit-outer-spin-button {
   .signup-modal {
     width: 100%;
     padding: 24px;
+  }
+  .cross-icon{
+    top:38px;
   }
 }
 /* @media (max-width: 400px) {

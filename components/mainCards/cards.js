@@ -13,6 +13,7 @@ import SelectVan from "./selectVan/selectVan";
 import ApplyCoupon from "./coupons/coupons";
 import Payment from "../payment/Payment";
 import AddCard from "../payment/AddCard";
+import ConfirmBooking from "../confirmBooking/ConfirmBooking";
 
 const itemsList = [
   {
@@ -381,7 +382,7 @@ const Cards = (props) => {
                 />
               ) : null}
               {viewPayment ? (
-                <Payment
+                <ConfirmBooking
                   addPaymentMethod={addPaymentMethod}
                   addPayment={addPayment}
                 />
