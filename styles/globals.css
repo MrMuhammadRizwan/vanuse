@@ -367,6 +367,11 @@ input[type="number"]::-webkit-outer-spin-button {
     transform: translate(-16%, 50%);
   }
 }
+@media (min-width: 576px){
+  .main-div .input:first-child{
+    margin-right: 20px;
+  }
+}
 @media (min-width: 768px) and (max-width: 1024px) {
   .MuiAppBar-root .MuiButton-root {
     margin-right: 10px;
@@ -419,6 +424,12 @@ input[type="number"]::-webkit-outer-spin-button {
   }
   .cross-icon{
     top:38px;
+  }
+  .main-div{
+    display: block !important;
+  }
+  .main-div .input{
+    width: 100%;
   }
 }
 /* @media (max-width: 400px) {
