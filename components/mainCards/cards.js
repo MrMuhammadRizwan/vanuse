@@ -11,9 +11,9 @@ import MyItemsList from "./addItems/myItemsList";
 import CustomItems from "./addItems/customItems";
 import SelectVan from "./selectVan/selectVan";
 import ApplyCoupon from "./coupons/coupons";
-import Payment from "../payment/Payment";
-import AddCard from "../payment/AddCard";
-import ConfirmBooking from "../confirmBooking/ConfirmBooking";
+import Payment from "./payment/payment";
+import AddCard from "./payment/addCard";
+import ConfirmBooking from "../confirmBooking/confirmBooking";
 
 const Cards = (props) => {
   const [sliderValue, setSliderValue] = React.useState(1);

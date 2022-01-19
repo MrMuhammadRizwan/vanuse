@@ -7,7 +7,7 @@ import {
   getAllCards,
   postSecret,
   removeCard,
-} from "../../pages/api/paymentApi";
+} from "../../../pages/api/paymentApi";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
