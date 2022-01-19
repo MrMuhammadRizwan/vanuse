@@ -15,72 +15,6 @@ import Payment from "../payment/Payment";
 import AddCard from "../payment/AddCard";
 import ConfirmBooking from "../confirmBooking/ConfirmBooking";
 
-const itemsList = [
-  {
-    key: 0,
-    title: "Parent",
-    subitems: [
-      {
-        id: "9090",
-        title: "yyyyyy",
-        quantity: 0,
-        width: "30",
-        height: "23",
-        depth: "14",
-        instructions: "instructions here",
-      },
-      {
-        id: "9092",
-        title: "zzzzzzz",
-        quantity: 0,
-        width: "30",
-        height: "23",
-        depth: "14",
-        instructions: "instructions here",
-      },
-      {
-        id: "9093",
-        title: "cccccccc",
-        quantity: 0,
-        width: "30",
-        height: "23",
-        depth: "14",
-        instructions: "instructions here",
-      },
-    ],
-  },
-  {
-    key: 1,
-    title: "Parent2",
-    subitems: [
-      {
-        id: "9094",
-        title: "dddddddd",
-        quantity: 0,
-        width: "30",
-        height: "23",
-        depth: "14",
-        instructions: "instructions here",
-      },
-    ],
-  },
-  {
-    key: 2,
-    title: "Parent3",
-    subitems: [
-      {
-        id: "9095",
-        title: "ffffffff",
-        quantity: 0,
-        width: "30",
-        height: "23",
-        depth: "14",
-        instructions: "instructions here",
-      },
-    ],
-  },
-];
-
 const Cards = (props) => {
   const [sliderValue, setSliderValue] = React.useState(1);
   const [gettingDate, setGettingDate] = React.useState(new Date());
@@ -99,7 +33,9 @@ const Cards = (props) => {
   const [viewSelectaVan, setViewSelectaVan] = React.useState(false);
   const [viewPayment, setViewPayment] = React.useState(false);
   const [filteredData, setFilteredData] = React.useState([]);
-
+  const [secretKey, setSecretKey] = React.useState("");
+  const [completeTripScreen, setCompleteTripScreen] = React.useState(false);
+  const [showSlider, setShowSlider] = React.useState(true);
   const itemsListFromServer = () => {
     Axios.get(`http://127.0.0.1:8000/item/category-wise/`)
       .then(function (response) {
@@ -216,12 +152,6 @@ const Cards = (props) => {
     setViewPayment(true);
   };
 
-  // const addItemsToList = ( list ) => {
-  //     console.log('addItems >>>', list)
-  //     setViewAddItemsToList(true)
-  //     setMyItemsList(list)
-  // }
-
   const increaseQty = (qty, ind, key) => {
     console.log("increaseQty rooms", qty, ind, key);
     let keys = key;
@@ -317,6 +247,16 @@ const Cards = (props) => {
     console.log("addPaymentMethod");
     setAddPayment(true);
   };
+  const goToCompleteTripScreen = (secret) => {
+    setViwAddItemsScreen(false);
+    setViewAddItemsToList(false);
+    setViewCustomItemsScreen(false);
+    setViewSelectaVan(false);
+    setViewPayment(false);
+    setShowSlider(false);
+    setSecretKey(secret);
+    setCompleteTripScreen(true);
+  };
 
   const cardAdded = () => {
     setAddPayment(false);
@@ -328,15 +268,17 @@ const Cards = (props) => {
         <Grid item xs={12} md={6}>
           <div className="banner-card">
             <div className="card-content">
-              <div className="card-slider">
-                <Slider
-                  aria-label="Volume"
-                  value={sliderValue}
-                  max={5}
-                  disabled
-                />
-                <span className="card-slider-count">{sliderValue}/5</span>
-              </div>
+              {showSlider ? (
+                <div className="card-slider">
+                  <Slider
+                    aria-label="Volume"
+                    value={sliderValue}
+                    max={5}
+                    disabled
+                  />
+                  <span className="card-slider-count">{sliderValue}/5</span>
+                </div>
+              ) : null}
               {viewSelectaVan ? (
                 <SelectVan
                   goBack={goBackItemsScreen}
@@ -382,10 +324,14 @@ const Cards = (props) => {
                 />
               ) : null}
               {viewPayment ? (
-                <ConfirmBooking
+                <Payment
                   addPaymentMethod={addPaymentMethod}
                   addPayment={addPayment}
+                  goToCompleteTripScreen={goToCompleteTripScreen}
                 />
+              ) : null}
+              {completeTripScreen ? (
+                <ConfirmBooking secretKey={secretKey} />
               ) : null}
             </div>
           </div>
