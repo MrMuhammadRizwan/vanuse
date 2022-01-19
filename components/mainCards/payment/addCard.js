@@ -1,5 +1,3 @@
-import DeleteIcon from "@mui/icons-material/Delete";
-import { IconButton } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -7,13 +5,11 @@ import Typography from "@mui/material/Typography";
 import { Elements, useElements, useStripe } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import React, { useEffect, useState } from "react";
-import { addCard } from "../../pages/api/paymentApi";
+import { addCard } from "../../../pages/api/paymentApi";
 import CloseIcon from "@mui/icons-material/Close";
 const stripePromise = loadStripe("pk_test_DfG4Kda9PiRu28UAJxXIOhC3");
 const AddCard = ({ cardAdded, handleCloseCard }) => {
-  const elements = useElements();
-  const stripe = useStripe();
-
+ 
   const [form, setForm] = useState({
     name: "",
     number: "",
@@ -119,27 +115,6 @@ const AddCard = ({ cardAdded, handleCloseCard }) => {
     }
   };
 
-  // const handleSubmit = (e) => {
-  //   // e.preventDefault();
-  //   // stripe.createToken(form, function (status, response) {
-  //   //   console.log("tttttttttt", status, response);
-  //   // });
-  //   var form = document.getElementById("card-element");
-  //   form.addEventListener("submit", function (e) {
-  //     console.log("eventmmmmm--", e);
-
-  //     e.preventDefault();
-  //     // createToken();
-  //   });
-  // };
-
-  // const handleChange_ = (e) => {
-  //   let card = form.card;
-  //   console.log("e.target.value", e.target.value);
-  //   // card[e.target.name] = e.target.value;
-  //   console.log("card", card);
-  //   // this.setState(card);
-  // };
 
   return (
     <div className="add-card" style={{ backgroundColor: "white" }}>
@@ -171,8 +146,6 @@ const AddCard = ({ cardAdded, handleCloseCard }) => {
             type="text"
             value={form.name}
             onChange={handleChange}
-            // error={form.name.length < 1}
-            // helperText={form.name.length < 1 ? "Please Enter Name" : ""}
           />
         </Box>
         <Box>
