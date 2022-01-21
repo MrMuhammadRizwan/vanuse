@@ -50,7 +50,7 @@ const SignupModal = ({open,onSignUp,handleOpenLoginModal, handleClose}) => {
                     </div>
                 </Typography>
                 <Box id="transition-modal-description" sx={{ mt: 2 }}>
-                    <Box  className="main-div" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <Box  className="main-div" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <TextField
                             className="input"
                             label="First Name"
@@ -81,6 +81,7 @@ const SignupModal = ({open,onSignUp,handleOpenLoginModal, handleClose}) => {
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 label="44"
+                                value={'+44'}
                                 required
                             >
                                 <MenuItem value={'+44'} selected>+44</MenuItem>

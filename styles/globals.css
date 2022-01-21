@@ -320,8 +320,8 @@ code {
 }
 .cross-icon{
   position: absolute;
-  right: 0;
-  top:10px;
+  right: 10px;
+  top:74px;
   cursor: pointer;
 }
 input[type="number"]::-webkit-inner-spin-button,
@@ -365,6 +365,11 @@ input[type="number"]::-webkit-outer-spin-button {
   .right-heading .bluecar {
     width: 50%;
     transform: translate(-16%, 50%);
+  }
+}
+@media (min-width: 576px){
+  .main-div .input:first-child{
+    margin-right: 20px;
   }
 }
 @media (min-width: 768px) and (max-width: 1024px) {
@@ -416,6 +421,15 @@ input[type="number"]::-webkit-outer-spin-button {
   .signup-modal {
     width: 100%;
     padding: 24px;
+  }
+  .cross-icon{
+    top:38px;
+  }
+  .main-div{
+    display: block !important;
+  }
+  .main-div .input{
+    width: 100%;
   }
 }
 /* @media (max-width: 400px) {

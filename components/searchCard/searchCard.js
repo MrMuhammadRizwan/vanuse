@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
-import Grid from '@mui/material/Grid';
+import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
@@ -12,7 +12,7 @@ import CustomMap from "../mapBox/customMap";
 import CustomEmptyMap from "../mapBox/customEmptyMap";
 
 import Cards from "../mainCards/cards";
-import Typography from '@mui/material/Typography';
+import Typography from "@mui/material/Typography";
 
 const SearchCard = (props) => {
   const [value, setValue] = React.useState(null);
@@ -57,11 +57,10 @@ const SearchCard = (props) => {
     latitude: "",
   });
 
-
   // starting trip actions
   const getValueInput = (e) => {
     Axios.get(
-      `https://api.mapbox.com/geocoding/v5/mapbox.places/${e.target.value}.json?access_token=pk.eyJ1IjoiaGFyaXNjczQ5OTciLCJhIjoiY2t4OHhuYjd2MzQwZjJycHo2aWZ6dW5xNiJ9.XF4Rwzg_G7nton8noZ7VVA`
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${e.target.value}.json?country=gb&access_token=pk.eyJ1IjoiaGFyaXNjczQ5OTciLCJhIjoiY2t4OHhuYjd2MzQwZjJycHo2aWZ6dW5xNiJ9.XF4Rwzg_G7nton8noZ7VVA`
     )
       .then(function (response) {
         let result = response.data.features.map((list) => ({
@@ -79,7 +78,7 @@ const SearchCard = (props) => {
   // end trip actions
   const getValueInput2 = (e) => {
     Axios.get(
-      `https://api.mapbox.com/geocoding/v5/mapbox.places/${e.target.value}.json?access_token=pk.eyJ1IjoiaGFyaXNjczQ5OTciLCJhIjoiY2t4OHhuYjd2MzQwZjJycHo2aWZ6dW5xNiJ9.XF4Rwzg_G7nton8noZ7VVA`
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${e.target.value}.json?country=gb&access_token=pk.eyJ1IjoiaGFyaXNjczQ5OTciLCJhIjoiY2t4OHhuYjd2MzQwZjJycHo2aWZ6dW5xNiJ9.XF4Rwzg_G7nton8noZ7VVA`
     )
       .then(function (response) {
         let result = response.data.features.map((list) => ({
@@ -114,7 +113,6 @@ const SearchCard = (props) => {
     setFocusActiveEnd(!focusActiveEnd);
   };
 
-
   const scheduleNow = () => {
     setClickSchedule(false)
     setSliderCard(true)
@@ -130,11 +128,14 @@ const SearchCard = (props) => {
     setSliderCard(false)
   }
 
-  return (
-    sliderCard?
-      <Cards goBack={goBack} clickSchedule={clickSchedule} authorized={props.authorized}/> 
-      :
-      <>
+  return sliderCard ? (
+    <Cards
+      goBack={goBack}
+      clickSchedule={clickSchedule}
+      authorized={props.authorized}
+    />
+  ) : (
+    <>
       <Grid container spacing={10} className="banner-section">
         <Grid item sm={12} md={6}>
           <div className="banner-card">
@@ -152,12 +153,15 @@ const SearchCard = (props) => {
             <div className="card-content">
               {value && value2 ? (
                 <div>
-                <h2>Does this look correct?</h2><br/>
+                  <h2>Does this look correct?</h2>
+                  <br />
                 </div>
               ) : (
                 <div>
                   <h2>Need help with a move?</h2>
-                  <p className="mb-52">Book on demand or a pre-scheduled van.</p>
+                  <p className="mb-52">
+                    Book on demand or a pre-scheduled van.
+                  </p>
                 </div>
               )}
 
@@ -189,7 +193,10 @@ const SearchCard = (props) => {
                     value={value}
                     onKeyUp={(e) => getValueInput(e)}
                     onChange={(event, newValue) => {
-                    localStorage.setItem("pick_address_line_1", JSON.stringify(newValue));
+                      localStorage.setItem(
+                        "pick_address_line_1",
+                        JSON.stringify(newValue)
+                      );
                       if (typeof newValue === "string") {
                         setDrawPoints(false);
                         setTimeout(() => {
@@ -211,8 +218,8 @@ const SearchCard = (props) => {
                       } else {
                         setDrawPoints(false);
                         setValue(newValue);
-                        if(newValue && value2){
-                          setDrawPoints(true)
+                        if (newValue && value2) {
+                          setDrawPoints(true);
                         }
                       }
                     }}
@@ -238,13 +245,18 @@ const SearchCard = (props) => {
                     sx={{ ml: 1, flex: 1 }}
                     freeSolo
                     renderInput={(params) => (
-                      <TextField {...params} placeholder="Enter pickup address" />
+                      <TextField
+                        {...params}
+                        placeholder="Enter pickup address"
+                      />
                     )}
                   />
                 </Paper>
                 <Paper
                   component="form"
-                  className={focusActiveEnd ? "start-field-active" : "start-field"}
+                  className={
+                    focusActiveEnd ? "start-field-active" : "start-field"
+                  }
                   onMouseOver={selectOnFocusFuncEnd}
                   onMouseOut={unselectOnFocusFuncEnd}
                   onBlur={unselectOnFocusFuncEnd}
@@ -259,13 +271,20 @@ const SearchCard = (props) => {
                   }}
                 >
                   <IconButton sx={{ p: "10px" }} aria-label="icon">
-                    <img src="/search-end.png" alt="search end" className="icons" />
+                    <img
+                      src="/search-end.png"
+                      alt="search end"
+                      className="icons"
+                    />
                   </IconButton>
                   <Autocomplete
                     value={value2}
                     onKeyUp={(e) => getValueInput2(e)}
                     onChange={(event, newValue) => {
-                      localStorage.setItem("pick_address_line_2", JSON.stringify(newValue));
+                      localStorage.setItem(
+                        "pick_address_line_2",
+                        JSON.stringify(newValue)
+                      );
                       if (typeof newValue === "string") {
                         setTimeout(() => {
                           setDrawPoints(false);
@@ -287,8 +306,8 @@ const SearchCard = (props) => {
                       } else {
                         setDrawPoints(false);
                         setValue2(newValue);
-                        if(value && newValue){
-                          setDrawPoints(true)
+                        if (value && newValue) {
+                          setDrawPoints(true);
                         }
                       }
                     }}
@@ -326,12 +345,17 @@ const SearchCard = (props) => {
                   key={"Request Now"}
                   className="darkbutton"
                   sx={{ mb: "16px" }}
-                  disabled={value && value2 ? false: true}
-                  onClick={()=>scheduleNow()}
+                  disabled={value && value2 ? false : true}
+                  onClick={() => scheduleNow()}
                 >
                   Request Now
                 </Button>
-                <Button key={"Schedule Later"} className="lightbutton" onClick={()=>scheduleLater()} disabled={value && value2 ? false: true}>
+                <Button
+                  key={"Schedule Later"}
+                  className="lightbutton"
+                  onClick={() => scheduleLater()}
+                  disabled={value && value2 ? false : true}
+                >
                   Schedule Later
                 </Button>
               </div>
@@ -339,10 +363,10 @@ const SearchCard = (props) => {
           </div>
         </Grid>
         <Grid item sm={12} md={6}>
-        <div className="right-heading">
-            <Typography variant="h1"  gutterBottom component="h1">
-              Order a van <br/>
-              any time, <br/>
+          <div className="right-heading">
+            <Typography variant="h1" gutterBottom component="h1">
+              Order a van <br />
+              any time, <br />
               any place in the UK.
             </Typography>
             <Typography variant="subtitle1" gutterBottom component="p">
@@ -353,7 +377,7 @@ const SearchCard = (props) => {
           </div>
         </Grid>
       </Grid>
-      </>
+    </>
   );
 };
 export default SearchCard;

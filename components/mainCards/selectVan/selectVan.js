@@ -230,7 +230,7 @@ const SelectVan = (props) => {
     }
     setShowToast(false);
   };
-  
+
   useEffect(() => {
     setIsLogin(props.authorized);
   }, [props.authorized]);
