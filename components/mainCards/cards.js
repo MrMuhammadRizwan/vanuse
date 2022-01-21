@@ -101,6 +101,10 @@ const Cards = (props) => {
     setViwPickupTime(true);
     setSliderValue(1);
     setViewAddItemsToList(false);
+    localStorage.removeItem("set-hours")
+    localStorage.removeItem("set-minutes")
+    localStorage.removeItem("set-am-pm")
+    localStorage.removeItem("date-value-all")
   };
 
   const goBackThirdScreen = () => {

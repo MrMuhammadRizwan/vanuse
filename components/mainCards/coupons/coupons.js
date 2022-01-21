@@ -9,7 +9,6 @@ const Coupons = (props) => {
     const [promoValidFromApi, setPromoValidFromApi] = React.useState(false);
 
     const applyPromo = () => {
-        console.log('applyPromo')
         if(promoValue.length<1){
             setPromoError(true)
             setPromoValidFromApi(true)

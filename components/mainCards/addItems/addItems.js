@@ -62,7 +62,6 @@ const AddItems = (props) => {
                     {filteredData.length > 0 ? <p>Or quickly add items from a list of popular rooms:</p> : null}
                     {filteredData.length <= 0 ? <p>0 Items Found</p> : null}
                     <div className="items-list mb-20">
-                        {console.log('itemsListFromServer filteredData>>>>>', filteredData)}
                         {filteredData && filteredData.map((list,index)=>{
                             return(
                                 <>

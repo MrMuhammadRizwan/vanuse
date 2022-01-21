@@ -20,7 +20,6 @@ const CustomItems = (props) => {
     const [itemInstructions, setItemInstructions] = React.useState('');
   
     const increaseQty = () => {
-        console.log('increaseQty', quantity)
         if(quantity<1){
             setQuantity(0)
         }else{
@@ -28,7 +27,6 @@ const CustomItems = (props) => {
         }
     }
     const decreaseQty =() =>{
-        console.log('decreaseQty', quantity)
         if(quantity<1){
             setQuantity(0)
         }else{
@@ -49,7 +47,6 @@ const CustomItems = (props) => {
                 "itemcategory_id": 90
          }
 
-         console.log('customObject', customObject)
 
          props.getValueFromCustomForm(newData)
 
@@ -70,7 +67,6 @@ const CustomItems = (props) => {
 
     return (
         <>
-            {console.log('customObject', customObject)}
 
             <div className="card-heading mb-31">
                 <h2>Custom Items</h2>
