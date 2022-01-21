@@ -99,7 +99,9 @@ const SelectVan = (props) => {
         const hours = JSON.parse(localStorage.getItem("set-hours"))
         const minutes = localStorage.getItem("set-minutes")
         const ampm = localStorage.getItem("set-am-pm")
+
         const validate = '';
+        console.log("final date to post check", hours && minutes && ampm ==='PM');
         if (hours && minutes && ampm ==='PM'){
           validate = moment(dataAll).format("YYYY-MM-DD")+"T"+(12+hours)+":"+ minutes+":"+moment(dataAll).format("ss[Z]")
         }else{
@@ -107,7 +109,8 @@ const SelectVan = (props) => {
         }
         
         // final date to post api
-        console.log("final date to post api", validate);
+        const finalDateTime = localStorage.setItem("final-date-time", validate)
+        console.log("final date to post api", finalDateTime);
 
             Axios({
               method: 'post',
