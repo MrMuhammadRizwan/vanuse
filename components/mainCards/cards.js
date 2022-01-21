@@ -13,72 +13,6 @@ import SelectVan from "./selectVan/selectVan";
 import ApplyCoupon from "./coupons/coupons";
 
 
-const itemsList = [
-    {
-        'key':0,
-        'title':'Parent',
-        'subitems':[
-            {
-                'id':'9090',
-                'title':'yyyyyy',
-                'quantity':0,
-                'width':'30',
-                'height':'23',
-                'depth':'14',
-                'instructions':'instructions here',
-            },
-            {
-                'id':'9092',
-                'title':'zzzzzzz',
-                'quantity':0,
-                'width':'30',
-                'height':'23',
-                'depth':'14',
-                'instructions':'instructions here',
-            },
-            {
-                'id':'9093',
-                'title':'cccccccc',
-                'quantity':0,
-                'width':'30',
-                'height':'23',
-                'depth':'14',
-                'instructions':'instructions here',
-            }
-        ]
-    },
-    {
-        'key':1,
-        'title':'Parent2',
-        'subitems':[
-            {
-                'id':'9094',
-                'title':'dddddddd',
-                'quantity':0,
-                'width':'30',
-                'height':'23',
-                'depth':'14',
-                'instructions':'instructions here',
-            }
-        ]
-    },
-    {
-        'key':2,
-        'title':'Parent3',
-        'subitems':[
-            {
-                'id':'9095',
-                'title':'ffffffff',
-                'quantity':0,
-                'width':'30',
-                'height':'23',
-                'depth':'14',
-                'instructions':'instructions here',
-            }
-        ]
-    }
-]
-
 const Cards = (props) => {
     const [sliderValue, setSliderValue] = React.useState(1);
     const [gettingDate, setGettingDate] = React.useState(new Date());
@@ -101,12 +35,9 @@ const Cards = (props) => {
     const itemsListFromServer = () => {
         Axios.get(`http://127.0.0.1:8000/item/category-wise/`)
           .then(function (response) {
-            console.log(response.data);
             let ApiRes = response.data
             setMyItemsList(ApiRes)
             setAllItemsList(ApiRes)
-            // localStorage.setItem("ApiRes", JSON.stringify(ApiRes));
-            
           })
           .catch(function (error) {
             console.log(error);
@@ -119,7 +50,6 @@ const Cards = (props) => {
 
     const shedulePickupChange = (data) =>{
         setShedulePickupValue(data)
-        console.log('clickSchedule Main', data)
         if(data){
             setShedulePickupValue(data)
         }else{
@@ -162,6 +92,10 @@ const Cards = (props) => {
         setViwPickupTime(true)
         setSliderValue(1)
         setViewAddItemsToList(false)
+        localStorage.removeItem("set-hours")
+        localStorage.removeItem("set-minutes")
+        localStorage.removeItem("set-am-pm")
+        localStorage.removeItem("date-value-all")
     }
 
     const goBackThirdScreen = () => {
@@ -203,53 +137,11 @@ const Cards = (props) => {
         setViewSelectaVan(false)
     }
 
-    // const addItemsToList = ( list ) => {
-    //     console.log('addItems >>>', list)
-    //     setViewAddItemsToList(true)
-    //     setMyItemsList(list)
-    // }
-
-    
-
-
     const increaseQty = (qty, ind, key) => {
-        // var submitedArray = {
-        //     'items': [],
-        //     'custom item': [
-        //         {
-        //             "is_custom": true,
-        //             "quantity": 0,
-        //             "name": "Custom1",
-        //             "description": "desc",
-        //             "dim_x": 2.0,
-        //             "dim_y": 2.0,
-        //             "dim_z": 2.0
-        //         },
-        //     ]
-        // }
-        // console.log('increaseQty rooms', qty, ind, key);
-        // console.log('increaseQty rooms >>>>>>>>>>>>', qty.id, qty.quantity);
-        // console.log('increaseQty rooms >>>>>>>>>>>> submitedArray 0', qty, qty.quantity);
-            // const submitedArrayNew = submitedArray['items'].push([
-            //     ...submitedArray['items'],
-            //     {
-            //         'id': qty.id, 
-            //         'quantity': qty.quantity
-            //     }
-            // ]
-            // )
-        
-        // console.log('increaseQty rooms >>>>>>>>>>>> submitedArray 0.1', submitedArrayNew);
-        // console.log('increaseQty rooms >>>>>>>>>>>> submitedArray 0.2', key2);
-
-        // key1.Object.keys(0)
-        // console.log('increaseQty rooms >>>>>>>>>>>> submitedArray 1', submitedArray[0]);
-
         let keys = key
         const rooms = JSON.parse(JSON.stringify(allItemsList));
             rooms[JSON.parse(JSON.stringify(keys))].subitems[JSON.parse(JSON.stringify(ind))].quantity++;
 
-        console.log('increaseQty rooms', rooms);
 
         setAllItemsList(rooms)
         setMyItemsList(rooms)
@@ -259,8 +151,6 @@ const Cards = (props) => {
     const decreaseQty = (qty, ind, key) => {
         let kiy = key
         const rooms = JSON.parse(JSON.stringify(allItemsList));
-        
-        console.log('decreaseQty rooms', rooms);
         
         if(rooms[JSON.parse(JSON.stringify(kiy))].subitems[JSON.parse(JSON.stringify(ind))].quantity){
             rooms[JSON.parse(JSON.stringify(kiy))].subitems[JSON.parse(JSON.stringify(ind))].quantity--;
@@ -275,10 +165,8 @@ const Cards = (props) => {
     }
 
     const clearQty = (qty, ind, kiy) => {
-        console.log('clearQty', qty, ind, kiy);
         const List = JSON.parse(JSON.stringify(allItemsList));
               List[JSON.parse(JSON.stringify(kiy))].subitems[JSON.parse(JSON.stringify(ind))].quantity = 0;
-        console.log('clearQty 2', List);
 
         setAllItemsList(List)
         setMyItemsList(List)
@@ -286,7 +174,6 @@ const Cards = (props) => {
     }
 
     const customItem = () => {
-        console.log('customItem');
         setViwPickupTime(false)
         setViwAddItemsScreen(false)
         setViwServices(false)
@@ -294,7 +181,6 @@ const Cards = (props) => {
     }
 
     const getValueFromCustomForm = (formData) => {
-        console.log('getValueFromCustomForm', formData);
         const getIndex = myItemsList.length - 1
         
             setMyItemsList(prevState => ([
@@ -318,7 +204,6 @@ const Cards = (props) => {
                         ]
                     }
             ]))
-        console.log('getValueFromCustomForm myItemsList', myItemsList);
         setViewCustomItemsScreen(false)
         setViwAddItemsScreen(true)
 
@@ -326,11 +211,8 @@ const Cards = (props) => {
     }
     
     useEffect(() => {
-        // localStorage.setItem("allItems", allItemsList);
-        
-        // console.log('ApiRes localStorage', localStorage.getItem("allItems"));
         itemsListFromServer()
-    }, [viewAddItemsToList]);
+    }, [viewAddItemsToList, localStorage]);
 
 
     return (

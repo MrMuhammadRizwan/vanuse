@@ -42,7 +42,6 @@ const HeaderBar = (props) => {
     setOpen(false);
   };
   const onLogin = (userName, password) => {
-    console.log("onLogin newData", userName, password);
     Axios.post(`http://127.0.0.1:8000/login/`, {
       username: userName,
       password: password,

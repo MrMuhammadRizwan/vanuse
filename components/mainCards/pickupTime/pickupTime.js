@@ -38,6 +38,7 @@ const PickupTime = (props) => {
             typeof value === 'string' ? value.split(',') : value,
         );
         setHoursBorder(true)
+        localStorage.setItem("set-hours", value)
     };
     const handleMinutes = (event) => {
         const {
@@ -47,6 +48,7 @@ const PickupTime = (props) => {
             typeof value === 'string' ? value.split(',') : value,
         );
         setMinutesBorder(true)
+        localStorage.setItem("set-minutes", value)
     };
     const handleAmpm = (event) => {
         const {
@@ -56,6 +58,7 @@ const PickupTime = (props) => {
             typeof value === 'string' ? value.split(',') : value,
         );
         setFillColor(true)
+        localStorage.setItem("set-am-pm", value)
     };
     
 
@@ -74,31 +77,28 @@ const PickupTime = (props) => {
         }else{
             props.shedulePickupChange(false)
         }
-      }, [immediateChecked,scheduleChecked]);
+        localStorage.setItem("date-value-all", JSON.stringify(props.dateValueFromOtherComp))
+
+      }, [immediateChecked,scheduleChecked,props,localStorage]);
 
     const handleIimmediateChecked = (event) => {
         setScheduleChecked(false);
         setImmediateChecked(true);
         setShowHoursMinutesAmpm(false)
         setShowDateBox(false)
-        // if(scheduleChecked){
-        // }else{
-        //     setImmediateChecked(event.target.checked);
-        // }
+        localStorage.removeItem("set-hours")
+        localStorage.removeItem("set-minutes")
+        localStorage.removeItem("date-value-all")
     };
 
     const handleScheduleChecked = (event) => {
         setScheduleChecked(true);
         setShowHoursMinutesAmpm(true)
         setImmediateChecked(false);
-        // props.shedulePickupChange(true)
         setShowDateBox(true)
-
-        // if(immediateChecked){
-        //     setImmediateChecked(false);
-        // }else{
-        //     setScheduleChecked(event.target.checked);
-        // }
+        localStorage.setItem("set-hours", hoursValue)
+        localStorage.setItem("set-minutes", minutesValue)
+        localStorage.setItem("date-value-all", JSON.stringify(props.dateValueFromOtherComp))
     };
 
     return (

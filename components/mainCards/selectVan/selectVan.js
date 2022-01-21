@@ -10,6 +10,7 @@ import Snackbar from "@mui/material/Snackbar";
 import SignupModal from "../../auth/SignupModal";
 import LoginModal from "../../auth/LoginModal";
 import { useDispatch } from "react-redux";
+import moment from 'moment';
 
 const SelectVan = (props) => {
   const dispatch = useDispatch();
@@ -54,7 +55,6 @@ const SelectVan = (props) => {
   };
 
     const onLogin=(userName,password)=>{
-        console.log('onLogin newData', userName,password)
         Axios.post(
             `http://127.0.0.1:8000/login/`,
                 {
@@ -84,17 +84,6 @@ const SelectVan = (props) => {
     }
 
     const addPaymentNow = () => {
-        // post to trip
-        // console.log("localstorage > ApiRes", localStorage.getItem("ApiRes"));
-        // console.log("localstorageFinal > TripObject", localStorage.getItem("TripObject"));
-        // console.log("localstorageFinal > token", localStorage.getItem("token"));
-        // console.log("localstorageFinal > pick_address_line_1", localStorage.getItem("pick_address_line_1"));
-        // console.log("localstorageFinal > pick_address_line_2", localStorage.getItem("pick_address_line_2"));
-        // console.log("localstorageFinal > floor_number", localStorage.getItem("floor_number"));
-        // console.log("localstorageFinal > pickup_time", localStorage.getItem("pickup_time"));
-        // console.log("localstorageFinal > has_elevator", localStorage.getItem("has_elevator"));
-        // console.log("localstorageFinal > is_van_filled", localStorage.getItem("is_van_filled"));
-        // console.log("localstorageFinal > is_load_assistant_required", localStorage.getItem("is_load_assistant_required"));
 
         const tripNow = JSON.parse(localStorage.getItem("TripObject"))
         // const tokenNow = 'Token '+localStorage.getItem("token") // will be change when user login is dynamic
@@ -106,7 +95,19 @@ const SelectVan = (props) => {
         const hasElevator = localStorage.getItem("has_elevator")
         const isVanFilled = localStorage.getItem("is_van_filled")
         const isLoadAssistantRequired = localStorage.getItem("is_load_assistant_required")
-
+        const dataAll = JSON.parse(localStorage.getItem("date-value-all"))
+        const hours = JSON.parse(localStorage.getItem("set-hours"))
+        const minutes = localStorage.getItem("set-minutes")
+        const ampm = localStorage.getItem("set-am-pm")
+        const validate = '';
+        if (hours && minutes && ampm ==='PM'){
+          validate = moment(dataAll).format("YYYY-MM-DD")+"T"+(12+hours)+":"+ minutes+":"+moment(dataAll).format("ss[Z]")
+        }else{
+          validate = dataAll
+        }
+        
+        // final date to post api
+        console.log("final date to post api", validate);
 
             Axios({
               method: 'post',
@@ -114,7 +115,7 @@ const SelectVan = (props) => {
               url: `http://127.0.0.1:8000/cart-item/add_items_in_cart/`,
               data: tripNow
             }).then(function (response) {
-                    console.log("localstorageFinal POST ITEMS", response);
+                    console.log(response);
                 }).catch(function (error) {
                   console.log(error);
                 });
@@ -145,7 +146,7 @@ const SelectVan = (props) => {
                 "destination_longitude": pickAddressLine2.longitude,
             }
             }).then(function (response) {
-                    console.log("localstorageFinal POST TRIP", response);
+                    console.log(response);
                 }).catch(function (error) {
                   console.log(error);
                 });
@@ -165,7 +166,6 @@ const SelectVan = (props) => {
         setOpen(true);
     }
     const setActiveVan = (value) => {
-        console.log('setActiveVan', value)
         switch (value) {
             case 's-van':
               return(
@@ -208,7 +208,6 @@ const SelectVan = (props) => {
             setFloor(
                 typeof value === 'string' ? value.split(',') : value,
             );
-        console.log('setFloor', floor)
         localStorage.setItem("floor_number", JSON.stringify(floor));
   }
 

@@ -29,7 +29,6 @@ const SearchCard = (props) => {
   const [sliderCard, setSliderCard] = React.useState(false);
 
   useEffect(() => {
-    console.log(drawPoints)
   }, [value, value2, drawPoints, focusActive, sliderCard]);
 
   const handleClose = () => {
@@ -65,15 +64,12 @@ const SearchCard = (props) => {
       `https://api.mapbox.com/geocoding/v5/mapbox.places/${e.target.value}.json?access_token=pk.eyJ1IjoiaGFyaXNjczQ5OTciLCJhIjoiY2t4OHhuYjd2MzQwZjJycHo2aWZ6dW5xNiJ9.XF4Rwzg_G7nton8noZ7VVA`
     )
       .then(function (response) {
-        console.log("coordinates >>>>>", response.data.features);
         let result = response.data.features.map((list) => ({
           title: list.place_name,
           longitude: list.geometry.coordinates[0],
           latitude: list.geometry.coordinates[1],
         }));
-        console.log("result", result);
         setAllTitles(result);
-        console.log("allTitles", allTitles);
       })
       .catch(function (error) {
         console.log(error);
@@ -86,15 +82,12 @@ const SearchCard = (props) => {
       `https://api.mapbox.com/geocoding/v5/mapbox.places/${e.target.value}.json?access_token=pk.eyJ1IjoiaGFyaXNjczQ5OTciLCJhIjoiY2t4OHhuYjd2MzQwZjJycHo2aWZ6dW5xNiJ9.XF4Rwzg_G7nton8noZ7VVA`
     )
       .then(function (response) {
-        console.log("coordinates >>>>>", response.data.features);
         let result = response.data.features.map((list) => ({
           title: list.place_name,
           longitude: list.geometry.coordinates[0],
           latitude: list.geometry.coordinates[1],
         }));
-        console.log("result", result);
         setAllTitles2(result);
-        console.log("allTitles 2", allTitles2);
       })
       .catch(function (error) {
         console.log(error);
@@ -123,19 +116,16 @@ const SearchCard = (props) => {
 
 
   const scheduleNow = () => {
-    console.log('scheduleNow')
     setClickSchedule(false)
     setSliderCard(true)
   }
 
   const scheduleLater = () => {
-    console.log('scheduleLater')
     setSliderCard(true)
     setClickSchedule(true)
   }
 
   const goBack = () => {
-    console.log('goBack')
     setGoBackValue(true)
     setSliderCard(false)
   }
