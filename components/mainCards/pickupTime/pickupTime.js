@@ -216,7 +216,7 @@ const PickupTime = (props) => {
             <p>
               Immediate pickups are usually able to be serviced <strong>within an hour.</strong>
               <br />
-              We'll notify drivers of your request once payment is complete
+              We&apos;ll notify drivers of your request once payment is complete
             </p>
           </div>
         </div>

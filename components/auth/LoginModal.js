@@ -40,7 +40,7 @@ const LoginModal = ({ open, onLogin, handleOpenSignUpModal, handleClose }) => {
             <div className="card-heading mb-81">
               <h2 className="mb-18">Welcome Back</h2>
               <p>
-                Don't have an account?{" "}
+                Don&apos;t have an account?{" "}
                 <a className="cursor-pointer" onClick={handleOpenSignUpModal}>
                   {" "}
                   Sign Up here
