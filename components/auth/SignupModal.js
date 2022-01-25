@@ -23,13 +23,15 @@ const style = {
   p: 4,
 };
 const SignupModal = ({ open, onSignUp, handleOpenLoginModal, handleClose }) => {
+  const [firstName,setFirstName]=React.useState(null);
+  const [lastName,setLastName]=React.useState(null);
   const [email, setEmail] = React.useState(null);
   const [password, setPassword] = React.useState(null);
   const [confirmPassword, setConfirmPassword] = React.useState(null);
   const [phoneNumber, setPhoneNumber] = React.useState(null);
 
   const onSignUpClick = () => {
-    onSignUp(email, password, phoneNumber);
+    onSignUp(email, password, phoneNumber, firstName, lastName);
   };
 
   return (
@@ -56,8 +58,8 @@ const SignupModal = ({ open, onSignUp, handleOpenLoginModal, handleClose }) => {
           </Typography>
           <Box id="transition-modal-description" sx={{ mt: 2 }}>
             <Box className="main-div" sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-              <TextField className="input" label="First Name" type="text" sx={{ marginRight: "auto" }} />
-              <TextField className="input" label="Last Name" type="text" />
+              <TextField className="input" label="First Name" type="text" sx={{ marginRight: "auto" }} onChange={(e) => setFirstName(e.target.value)}/>
+              <TextField className="input" label="Last Name" type="text" onChange={(e) => setLastName(e.target.value)}/>
             </Box>
             <Box>
               <TextField
