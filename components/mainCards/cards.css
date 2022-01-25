@@ -8,65 +8,81 @@
   border: 1px solid #d9dbe9;
   border-radius: 5px;
 }
+
 .notification-icon {
   /* width: 15%; */
   padding-right: 19px;
 }
+
 .notification-text {
   width: 85%;
 }
+
 .notification-text p {
   margin-bottom: 0px;
 }
+
 .card-buttons-grid {
   display: inline-flex;
   width: 100%;
   justify-content: space-between;
 }
+
 .card-buttons-grid .lightbutton,
 .card-buttons-grid .darkbutton {
   width: 48%;
   height: 48px;
   margin-bottom: 0;
 }
+
 .card-slection {
   position: relative;
   padding: 10px 10px 10px 20px;
   border: 1px solid #d1d1d1;
   border-radius: 5px;
 }
+
 .card-slection p {
   margin-bottom: 0px;
 }
+
 .card-slection .MuiCheckbox-root {
   position: absolute;
   right: 0;
   top: 0;
 }
+
 .card-slection.selection {
   background: #31b7b7;
 }
+
 .card-slection.selection p {
   color: #fff;
 }
+
 .card-slection.selection .MuiCheckbox-root {
   color: #fff;
 }
+
 .card-slider .MuiSlider-root {
   color: #31b7b7;
   height: 8px;
   padding: 0px;
   border-radius: 16px;
 }
+
 .card-slider .MuiSlider-track {
   border-radius: 16px;
 }
+
 .card-slider .MuiSlider-rail {
   color: #eff0f7;
 }
+
 .card-slider .MuiSlider-thumb {
   display: none;
 }
+
 .card-slider-count {
   display: flex;
   align-items: flex-end;
@@ -79,21 +95,26 @@
   width: 100%;
   justify-content: space-between;
 }
+
 .time-wrapper .select {
   width: 30%;
 }
+
 .time-wrapper .MuiSelect-select {
   padding: 10px 20px;
 }
+
 .time-wrapper .MuiFormControl-root {
   background: #f7f7fc;
   padding: 0px;
   width: 100%;
   border-radius: 15px;
 }
+
 .time-wrapper .MuiOutlinedInput-notchedOutline {
   border: 0px;
 }
+
 .time-wrapper .MuiOutlinedInput-root {
   border-radius: 15px;
 }
@@ -106,6 +127,7 @@
   width: 100%;
   border-radius: 15px;
 }
+
 .select-fill-color .MuiOutlinedInput-root {
   border: 1px solid #31b7b7;
   background-color: #31b7b7;
@@ -118,6 +140,7 @@
 .placeholder {
   color: #ccc;
 }
+
 .date-card {
   width: 100%;
   max-width: 360px;
@@ -126,34 +149,42 @@
   border-radius: 16px;
   overflow: hidden;
 }
+
 .date-card .card-content {
   padding: 20px;
 }
+
 .date-card .card-content .MuiTypography-caption {
   color: #23274f;
   font-weight: 500;
 }
+
 .date-card .card-content .css-l0iinn {
   color: #23274f;
   font-weight: bold;
 }
+
 .date-card .card-content .MuiIconButton-sizeSmall {
   width: 30px;
   height: 30px;
   color: #23274f;
 }
+
 .date-card .PrivatePickersSlideTransition-root {
   min-height: 230px;
 }
+
 .date-card .MuiPickersDay-root,
 .date-card .MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected) {
   border-radius: 6px;
   color: #23274f;
   font-weight: 500;
 }
+
 .date-card .Mui-disabled {
   color: #d9dbe9;
 }
+
 .date-card .MuiButtonBase-root-MuiPickersDay-root.Mui-selected,
 .date-card .css-bkrceb-MuiButtonBase-root-MuiPickersDay-root.Mui-selected:hover,
 .date-card .Mui-selected {
@@ -161,24 +192,30 @@
   background: #31b7b7 !important;
   color: #fff;
 }
+
 .select-fill-color .MuiOutlinedInput-root svg {
   fill: #fff;
 }
+
 .items-list .MuiPaper-root {
   background-color: #f7f7fc;
   border-radius: 15px;
   box-shadow: none;
   margin-bottom: 10px;
 }
+
 .items-list .MuiPaper-root.Mui-expanded {
   border: 2px solid #31b7b7;
 }
+
 .MuiAccordionSummary-content {
   margin: 0px;
 }
+
 .MuiAccordionSummary-root {
   min-height: 39px;
 }
+
 .items-list .MuiPaper-root:before {
   display: none;
 }
@@ -190,17 +227,21 @@
   padding: 5px 10px;
   margin-bottom: 5px;
 }
+
 .child-items .cart {
   width: 100px;
   display: inline-flex;
 }
+
 .child-items .cart-list {
   width: 150px;
   display: inline-flex;
 }
+
 .child-items .MuiOutlinedInput-notchedOutline {
   border: none;
 }
+
 .child-items .cart-increase {
   min-width: 30px;
   width: 30px;
@@ -208,6 +249,7 @@
   height: 30px;
   border-radius: 50%;
 }
+
 .cart-clear {
   min-width: 30px;
   width: 30px;
@@ -218,11 +260,13 @@
   border-radius: 50%;
   margin-left: 21px;
 }
+
 .child-items .MuiInputBase-input {
   padding: 0px;
   height: 30px;
   text-align: center;
 }
+
 .link {
   color: #31b7b7;
   cursor: pointer;
@@ -235,129 +279,105 @@
   border-radius: 5px;
   padding: 0px 10px;
 }
+
 .search-box .MuiFormControl-roo {
   width: 100%;
 }
+
 .search-box .MuiTextField-root {
   width: 100%;
 }
+
 .search-box .MuiOutlinedInput-notchedOutline {
   border: 0px;
 }
+
 .mb-5 {
   margin-bottom: 5px;
 }
-.mb-10 {
-  margin-bottom: 10px;
-}
+
 .mb-20 {
   margin-bottom: 20px;
 }
-.mb-21 {
-  margin-bottom: 21px;
-}
-.mb-22 {
-  margin-bottom: 22px;
-}
+
 .mb-23 {
   margin-bottom: 23px;
 }
+
 .mb-26 {
   margin-bottom: 26px;
 }
+
 .mb-28 {
   margin-bottom: 28px;
 }
+
 .mb-31 {
   margin-bottom: 31px;
 }
+
 .mb-32 {
   margin-bottom: 32px;
 }
+
 .mb-33 {
   margin-bottom: 33px;
 }
-.mb-39 {
-  margin-bottom: 39px;
-}
+
 .mb-43 {
   margin-bottom: 43px;
 }
+
 .mb-50 {
   margin-bottom: 50px;
 }
+
 .mb-52 {
   margin-bottom: 52px;
 }
+
 .mb-61 {
   margin-bottom: 61px;
 }
+
 .mb-71 {
   margin-bottom: 71px;
 }
+
 .mb-75 {
   margin-bottom: 75px;
 }
+
 .mb-81 {
   margin-bottom: 81px;
 }
+
 .mb-132 {
   margin-bottom: 132px;
 }
+
 .text-center {
   text-align: center;
 }
-.font-12{
-  font-size: 12px;
-}
-.font-14{
-  font-size: 14px;
-}
-.font-16{
-  font-size: 16px;
-}
-.font-18{
-  font-size: 18px;
-}
-.font-20{
-  font-size: 20px;
-}
-.font-24{
-  font-size: 24px;
-}
-.font-28{
-  font-size: 28px;
-}
-.font-32{
-  font-size: 32px;
-}
+
 .mr-20 {
   margin-right: 20px;
 }
+
 .m-auto {
   margin: auto;
-}
-.fw-bold{
-  font-weight: bold;
-}
-.purple{
-  color: #23274f;
-}
-.light-purple{
-  color: #5A5D77;
-}
-.b-bottom{
-  border-bottom: 1px solid #D9DBE9;
 }
 
 @media (max-width: 991px) {
   .date-card {
     margin: auto;
   }
+
   .add-card {
     margin: auto;
   }
 }
+
 .display-block {
   display: block;
 }
@@ -365,20 +385,25 @@
 .custom-title .text-input {
   width: 100%;
 }
+
 .add-items-qty {
   margin-bottom: 5px;
 }
+
 .add-items-qty .cart {
   width: 100px;
   display: inline-flex;
 }
+
 .add-items-qty .cart-list {
   width: 100px;
   display: inline-flex;
 }
+
 .add-items-qty .MuiOutlinedInput-notchedOutline {
   border: none;
 }
+
 .add-items-qty .cart-increase {
   min-width: 30px;
   width: 30px;
@@ -392,21 +417,26 @@
   height: 30px;
   text-align: center;
 }
+
 .dimension-wrap {
   display: block;
 }
+
 .dimension-box {
   display: inline-flex;
   justify-content: space-between;
 }
+
 .dimension-box .text-input {
   width: 30%;
 }
+
 .dimension-box .dimension-text {
   font-weight: 400;
   font-size: 20px;
   color: #23274f;
 }
+
 .instructions-wrap .text-input {
   width: 100%;
   height: 89px;
@@ -418,6 +448,7 @@
   align-items: center;
   width: 100%;
 }
+
 .van-box {
   padding: 7px;
   text-align: center;
@@ -432,46 +463,56 @@
   width: 25%;
   cursor: pointer;
 }
+
 .van-box-active {
   border: 2px solid #31b7b7;
   cursor: pointer;
 }
+
 .van-box-active svg path {
   fill: #31b7b7;
   color: #31b7b7;
 }
+
 .van-box-active p {
   fill: #31b7b7;
   color: #31b7b7;
 }
+
 .van-box p {
   margin-bottom: 0px;
   margin-top: -21px;
   font-weight: 700;
   font-size: 12px;
 }
+
 .van-box image {
   margin-bottom: 0px;
 }
+
 .yesno {
   display: flex;
   width: 100%;
   justify-content: space-between;
 }
+
 .yesno .lightbutton {
   width: 45%;
   border-radius: 30px;
   font-weight: 700;
 }
+
 .yesno .darkbutton {
   width: 45%;
   border-radius: 30px;
   font-weight: 700;
 }
+
 .price-wrap .text-large {
   font-size: 32px;
   font-weight: 700;
 }
+
 .delivery-options .MuiOutlinedInput-root {
   border-radius: 15px;
   background: #f7f7fc;
@@ -479,9 +520,11 @@
   width: 185px;
   height: 44px;
 }
+
 .delivery-options .MuiOutlinedInput-notchedOutline {
   border: 0px;
 }
+
 .delivery-options .MuiOutlinedInput-root {
   width: 100%;
   padding: 0px;
@@ -489,27 +532,33 @@
   width: 100%;
   border-radius: 15px;
 }
+
 .white {
   background: #fff;
 }
+
 .white .card-content {
   min-height: 262px;
 }
+
 .items-list {
   max-height: 245px;
   overflow: auto;
 }
+
 .items-list::-webkit-scrollbar {
   width: 8px;
   color: #d9dbe9;
   transition: all 0.4s ease;
 }
+
 .items-list::-webkit-scrollbar-thumb {
   background: #d9dbe9;
   border-radius: 4px;
   width: 8px;
   transition: all 0.4s ease;
 }
+
 .items-list::-webkit-scrollbar-track {
   background: #eff0f7;
   border-radius: 4px;
@@ -521,26 +570,32 @@
   color: #d9dbe9;
   transition: all 0.4s ease;
 }
+
 .m-h-130::-webkit-scrollbar-thumb {
   background: #d9dbe9;
   border-radius: 4px;
   width: 8px;
   transition: all 0.4s ease;
 }
+
 .m-h-130::-webkit-scrollbar-track {
   background: #eff0f7;
   border-radius: 4px;
   width: 8px;
 }
+
 .help-slection .MuiCheckbox-root {
   color: #31b7b7;
 }
+
 .coupon h2 {
   margin-top: 0px;
 }
+
 .p-60 {
   padding: 60px;
 }
+
 .display-none {
   display: none;
 }
@@ -548,9 +603,11 @@
 .position-relative {
   display: none;
 }
+
 .position-relative:first-child {
   display: block;
 }
+
 .m-h-130 {
   max-height: 135px;
   overflow: auto;
@@ -567,6 +624,7 @@
   padding: 9px 13px 10px 19px;
   margin-bottom: 16px;
 }
+
 .master-card h6,
 .visa-card h6 {
   font-weight: bold;
@@ -574,23 +632,27 @@
   color: #23274f;
   margin-bottom: 0;
 }
+
 .master-card p,
 .visa-card p {
   font-size: 14px;
   color: #5a5d77;
   margin-bottom: 0;
 }
+
 .master-card .heading,
 .visa-card .heading {
   margin-right: auto;
   margin-left: 24px;
 }
+
 .visa-card {
   background: #f7f7fc;
   border-radius: 5px;
   padding: 9px 13px 10px 19px;
   margin-bottom: 15px;
 }
+
 .add-btns .add-payment {
   background: #fcfcfc;
   border-radius: 5px;
@@ -601,6 +663,7 @@
   text-align: center;
   margin-bottom: 16px;
 }
+
 .add-btns .next {
   background: #23274f;
   border-radius: 5px;
@@ -609,27 +672,33 @@
   text-align: center;
   color: #fcfcfc;
 }
+
 .w-100 {
   width: 100%;
 }
+
 .add-card {
   padding: 20px 59px 58px 59px;
   box-shadow: 0px 8px 16px rgba(17, 17, 17, 0.06);
   border-radius: 16px;
 }
+
 .add-card .card-heading h2 {
   font-weight: bold;
   font-size: 24px;
   color: #23274f;
 }
+
 .add-card .card-heading p {
   margin-top: 0;
   font-size: 14px;
   color: #5a5d77;
 }
+
 .add-card .input {
   margin-bottom: 12px;
 }
+
 .add-card .payment {
   background: #23274f;
   border-radius: 5px;
@@ -638,16 +707,19 @@
   text-align: center;
   color: #fcfcfc;
 }
+
 .add-card label {
   color: #23274f;
   font-weight: 500;
   font-size: 14px;
 }
+
 @media (min-width: 576px) {
   .add-card {
     width: 406px;
   }
 }
+
 @media (max-width: 575px) {
   .add-card {
     padding: 24px;

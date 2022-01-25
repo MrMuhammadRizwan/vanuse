@@ -2,10 +2,7 @@ import axiosHelper from "../../services/axiosHelper";
 
 export const getAllCards = async (req, res) => {
   try {
-    const response = await axiosHelper.getRequest(
-      "http://127.0.0.1:8000/payment/my_cards"
-    );
-    return response;
+    return await axiosHelper.getRequest(`${process.env.API_URL}/payment/my_cards`);
   } catch (err) {
     console.log(err);
   }
@@ -14,22 +11,20 @@ export const getAllCards = async (req, res) => {
 export const postSecret = async (id) => {
   try {
     const response = await axiosHelper.postRequest(
-      "http://127.0.0.1:8000/payment/secret",
-      {
-        // card_id: "pm_1KGrEJAnCtxHwdDokTzWAZFV",
+      `${process.env.API_URL}/payment/secret`, {
         card_id: id,
-      }
-    );
-    console.log("response", response);
+      });
+    console.log(`response`, response);
     return response.client_secret;
   } catch (err) {
     console.log(err);
   }
 };
+
 export const addCard = async (form) => {
   try {
     const response = await axiosHelper.postRequest(
-      "http://127.0.0.1:8000/payment/add_card",
+      `${process.env.API_URL}/payment/add_card`,
       form
       // {
       //   number: "4242424242424242",
@@ -38,7 +33,7 @@ export const addCard = async (form) => {
       //   cvc: "111",
       // }
     );
-    console.log("response", response);
+    console.log(`response`, response);
     return response;
   } catch (err) {
     console.log(err);
@@ -46,12 +41,9 @@ export const addCard = async (form) => {
 };
 export const removeCard = async (id) => {
   try {
-    const response = await axiosHelper.postRequest(
-      "http://127.0.0.1:8000/payment/remove_card",
-      {
-        card_id: id,
-      }
-    );
+    const response = await axiosHelper.postRequest(`${process.env.API_URL}/payment/remove_card`, {
+      card_id: id,
+    });
     console.log("response", response);
     return response;
   } catch (err) {

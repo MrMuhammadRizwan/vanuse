@@ -16,7 +16,7 @@ p {
 
 * {
   box-sizing: border-box;
-  font-family: poppins !important;
+  font-family: poppins, serif !important;
 }
 .container {
   min-height: 100vh;
@@ -73,8 +73,8 @@ code {
   border-radius: 5px;
   padding: 0.75rem;
   font-size: 1.1rem;
-  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-    Bitstream Vera Sans Mono, Courier New, monospace;
+  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New,
+    monospace;
 }
 
 .grid {
@@ -318,10 +318,10 @@ code {
 .signup-modal .age {
   width: 122px;
 }
-.cross-icon{
+.cross-icon {
   position: absolute;
   right: 10px;
-  top:74px;
+  top: 10px;
   cursor: pointer;
 }
 input[type="number"]::-webkit-inner-spin-button,
@@ -365,11 +365,6 @@ input[type="number"]::-webkit-outer-spin-button {
   .right-heading .bluecar {
     width: 50%;
     transform: translate(-16%, 50%);
-  }
-}
-@media (min-width: 576px){
-  .main-div .input:first-child{
-    margin-right: 20px;
   }
 }
 @media (min-width: 768px) and (max-width: 1024px) {
@@ -421,15 +416,6 @@ input[type="number"]::-webkit-outer-spin-button {
   .signup-modal {
     width: 100%;
     padding: 24px;
-  }
-  .cross-icon{
-    top:38px;
-  }
-  .main-div{
-    display: block !important;
-  }
-  .main-div .input{
-    width: 100%;
   }
 }
 /* @media (max-width: 400px) {
