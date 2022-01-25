@@ -3,24 +3,39 @@ import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
 import Typography from "@mui/material/Typography";
 import React, { useEffect, useState } from "react";
-import {
-  getAllCards,
-  postSecret,
-  removeCard,
-} from "../../../pages/api/paymentApi";
+import { getAllCards, postSecret, removeCard } from "../../pages/api/paymentApi";
+import { CardElement, useElements, useStripe , Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
+const stripePromise = loadStripe("pk_test_DfG4Kda9PiRu28UAJxXIOhC3");
 
-const Payment = ({ addPaymentMethod, addPayment, goToCompleteTripScreen }) => {
+const Payment = ({ addPaymentMethod, addPayment }) => {
+  const [error, setError] = useState(null);
+  const stripe = useStripe();
+  const elements = useElements();
+  // Handle real-time validation errors from the CardElement.
+
   const [cardsData, setCardsData] = useState([]);
   const [currentPaymentMethod, setCurrentPaymentMethod] = useState(-1);
   const [secretKey, setSecretKey] = useState(null);
 
+  const handleChange = (event) => {
+    if (event.error) {
+      console.log("ffff", event.error.message);
+    } else {
+      console.log("ffff", null);
+    }
+  };
   useEffect(() => {
     if (!addPayment) getCardLocalFn();
   }, [addPayment]);
+
+  // useEffect(() => {
+  //   getCardLocalFn();
+  // }, []);
 
   const getCardLocalFn = async () => {
     let cardsTemp = await getAllCards();
@@ -28,6 +43,16 @@ const Payment = ({ addPaymentMethod, addPayment, goToCompleteTripScreen }) => {
     setCardsData(cardsTemp);
   };
 
+  const doPayment = async () => {
+    stripe
+      .confirmCardPayment(secretKey)
+      .then((res) => {
+        console.log("Status", res.paymentIntent.status);
+      })
+      .catch((err) => {
+        console.log("ssss", err);
+      });
+  };
   const deleteCard = (id) => {
     removeCard(id)
       .then((res) => {
@@ -39,9 +64,6 @@ const Payment = ({ addPaymentMethod, addPayment, goToCompleteTripScreen }) => {
       });
   };
 
-  const completeTrip = () => {
-    goToCompleteTripScreen(secretKey);
-  };
   return (
     <>
       <div className="card-heading mb-31">
@@ -118,11 +140,7 @@ const Payment = ({ addPaymentMethod, addPayment, goToCompleteTripScreen }) => {
           <Button onClick={addPaymentMethod} className="w-100 add-payment">
             Add Payment Method
           </Button>
-          <Button
-            disabled={!secretKey}
-            className="w-100 next"
-            onClick={completeTrip}
-          >
+          <Button disabled={!secretKey || cardsData.length === 0} className="w-100 next" onClick={doPayment}>
             Next
           </Button>
         </Box>
@@ -131,4 +149,12 @@ const Payment = ({ addPaymentMethod, addPayment, goToCompleteTripScreen }) => {
   );
 };
 
-export default Payment;
+const Wrapper = ({ addPaymentMethod, addPayment }) => {
+  return (
+    <Elements stripe={stripePromise}>
+      <Payment addPaymentMethod={addPaymentMethod} addPayment={addPayment} />
+    </Elements>
+  );
+};
+
+export default Wrapper;

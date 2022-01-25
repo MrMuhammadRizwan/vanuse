@@ -1,25 +1,25 @@
-.MuiAppBar-root{
+.MuiAppBar-root {
   background-color: #fff;
 }
-.MuiButton-root{
+.MuiButton-root {
   text-transform: capitalize;
   font-weight: bold;
   font-size: 16px;
 }
-.MuiAppBar-root .MuiButton-root{
-  color: #1F3D6D;
+.MuiAppBar-root .MuiButton-root {
+  color: #1f3d6d;
   margin-right: 35px;
 }
-.header-logo{
+.header-logo {
   margin-right: 100px;
 }
-@media (max-width: 1040px){
-  .header-logo{
+@media (max-width: 1040px) {
+  .header-logo {
     margin-right: 25px !important;
-  } 
+  }
 }
-@media (max-width: 991px){
-  .MuiAppBar-root .MuiButton-root{
+@media (max-width: 991px) {
+  .MuiAppBar-root .MuiButton-root {
     margin-right: 25px;
   }
 }

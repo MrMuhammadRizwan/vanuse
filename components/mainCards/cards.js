@@ -11,9 +11,74 @@ import MyItemsList from "./addItems/myItemsList";
 import CustomItems from "./addItems/customItems";
 import SelectVan from "./selectVan/selectVan";
 import ApplyCoupon from "./coupons/coupons";
-import Payment from "./payment/payment";
-import AddCard from "./payment/addCard";
-import ConfirmBooking from "../confirmBooking/confirmBooking";
+import Payment from "../payment/Payment";
+import AddCard from "../payment/AddCard";
+
+const itemsList = [
+  {
+    key: 0,
+    title: "Parent",
+    subitems: [
+      {
+        id: "9090",
+        title: "yyyyyy",
+        quantity: 0,
+        width: "30",
+        height: "23",
+        depth: "14",
+        instructions: "instructions here",
+      },
+      {
+        id: "9092",
+        title: "zzzzzzz",
+        quantity: 0,
+        width: "30",
+        height: "23",
+        depth: "14",
+        instructions: "instructions here",
+      },
+      {
+        id: "9093",
+        title: "cccccccc",
+        quantity: 0,
+        width: "30",
+        height: "23",
+        depth: "14",
+        instructions: "instructions here",
+      },
+    ],
+  },
+  {
+    key: 1,
+    title: "Parent2",
+    subitems: [
+      {
+        id: "9094",
+        title: "dddddddd",
+        quantity: 0,
+        width: "30",
+        height: "23",
+        depth: "14",
+        instructions: "instructions here",
+      },
+    ],
+  },
+  {
+    key: 2,
+    title: "Parent3",
+    subitems: [
+      {
+        id: "9095",
+        title: "ffffffff",
+        quantity: 0,
+        width: "30",
+        height: "23",
+        depth: "14",
+        instructions: "instructions here",
+      },
+    ],
+  },
+];
 
 const Cards = (props) => {
   const [sliderValue, setSliderValue] = React.useState(1);
@@ -26,18 +91,14 @@ const Cards = (props) => {
   const [myItemsList, setMyItemsList] = React.useState([]);
   const [allItemsList, setAllItemsList] = React.useState([]);
   const [fillVan, setFillVan] = React.useState(false);
-  const [viewCustomItemsScreen, setViewCustomItemsScreen] =
-    React.useState(false);
-  const [viewCustomItemsScreenList, setViewCustomItemsScreenList] =
-    React.useState(false);
+  const [viewCustomItemsScreen, setViewCustomItemsScreen] = React.useState(false);
+  const [viewCustomItemsScreenList, setViewCustomItemsScreenList] = React.useState(false);
   const [viewSelectaVan, setViewSelectaVan] = React.useState(false);
   const [viewPayment, setViewPayment] = React.useState(false);
   const [filteredData, setFilteredData] = React.useState([]);
-  const [secretKey, setSecretKey] = React.useState("");
-  const [completeTripScreen, setCompleteTripScreen] = React.useState(false);
-  const [showSlider, setShowSlider] = React.useState(true);
+
   const itemsListFromServer = () => {
-    Axios.get(`http://127.0.0.1:8000/item/category-wise/`)
+    Axios.get(`${process.env.API_URL}/item/category-wise/`)
       .then(function (response) {
         console.log(response.data);
         let ApiRes = response.data;
@@ -101,10 +162,6 @@ const Cards = (props) => {
     setViwPickupTime(true);
     setSliderValue(1);
     setViewAddItemsToList(false);
-    localStorage.removeItem("set-hours")
-    localStorage.removeItem("set-minutes")
-    localStorage.removeItem("set-am-pm")
-    localStorage.removeItem("date-value-all")
   };
 
   const goBackThirdScreen = () => {
@@ -156,13 +213,17 @@ const Cards = (props) => {
     setViewPayment(true);
   };
 
+  // const addItemsToList = ( list ) => {
+  //     console.log('addItems >>>', list)
+  //     setViewAddItemsToList(true)
+  //     setMyItemsList(list)
+  // }
+
   const increaseQty = (qty, ind, key) => {
     console.log("increaseQty rooms", qty, ind, key);
     let keys = key;
     const rooms = JSON.parse(JSON.stringify(allItemsList));
-    rooms[JSON.parse(JSON.stringify(keys))].subitems[
-      JSON.parse(JSON.stringify(ind))
-    ].quantity++;
+    rooms[JSON.parse(JSON.stringify(keys))].subitems[JSON.parse(JSON.stringify(ind))].quantity++;
 
     console.log("increaseQty rooms", rooms);
 
@@ -176,18 +237,10 @@ const Cards = (props) => {
 
     console.log("decreaseQty rooms", rooms);
 
-    if (
-      rooms[JSON.parse(JSON.stringify(kiy))].subitems[
-        JSON.parse(JSON.stringify(ind))
-      ].quantity
-    ) {
-      rooms[JSON.parse(JSON.stringify(kiy))].subitems[
-        JSON.parse(JSON.stringify(ind))
-      ].quantity--;
+    if (rooms[JSON.parse(JSON.stringify(kiy))].subitems[JSON.parse(JSON.stringify(ind))].quantity) {
+      rooms[JSON.parse(JSON.stringify(kiy))].subitems[JSON.parse(JSON.stringify(ind))].quantity--;
     } else {
-      rooms[JSON.parse(JSON.stringify(kiy))].subitems[
-        JSON.parse(JSON.stringify(ind))
-      ].quantity = 0;
+      rooms[JSON.parse(JSON.stringify(kiy))].subitems[JSON.parse(JSON.stringify(ind))].quantity = 0;
     }
     setAllItemsList(rooms);
 
@@ -197,9 +250,7 @@ const Cards = (props) => {
   const clearQty = (qty, ind, kiy) => {
     console.log("clearQty", qty, ind, kiy);
     const List = JSON.parse(JSON.stringify(allItemsList));
-    List[JSON.parse(JSON.stringify(kiy))].subitems[
-      JSON.parse(JSON.stringify(ind))
-    ].quantity = 0;
+    List[JSON.parse(JSON.stringify(kiy))].subitems[JSON.parse(JSON.stringify(ind))].quantity = 0;
     console.log("clearQty 2", List);
 
     setAllItemsList(List);
@@ -251,16 +302,6 @@ const Cards = (props) => {
     console.log("addPaymentMethod");
     setAddPayment(true);
   };
-  const goToCompleteTripScreen = (secret) => {
-    setViwAddItemsScreen(false);
-    setViewAddItemsToList(false);
-    setViewCustomItemsScreen(false);
-    setViewSelectaVan(false);
-    setViewPayment(false);
-    setShowSlider(false);
-    setSecretKey(secret);
-    setCompleteTripScreen(true);
-  };
 
   const cardAdded = () => {
     setAddPayment(false);
@@ -272,17 +313,10 @@ const Cards = (props) => {
         <Grid item xs={12} md={6}>
           <div className="banner-card">
             <div className="card-content">
-              {showSlider ? (
-                <div className="card-slider">
-                  <Slider
-                    aria-label="Volume"
-                    value={sliderValue}
-                    max={5}
-                    disabled
-                  />
-                  <span className="card-slider-count">{sliderValue}/5</span>
-                </div>
-              ) : null}
+              <div className="card-slider">
+                <Slider aria-label="Volume" value={sliderValue} max={5} disabled />
+                <span className="card-slider-count">{sliderValue}/5</span>
+              </div>
               {viewSelectaVan ? (
                 <SelectVan
                   goBack={goBackItemsScreen}
@@ -327,16 +361,7 @@ const Cards = (props) => {
                   clickSchedule={props.clickSchedule}
                 />
               ) : null}
-              {viewPayment ? (
-                <Payment
-                  addPaymentMethod={addPaymentMethod}
-                  addPayment={addPayment}
-                  goToCompleteTripScreen={goToCompleteTripScreen}
-                />
-              ) : null}
-              {completeTripScreen ? (
-                <ConfirmBooking secretKey={secretKey} />
-              ) : null}
+              {viewPayment ? <Payment addPaymentMethod={addPaymentMethod} addPayment={addPayment} /> : null}
             </div>
           </div>
         </Grid>
@@ -351,13 +376,7 @@ const Cards = (props) => {
               clearQty={clearQty}
             />
           ) : null}
-          {viwPickupTime ? (
-            <>
-              {shedulePickupValue ? (
-                <PickupDate getDate={getDateFromComponent} />
-              ) : null}
-            </>
-          ) : null}
+          {viwPickupTime ? <>{shedulePickupValue ? <PickupDate getDate={getDateFromComponent} /> : null}</> : null}
           {addPayment ? (
             <Grid style={{ zIndex: 999 }} item xs={12} md={4}>
               <AddCard
