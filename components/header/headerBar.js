@@ -54,9 +54,9 @@ const HeaderBar = (props) => {
           setOpenLoginModal(false);
           dispatch({
             type: "SET_USER_DATA",
-            payload: response.data.token,
+            payload: response.data,
           });
-          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("token", JSON.stringify(response.data));
         }
       })
       .catch(function (error) {
@@ -66,8 +66,10 @@ const HeaderBar = (props) => {
         });
       });
   };
-  const onSignUp = (email, password, phoneNumber) => {
+  const onSignUp = (email, password, phoneNumber, firstName, lastName) => {
     Axios.post(`${process.env.API_URL}/signup/`, {
+      first_name:firstName,
+      last_name:lastName,
       email: email,
       username: email,
       password: password,
@@ -75,11 +77,11 @@ const HeaderBar = (props) => {
     })
       .then(function (response) {
         setShowToast(true);
-        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("token", JSON.stringify(response.data));
         setSignupValue(true);
         dispatch({
           type: "SET_USER_DATA",
-          payload: response.data.token,
+          payload: response.data,
         });
         setOpen(false);
       })
