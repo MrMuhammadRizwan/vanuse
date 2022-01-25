@@ -1,3 +1,5 @@
+import DeleteIcon from "@mui/icons-material/Delete";
+import { IconButton } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -5,11 +7,13 @@ import Typography from "@mui/material/Typography";
 import { Elements, useElements, useStripe } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import React, { useEffect, useState } from "react";
-import { addCard } from "../../../pages/api/paymentApi";
+import { addCard } from "../../pages/api/paymentApi";
 import CloseIcon from "@mui/icons-material/Close";
 const stripePromise = loadStripe("pk_test_DfG4Kda9PiRu28UAJxXIOhC3");
 const AddCard = ({ cardAdded, handleCloseCard }) => {
- 
+  const elements = useElements();
+  const stripe = useStripe();
+
   const [form, setForm] = useState({
     name: "",
     number: "",
@@ -53,10 +57,7 @@ const AddCard = ({ cardAdded, handleCloseCard }) => {
       textTemp = "";
     }
     if (textTemp.length === 2) {
-      if (
-        parseInt(textTemp.substring(0, 2)) > 12 ||
-        parseInt(textTemp.substring(0, 2)) == 0
-      ) {
+      if (parseInt(textTemp.substring(0, 2)) > 12 || parseInt(textTemp.substring(0, 2)) == 0) {
         textTemp = textTemp[0];
       } else if (e.target.value.length === 2) {
         textTemp += "/";
@@ -80,19 +81,14 @@ const AddCard = ({ cardAdded, handleCloseCard }) => {
   const creditCardValidation = ({ target: { value, name } }) => {
     if (String(value).length <= 19) {
       let v = value;
-      if (
-        String(value).length === 4 ||
-        String(value).length === 9 ||
-        String(value).length === 14
-      ) {
+      if (String(value).length === 4 || String(value).length === 9 || String(value).length === 14) {
         v = value + " ";
       }
       setForm({
         ...form,
         [name]: v,
       });
-      let regEx =
-        /^4[1-5][0-9]{14}$|^2(?:2(?:2[1-9]|[3-9][0-9])|[3-6][0-9][0-9]|7(?:[01][0-9]|20))[0-9]{12}$/;
+      let regEx = /^4[1-5][0-9]{14}$|^2(?:2(?:2[1-9]|[3-9][0-9])|[3-6][0-9][0-9]|7(?:[01][0-9]|20))[0-9]{12}$/;
       if (value.replaceAll(" ", "").match(regEx)) {
         setErrors({ ...errors, number: null });
         return true;
@@ -115,6 +111,27 @@ const AddCard = ({ cardAdded, handleCloseCard }) => {
     }
   };
 
+  // const handleSubmit = (e) => {
+  //   // e.preventDefault();
+  //   // stripe.createToken(form, function (status, response) {
+  //   //   console.log("tttttttttt", status, response);
+  //   // });
+  //   var form = document.getElementById("card-element");
+  //   form.addEventListener("submit", function (e) {
+  //     console.log("eventmmmmm--", e);
+
+  //     e.preventDefault();
+  //     // createToken();
+  //   });
+  // };
+
+  // const handleChange_ = (e) => {
+  //   let card = form.card;
+  //   console.log("e.target.value", e.target.value);
+  //   // card[e.target.name] = e.target.value;
+  //   console.log("card", card);
+  //   // this.setState(card);
+  // };
 
   return (
     <div className="add-card" style={{ backgroundColor: "white" }}>
@@ -123,11 +140,7 @@ const AddCard = ({ cardAdded, handleCloseCard }) => {
           <Typography className="mb-5" variant="h6" gutterBottom component="h2">
             Add Card Details
           </Typography>
-          <CloseIcon
-            style={{ flex: "auto", justifyContent: "end" }}
-            onClick={handleCloseCard}
-            fontSize="inherit"
-          />
+          <CloseIcon style={{ flex: "auto", justifyContent: "end" }} onClick={handleCloseCard} fontSize="inherit" />
         </div>
 
         <Typography variant="p" gutterBottom component="p">
@@ -146,6 +159,8 @@ const AddCard = ({ cardAdded, handleCloseCard }) => {
             type="text"
             value={form.name}
             onChange={handleChange}
+            // error={form.name.length < 1}
+            // helperText={form.name.length < 1 ? "Please Enter Name" : ""}
           />
         </Box>
         <Box>

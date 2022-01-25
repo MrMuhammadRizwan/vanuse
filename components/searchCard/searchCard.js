@@ -139,11 +139,7 @@ const SearchCard = (props) => {
   };
 
   return sliderCard ? (
-    <Cards
-      goBack={goBack}
-      clickSchedule={clickSchedule}
-      authorized={props.authorized}
-    />
+    <Cards goBack={goBack} clickSchedule={clickSchedule} authorized={props.authorized} />
   ) : (
     <>
       <Grid container spacing={10} className="banner-section">
@@ -151,13 +147,7 @@ const SearchCard = (props) => {
           <div className="banner-card">
             {/* map */}
             <div className="map">
-              {drawPoints ? (
-                value && value2 ? (
-                  <CustomMap value={value} value2={value2} />
-                ) : null
-              ) : (
-                <CustomEmptyMap />
-              )}
+              {drawPoints ? value && value2 ? <CustomMap value={value} value2={value2} /> : null : <CustomEmptyMap />}
             </div>
             {/* content */}
             <div className="card-content">
@@ -169,9 +159,7 @@ const SearchCard = (props) => {
               ) : (
                 <div>
                   <h2>Need help with a move?</h2>
-                  <p className="mb-52">
-                    Book on demand or a pre-scheduled van.
-                  </p>
+                  <p className="mb-52">Book on demand or a pre-scheduled van.</p>
                 </div>
               )}
 
@@ -193,20 +181,13 @@ const SearchCard = (props) => {
                   }}
                 >
                   <IconButton sx={{ p: "10px" }} aria-label="icon">
-                    <img
-                      src="/search-start.svg"
-                      alt="search start"
-                      className="icons"
-                    />
+                    <img src="/search-start.svg" alt="search start" className="icons" />
                   </IconButton>
                   <Autocomplete
                     value={value}
                     onKeyUp={(e) => getValueInput(e)}
                     onChange={(event, newValue) => {
-                      localStorage.setItem(
-                        "pick_address_line_1",
-                        JSON.stringify(newValue)
-                      );
+                      localStorage.setItem("pick_address_line_1", JSON.stringify(newValue));
                       if (typeof newValue === "string") {
                         setDrawPoints(false);
                         setTimeout(() => {
@@ -249,24 +230,15 @@ const SearchCard = (props) => {
                     selectOnFocus
                     clearOnBlur
                     handleHomeEndKeys
-                    renderOption={(props, option) => (
-                      <li {...props}>{option.title}</li>
-                    )}
+                    renderOption={(props, option) => <li {...props}>{option.title}</li>}
                     sx={{ ml: 1, flex: 1 }}
                     freeSolo
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        placeholder="Enter pickup address"
-                      />
-                    )}
+                    renderInput={(params) => <TextField {...params} placeholder="Enter pickup address" />}
                   />
                 </Paper>
                 <Paper
                   component="form"
-                  className={
-                    focusActiveEnd ? "start-field-active" : "start-field"
-                  }
+                  className={focusActiveEnd ? "start-field-active" : "start-field"}
                   onMouseOver={selectOnFocusFuncEnd}
                   onMouseOut={unselectOnFocusFuncEnd}
                   onBlur={unselectOnFocusFuncEnd}
@@ -281,20 +253,13 @@ const SearchCard = (props) => {
                   }}
                 >
                   <IconButton sx={{ p: "10px" }} aria-label="icon">
-                    <img
-                      src="/search-end.png"
-                      alt="search end"
-                      className="icons"
-                    />
+                    <img src="/search-end.png" alt="search end" className="icons" />
                   </IconButton>
                   <Autocomplete
                     value={value2}
                     onKeyUp={(e) => getValueInput2(e)}
                     onChange={(event, newValue) => {
-                      localStorage.setItem(
-                        "pick_address_line_2",
-                        JSON.stringify(newValue)
-                      );
+                      localStorage.setItem("pick_address_line_2", JSON.stringify(newValue));
                       if (typeof newValue === "string") {
                         setTimeout(() => {
                           setDrawPoints(false);
@@ -336,17 +301,10 @@ const SearchCard = (props) => {
                     selectOnFocus
                     clearOnBlur
                     handleHomeEndKeys
-                    renderOption={(props, option) => (
-                      <li {...props}>{option.title}</li>
-                    )}
+                    renderOption={(props, option) => <li {...props}>{option.title}</li>}
                     sx={{ ml: 1, flex: 1 }}
                     freeSolo
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        placeholder="Enter destination address"
-                      />
-                    )}
+                    renderInput={(params) => <TextField {...params} placeholder="Enter destination address" />}
                   />
                 </Paper>
               </div>
