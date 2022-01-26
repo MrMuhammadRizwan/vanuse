@@ -42,20 +42,21 @@ const HeaderBar = (props) => {
     setOpen(false);
   };
   const onLogin = (userName, password) => {
-    Axios.post(`http://127.0.0.1:8000/login/`, {
+    console.log("onLogin newData", userName, password);
+    Axios.post(`${process.env.API_URL}/login/`, {
       username: userName,
       password: password,
     })
       .then(function (response) {
         setShowToast(true);
-        if (response.status == 200) {
+        if (response.status === 200) {
           setSignupValue(false);
           setOpenLoginModal(false);
           dispatch({
             type: "SET_USER_DATA",
-            payload: response.data.token,
+            payload: response.data,
           });
-          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("token", JSON.stringify(response.data));
         }
       })
       .catch(function (error) {
@@ -65,8 +66,10 @@ const HeaderBar = (props) => {
         });
       });
   };
-  const onSignUp = (email, password, phoneNumber) => {
-    Axios.post(`http://127.0.0.1:8000/signup/`, {
+  const onSignUp = (email, password, phoneNumber, firstName, lastName) => {
+    Axios.post(`${process.env.API_URL}/signup/`, {
+      first_name:firstName,
+      last_name:lastName,
       email: email,
       username: email,
       password: password,
@@ -74,11 +77,11 @@ const HeaderBar = (props) => {
     })
       .then(function (response) {
         setShowToast(true);
-        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("token", JSON.stringify(response.data));
         setSignupValue(true);
         dispatch({
           type: "SET_USER_DATA",
-          payload: response.data.token,
+          payload: response.data,
         });
         setOpen(false);
       })
@@ -120,21 +123,12 @@ const HeaderBar = (props) => {
             <img src="/logo.svg" alt="Logo" className="logo" />
           </Typography>
 
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
-          >
+          <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
+              <Button key={page} onClick={handleCloseNavMenu} sx={{ my: 2, color: "white", display: "block" }}>
                 {page}
               </Button>
             ))}
@@ -160,11 +154,7 @@ const HeaderBar = (props) => {
               <Button key={"login"} onClick={handleOpenLoginModal}>
                 Log In
               </Button>
-              <Button
-                key={"signup"}
-                className="darkbutton"
-                onClick={handleOpen}
-              >
+              <Button key={"signup"} className="darkbutton" onClick={handleOpen}>
                 Sign Up
               </Button>
             </Box>
@@ -221,18 +211,10 @@ const HeaderBar = (props) => {
                 </MenuItem>
               ) : (
                 <Box>
-                  <MenuItem
-                    key={"login"}
-                    onClick={handleOpenLoginModal}
-                    sx={{ display: { xs: "block", md: "none" } }}
-                  >
+                  <MenuItem key={"login"} onClick={handleOpenLoginModal} sx={{ display: { xs: "block", md: "none" } }}>
                     Log In
                   </MenuItem>
-                  <MenuItem
-                    key={"signup"}
-                    onClick={handleOpen}
-                    sx={{ display: { xs: "block", md: "none" } }}
-                  >
+                  <MenuItem key={"signup"} onClick={handleOpen} sx={{ display: { xs: "block", md: "none" } }}>
                     Sign Up
                   </MenuItem>
                 </Box>

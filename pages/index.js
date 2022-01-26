@@ -21,12 +21,12 @@ export default function Home() {
   }, []);
   return (
     <>
-      <HeaderBar authorized={authorized}/>
-      <main className='main-content'>
-        <div className='banner-container'>
-          <SearchCard authorized={authorized}/>
+      <HeaderBar authorized={authorized} />
+      <main className="main-content">
+        <div className="banner-container">
+          <SearchCard authorized={authorized} />
         </div>
       </main>
     </>
-  )
+  );
 }

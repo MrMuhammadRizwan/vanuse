@@ -26,8 +26,7 @@ instance.interceptors.request.use(
     // if (token != null) {
     //   await validateRefreshToken();
     //   token = getToken();
-    config.headers.Authorization =
-      "Token " + localStorage.getItem("token");
+    config.headers.Authorization = "Token " + localStorage.getItem("token");
     // }
     return config;
   },
