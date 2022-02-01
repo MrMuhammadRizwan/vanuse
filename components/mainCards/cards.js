@@ -14,6 +14,7 @@ import ApplyCoupon from "./coupons/coupons";
 import Payment from "./payment/payment";
 import AddCard from "./payment/addCard";
 import ConfirmBooking from "../confirmBooking/confirmBooking";
+import moment from 'moment';
 
 const Cards = (props) => {
   const [sliderValue, setSliderValue] = React.useState(1);
@@ -68,7 +69,28 @@ const Cards = (props) => {
     setViwPickupTime(false);
     setViwServices(true);
     setSliderValue(2);
-    localStorage.setItem("pickup_time", JSON.stringify(gettingDate));
+    localStorage.setItem("pickup_time", gettingDate);
+
+    const dataAll = localStorage.getItem("pickup_time");
+    const hours = JSON.parse(localStorage.getItem("set-hours"))
+    const minutes = localStorage.getItem("set-minutes")
+    const ampm = localStorage.getItem("set-am-pm")
+
+    console.log("finaldatetime check", hours, minutes, ampm);
+
+    var validate = '';
+    if (hours && minutes && ampm ==='PM'){
+      validate = moment(dataAll).format("YYYY-MM-DD")+"T"+(12+hours)+":"+ minutes+":"+moment(dataAll).format("ss[Z]")
+    }else if(hours && minutes){
+      validate = moment(dataAll).format("YYYY-MM-DD")+"T"+(hours)+":"+ minutes+":"+moment(dataAll).format("ss[Z]")
+    }else{
+      validate = JSON.stringify(new Date())
+    }
+    
+    // final date to post api
+    const finalDateTime = localStorage.setItem("final-date-time", validate)
+    console.log("finaldatetime", validate);
+
   };
 
   const goNextFourScreen = () => {
